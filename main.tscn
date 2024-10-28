@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://clr6m3lns24l8"]
+
+[ext_resource type="Script" path="res://Label.cs" id="1_1kfa7"]
+
+[node name="MainMenu" type="Node2D"]
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("1_1kfa7")
+metadata/_edit_use_anchors_ = true
