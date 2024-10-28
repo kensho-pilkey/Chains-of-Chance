@@ -1,14 +1,16 @@
 [gd_scene load_steps=2 format=3 uid="uid://clr6m3lns24l8"]
 
-[ext_resource type="Script" path="res://Main.cs" id="1_wntlg"]
+[ext_resource type="Script" path="res://Scripts/Main.cs" id="1_5yuoe"]
 
 [node name="MainMenu" type="Node2D"]
-script = ExtResource("1_wntlg")
+script = ExtResource("1_5yuoe")
 
 [node name="Label" type="Label" parent="."]
-offset_top = 1.0
-offset_right = 40.0
-offset_bottom = 24.0
+offset_left = -67.0
+offset_top = -48.0
+offset_right = 111.0
+offset_bottom = -25.0
+text = "Card Game Title"
 metadata/_edit_use_anchors_ = true
 
 [node name="Exit" type="Button" parent="."]
