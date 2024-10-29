@@ -5,7 +5,7 @@ public partial class Main : Node2D
 {
 	// Called when the node enters the scene tree for the first time.
 	public void _on_start_pressed() {
-		GetTree().ChangeSceneToFile("res://game_scene.tscn");
+		GetTree().ChangeSceneToFile("res://Scenes/game_scene.tscn");
 	}
 	public override void _Ready()
 	{
