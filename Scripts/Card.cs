@@ -30,6 +30,8 @@ public partial class Card : Button
     private Control _shadow;
     private CollisionShape2D _collisionShape;
 
+    private CardSlot _hoveredSlot;
+
     public override void _Ready()
 {
     AngleXMax = Mathf.DegToRad(AngleXMax);
@@ -85,18 +87,32 @@ public partial class Card : Button
         var mousePos = GetGlobalMousePosition();
         GlobalPosition = mousePos - (Size / 2.0f);
     }
+    private void PlaceCardInSlot(CardSlot slot)
+        {
+            GlobalPosition = slot.GlobalPosition;
+            slot.PlaceCard(this);
+            _hoveredSlot = null;
+        }
+
 
     private void HandleMouseClick(InputEvent @event)
     {
         if (@event is InputEventMouseButton mouseEvent && mouseEvent.ButtonIndex == MouseButton.Left)
         {
             _followingMouse = mouseEvent.IsPressed();
+
+            if (!_followingMouse && _hoveredSlot != null)
+            {
+                GD.Print("Attempting to place card in slot");
+                PlaceCardInSlot(_hoveredSlot);
+            }
+
             if (!_followingMouse)
             {
                 _collisionShape.SetDeferred("disabled", false);
                 if (_tweenHandle != null && _tweenHandle.IsRunning())
                     _tweenHandle.Kill();
-                
+
                 _tweenHandle = CreateTween().SetEase(Tween.EaseType.InOut).SetTrans(Tween.TransitionType.Cubic);
                 _tweenHandle.TweenProperty(this, "rotation", 0.0f, 0.3f);
             }
@@ -115,63 +131,74 @@ public partial class Card : Button
     }
 
     public override void _GuiInput(InputEvent @event)
+{
+    HandleMouseClick(@event);
+
+    if (_followingMouse && @event is InputEventMouseMotion)
     {
-        HandleMouseClick(@event);
-        if (_followingMouse) return;
+        FollowMouse((float)GetProcessDeltaTime());
 
-        if (@event is InputEventMouseMotion motionEvent)
+        // Access the 2D physics space
+        var spaceState = GetWorld2D().DirectSpaceState;
+
+        // Perform an intersect point query to find CardSlot under the card
+        var query = new PhysicsPointQueryParameters2D
         {
-            var mousePos = GetLocalMousePosition();
-            
-            // Ensure values are clamped between 0 and 1 for normalized lerp.
-            float lerpValX = Mathf.Clamp(mousePos.X / Size.X, 0, 1);
-            float lerpValY = Mathf.Clamp(mousePos.Y / Size.Y, 0, 1);
+            Position = GlobalPosition,
+            CollideWithAreas = true,
+            CollideWithBodies = true
+        };
+        var areaResults = spaceState.IntersectPoint(query);
 
-            // Use angles within bounds
-            float rotX = Mathf.RadToDeg(Mathf.LerpAngle(-AngleXMax, AngleXMax, lerpValX));
-            float rotY = Mathf.RadToDeg(Mathf.LerpAngle(AngleYMax, -AngleYMax, lerpValY));
-
-            if (_cardTexture.Material is ShaderMaterial shaderMaterial)
+        _hoveredSlot = null;
+        foreach (var result in areaResults)
+    {
+            var collider = (Node)result["collider"];
+            if (collider is CardSlot slot)
             {
-                shaderMaterial.SetShaderParameter("x_rot", rotY);
-                shaderMaterial.SetShaderParameter("y_rot", rotX);
+                _hoveredSlot = slot;
+                break;
             }
-
-            // Apply tilt to the shadow
-            _shadow.Rotation = Mathf.DegToRad(rotX * 0.5f);
         }
     }
 
-    private void _onMouseEntered()
-{
-    if (_tweenHover != null && _tweenHover.IsRunning())
-        _tweenHover.Kill();
-
-    _tweenHover = CreateTween().SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Elastic);
-    _tweenHover.TweenProperty(this, "scale", new Vector2(1.2f, 1.2f), 0.5f);
+    // Place the card in the slot if dragging has stopped and a slot is available
+    if (!_followingMouse && _hoveredSlot != null)
+    {
+        PlaceCardInSlot(_hoveredSlot);
+    }
 }
 
-private void _onMouseExited()
-{
-    if (_tweenRot != null && _tweenRot.IsRunning())
-        _tweenRot.Kill();
-
-    _tweenRot = CreateTween().SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Back).SetParallel(true);
-
-    // Reset shader rotation values to 0
-    if (_cardTexture.Material is ShaderMaterial shaderMaterial)
+    private void _onMouseEntered()
     {
-        _tweenRot.TweenProperty(shaderMaterial, "shader_parameter/x_rot", 0.0f, 0.5f);
-        _tweenRot.TweenProperty(shaderMaterial, "shader_parameter/y_rot", 0.0f, 0.5f);
+        if (_tweenHover != null && _tweenHover.IsRunning())
+            _tweenHover.Kill();
+
+        _tweenHover = CreateTween().SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Elastic);
+        _tweenHover.TweenProperty(this, "scale", new Vector2(1.2f, 1.2f), 0.5f);
     }
 
-    // Reset shadow rotation to 0
-    _tweenRot.TweenProperty(_shadow, "rotation", 0.0f, 0.5f);
+    private void _onMouseExited()
+    {
+        if (_tweenRot != null && _tweenRot.IsRunning())
+            _tweenRot.Kill();
 
-    if (_tweenHover != null && _tweenHover.IsRunning())
-        _tweenHover.Kill();
+        _tweenRot = CreateTween().SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Back).SetParallel(true);
 
-    _tweenHover = CreateTween().SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Elastic);
-    _tweenHover.TweenProperty(this, "scale", Vector2.One, 0.55f);
-}
+        // Reset shader rotation values to 0
+        if (_cardTexture.Material is ShaderMaterial shaderMaterial)
+        {
+            _tweenRot.TweenProperty(shaderMaterial, "shader_parameter/x_rot", 0.0f, 0.5f);
+            _tweenRot.TweenProperty(shaderMaterial, "shader_parameter/y_rot", 0.0f, 0.5f);
+        }
+
+        // Reset shadow rotation to 0
+        _tweenRot.TweenProperty(_shadow, "rotation", 0.0f, 0.5f);
+
+        if (_tweenHover != null && _tweenHover.IsRunning())
+            _tweenHover.Kill();
+
+        _tweenHover = CreateTween().SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Elastic);
+        _tweenHover.TweenProperty(this, "scale", Vector2.One, 0.55f);
+    }
 }

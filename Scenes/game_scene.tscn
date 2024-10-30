@@ -1,6 +1,26 @@
-[gd_scene load_steps=2 format=3 uid="uid://bgwmcug2b3m44"]
+[gd_scene load_steps=8 format=3 uid="uid://bgwmcug2b3m44"]
+
+[ext_resource type="PackedScene" uid="uid://du3ohm1na5wf1" path="res://Scenes/card_slot.tscn" id="1_o4di6"]
+[ext_resource type="PackedScene" uid="uid://ccpeukrdsfbkm" path="res://Scenes/card.tscn" id="2_yb5w7"]
+[ext_resource type="Shader" path="res://shaders/dissolve.gdshader" id="3_evu5b"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_7gq1h"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_kntej"]
+seed = -15
+frequency = 0.0021
+fractal_octaves = 4
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_bboy4"]
+noise = SubResource("FastNoiseLite_kntej")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0q3jw"]
+resource_local_to_scene = true
+shader = ExtResource("3_evu5b")
+shader_parameter/dissolve_value = 1.0
+shader_parameter/burn_size = 0.03
+shader_parameter/burn_color = Color(1.5, 0.924, 0, 1)
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_bboy4")
 
 [node name="gameScene" type="Node2D"]
 
@@ -10,3 +30,16 @@
 offset_right = 195.0
 offset_bottom = 166.0
 texture = SubResource("PlaceholderTexture2D_7gq1h")
+
+[node name="cardSlot" parent="." instance=ExtResource("1_o4di6")]
+offset_left = -454.0
+offset_top = -213.0
+offset_right = -287.0
+offset_bottom = 14.0
+
+[node name="Card" parent="." instance=ExtResource("2_yb5w7")]
+material = SubResource("ShaderMaterial_0q3jw")
+offset_left = -399.0
+offset_top = 37.0
+offset_right = -247.0
+offset_bottom = 244.0
