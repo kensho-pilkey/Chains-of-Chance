@@ -33,6 +33,10 @@ public partial class GameScene : Node2D
 	public void EndRound() {
 		//TODO 
 	}
+	public void changeTurn() {
+		//TODO Swap turns
+		turn ++;
+	}
 	public void EndGame(Boolean player1Wins) {
 		//TODO switch to end scene
 	}

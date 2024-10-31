@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://bgwmcug2b3m44"]
+[gd_scene load_steps=8 format=3 uid="uid://bgwmcug2b3m44"]
 
+[ext_resource type="Script" path="res://Scripts/GameScene.cs" id="1_uuudh"]
 [ext_resource type="PackedScene" uid="uid://ccpeukrdsfbkm" path="res://Scenes/card.tscn" id="2_yb5w7"]
 [ext_resource type="PackedScene" uid="uid://crk55yf4cd35p" path="res://Scenes/board.tscn" id="3_6l1e4"]
 [ext_resource type="Shader" path="res://shaders/dissolve.gdshader" id="3_evu5b"]
@@ -21,6 +22,7 @@ shader_parameter/burn_color = Color(1.5, 0.924, 0, 1)
 shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_bboy4")
 
 [node name="gameScene" type="Node2D"]
+script = ExtResource("1_uuudh")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-5, 0)
