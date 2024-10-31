@@ -50,6 +50,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_7aqjh")
 script = ExtResource("1_borcn")
 
 [node name="Shadow" type="TextureRect" parent="."]
+visible = false
 modulate = Color(0, 0, 0, 1)
 self_modulate = Color(1, 1, 1, 0.168627)
 show_behind_parent = true

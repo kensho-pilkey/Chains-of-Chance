@@ -139,7 +139,7 @@ public partial class Card : Button
 		if (hovering) {
 			_hoveredSlot = slot;
 		}
-		else {
+		else if (!hovering && _hoveredSlot == slot) {
 			_hoveredSlot = null;
 		}
 	}
