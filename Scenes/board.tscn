@@ -1,0 +1,135 @@
+[gd_scene load_steps=3 format=3 uid="uid://crk55yf4cd35p"]
+
+[ext_resource type="Texture2D" uid="uid://dcw4gmfkmfavk" path="res://Assets/wild-bg.png" id="1_4ef2d"]
+[ext_resource type="PackedScene" uid="uid://du3ohm1na5wf1" path="res://Scenes/card_slot.tscn" id="1_ybx71"]
+
+[node name="board" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(2, 2)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+offset_left = 5.0
+offset_top = 11.0
+offset_right = 825.0
+offset_bottom = 733.0
+scale = Vector2(4, 4)
+texture = ExtResource("1_4ef2d")
+
+[node name="col1" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 569.0
+offset_top = 563.5
+offset_right = 609.0
+offset_bottom = 1963.5
+theme_override_constants/separation = 333
+
+[node name="cardSlot1" parent="col1" instance=ExtResource("1_ybx71")]
+layout_mode = 2
+
+[node name="cardSlot2" parent="col1" instance=ExtResource("1_ybx71")]
+layout_mode = 2
+
+[node name="cardSlot3" parent="col1" instance=ExtResource("1_ybx71")]
+layout_mode = 2
+
+[node name="cardSlot4" parent="col1" instance=ExtResource("1_ybx71")]
+layout_mode = 2
+
+[node name="cardSlot5" parent="col1" instance=ExtResource("1_ybx71")]
+layout_mode = 2
+
+[node name="col2" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 1051.0
+offset_top = 567.0
+offset_right = 1091.0
+offset_bottom = 1967.0
+theme_override_constants/separation = 333
+
+[node name="cardSlot1" parent="col2" instance=ExtResource("1_ybx71")]
+layout_mode = 2
+
+[node name="cardSlot2" parent="col2" instance=ExtResource("1_ybx71")]
+layout_mode = 2
+
+[node name="cardSlot3" parent="col2" instance=ExtResource("1_ybx71")]
+layout_mode = 2
+
+[node name="cardSlot4" parent="col2" instance=ExtResource("1_ybx71")]
+layout_mode = 2
+
+[node name="cardSlot5" parent="col2" instance=ExtResource("1_ybx71")]
+layout_mode = 2
+
+[node name="col3" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 1531.5
+offset_top = 565.0
+offset_right = 1571.5
+offset_bottom = 1965.0
+theme_override_constants/separation = 333
+
+[node name="cardSlot1" parent="col3" instance=ExtResource("1_ybx71")]
+layout_mode = 2
+
+[node name="cardSlot2" parent="col3" instance=ExtResource("1_ybx71")]
+layout_mode = 2
+
+[node name="cardSlot3" parent="col3" instance=ExtResource("1_ybx71")]
+layout_mode = 2
+
+[node name="cardSlot4" parent="col3" instance=ExtResource("1_ybx71")]
+layout_mode = 2
+
+[node name="cardSlot5" parent="col3" instance=ExtResource("1_ybx71")]
+layout_mode = 2
+
+[node name="col4" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 2030.5
+offset_top = 560.0
+offset_right = 2070.5
+offset_bottom = 1960.0
+theme_override_constants/separation = 333
+
+[node name="cardSlot1" parent="col4" instance=ExtResource("1_ybx71")]
+layout_mode = 2
+
+[node name="cardSlot2" parent="col4" instance=ExtResource("1_ybx71")]
+layout_mode = 2
+
+[node name="cardSlot3" parent="col4" instance=ExtResource("1_ybx71")]
+layout_mode = 2
+
+[node name="cardSlot4" parent="col4" instance=ExtResource("1_ybx71")]
+layout_mode = 2
+
+[node name="cardSlot5" parent="col4" instance=ExtResource("1_ybx71")]
+layout_mode = 2
+
+[node name="col5" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 2509.5
+offset_top = 560.5
+offset_right = 2549.5
+offset_bottom = 1960.5
+theme_override_constants/separation = 333
+
+[node name="cardSlot1" parent="col5" instance=ExtResource("1_ybx71")]
+layout_mode = 2
+
+[node name="cardSlot2" parent="col5" instance=ExtResource("1_ybx71")]
+layout_mode = 2
+
+[node name="cardSlot3" parent="col5" instance=ExtResource("1_ybx71")]
+layout_mode = 2
+
+[node name="cardSlot4" parent="col5" instance=ExtResource("1_ybx71")]
+layout_mode = 2
+
+[node name="cardSlot5" parent="col5" instance=ExtResource("1_ybx71")]
+layout_mode = 2

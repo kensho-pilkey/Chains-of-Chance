@@ -5,8 +5,8 @@ public partial class CardSlot : Control
 {
     private bool _occupied = false;
     private Card _currentCard = null;
-    [Export] private Color HoverColor = new Color(0.7f, 0.7f, 0.7f, 1.0f); // Light gray
-    [Export] private Color DefaultColor = new Color(1, 1, 1, 1); // White
+    [Export] private Color HoverColor = new Color(1, 1, 1, 0.5f); // Light gray
+    [Export] private Color DefaultColor = new Color(1, 1, 1, 0); // clear
 
     public override void _Ready()
     {

@@ -3,6 +3,7 @@ using System;
 
 public partial class Card : Button
 {
+	//Effect Vars
     [Export] public float AngleXMax = 15.0f;
     [Export] public float AngleYMax = 15.0f;
     [Export] public float MaxOffsetShadow = 50.0f;
@@ -19,19 +20,14 @@ public partial class Card : Button
     private Tween _tweenHover;
     private Tween _tweenDestroy;
     private Tween _tweenHandle;
-    
-    private Vector2 _lastMousePos;
-    private Vector2 _mouseVelocity;
-    private bool _followingMouse = false;
     private Vector2 _lastPos;
     private Vector2 _velocity;
-    
     private TextureRect _cardTexture;
     private Control _shadow;
     private CollisionShape2D _collisionShape;
-
+	
     private CardSlot _hoveredSlot;
-
+ 	private bool _followingMouse = false;
 	private bool _placed = false;
 
     public override void _Ready()
@@ -149,7 +145,7 @@ public partial class Card : Button
             _tweenHover.Kill();
 
         _tweenHover = CreateTween().SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Elastic);
-        _tweenHover.TweenProperty(this, "scale", new Vector2(1.2f, 1.2f), 0.5f);
+        _tweenHover.TweenProperty(this, "scale", new Vector2(2.2f, 2.2f), 0.5f);
     }
 
     private void _onMouseExited()
@@ -173,6 +169,6 @@ public partial class Card : Button
             _tweenHover.Kill();
 
         _tweenHover = CreateTween().SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Elastic);
-        _tweenHover.TweenProperty(this, "scale", Vector2.One, 0.55f);
+        _tweenHover.TweenProperty(this, "scale", new Vector2(2f, 2f), 0.55f);
     }
 }

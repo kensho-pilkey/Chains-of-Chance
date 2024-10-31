@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bgwmcug2b3m44"]
 
-[ext_resource type="PackedScene" uid="uid://du3ohm1na5wf1" path="res://Scenes/card_slot.tscn" id="1_o4di6"]
 [ext_resource type="PackedScene" uid="uid://ccpeukrdsfbkm" path="res://Scenes/card.tscn" id="2_yb5w7"]
+[ext_resource type="PackedScene" uid="uid://crk55yf4cd35p" path="res://Scenes/board.tscn" id="3_6l1e4"]
 [ext_resource type="Shader" path="res://shaders/dissolve.gdshader" id="3_evu5b"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_kntej"]
@@ -12,7 +12,7 @@ fractal_octaves = 4
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_bboy4"]
 noise = SubResource("FastNoiseLite_kntej")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0q3jw"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ydb64"]
 resource_local_to_scene = true
 shader = ExtResource("3_evu5b")
 shader_parameter/dissolve_value = 1.0
@@ -23,34 +23,18 @@ shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_bboy4")
 [node name="gameScene" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-5, 0)
+zoom = Vector2(0.2, 0.2)
 
-[node name="cardSlot" parent="." instance=ExtResource("1_o4di6")]
-offset_left = -454.0
-offset_top = -213.0
-offset_right = -287.0
-offset_bottom = 14.0
+[node name="board" parent="." instance=ExtResource("3_6l1e4")]
+offset_left = -3322.0
+offset_top = -2939.0
+offset_right = -3282.0
+offset_bottom = -2899.0
 
-[node name="cardSlot2" parent="." instance=ExtResource("1_o4di6")]
-offset_left = -212.0
-offset_top = -210.0
-offset_right = -45.0
-offset_bottom = 17.0
-
-[node name="cardSlot3" parent="." instance=ExtResource("1_o4di6")]
-offset_left = 26.0
-offset_top = -213.0
-offset_right = 193.0
-offset_bottom = 14.0
-
-[node name="cardSlot4" parent="." instance=ExtResource("1_o4di6")]
-offset_left = 252.0
-offset_top = -211.0
-offset_right = 419.0
-offset_bottom = 16.0
-
-[node name="Card" parent="." instance=ExtResource("2_yb5w7")]
-material = SubResource("ShaderMaterial_0q3jw")
-offset_left = -308.0
-offset_top = 109.0
-offset_right = -156.0
-offset_bottom = 316.0
+[node name="Card2" parent="." instance=ExtResource("2_yb5w7")]
+material = SubResource("ShaderMaterial_ydb64")
+offset_left = -26.0
+offset_top = 1972.0
+offset_right = 126.0
+offset_bottom = 2179.0
