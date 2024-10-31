@@ -115,6 +115,7 @@ public partial class Card : Button
 			if (@event is InputEventMouseButton mouseEvent && mouseEvent.ButtonIndex == MouseButton.Left)
 			{
 				_followingMouse = mouseEvent.IsPressed();
+				
 
 				if (!_followingMouse && _hoveredSlot != null)
 				{
@@ -125,16 +126,11 @@ public partial class Card : Button
 
 				if (!_followingMouse)
 				{
-					_collisionShape.SetDeferred("disabled", false);
 					if (_tweenHandle != null && _tweenHandle.IsRunning())
 						_tweenHandle.Kill();
 
 					_tweenHandle = CreateTween().SetEase(Tween.EaseType.InOut).SetTrans(Tween.TransitionType.Cubic);
 					_tweenHandle.TweenProperty(this, "rotation", 0.0f, 0.3f);
-				}
-				if (_followingMouse && @event is InputEventMouseMotion)
-				{
-					FollowMouse((float)GetProcessDeltaTime());
 				}
 			}
 		}
