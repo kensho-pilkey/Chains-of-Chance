@@ -39,7 +39,7 @@ offset_bottom = 14.0
 
 [node name="Card" parent="." instance=ExtResource("2_yb5w7")]
 material = SubResource("ShaderMaterial_0q3jw")
-offset_left = -399.0
-offset_top = 37.0
-offset_right = -247.0
-offset_bottom = 244.0
+offset_left = 270.0
+offset_top = -137.0
+offset_right = 422.0
+offset_bottom = 70.0

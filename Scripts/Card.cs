@@ -32,12 +32,14 @@ public partial class Card : Button
 
     private CardSlot _hoveredSlot;
 
+	private bool _placed = false;
+
     public override void _Ready()
 {
     AngleXMax = Mathf.DegToRad(AngleXMax);
     AngleYMax = Mathf.DegToRad(AngleYMax);
     _collisionShape = GetNode<CollisionShape2D>("DestroyArea/CollisionShape2D");
-    _collisionShape.SetDeferred("disabled", true);
+    _collisionShape.SetDeferred("disabled", false);
 
     _cardTexture = GetNode<TextureRect>("CardTexture");
     _shadow = GetNode<Control>("Shadow");
@@ -71,6 +73,7 @@ public partial class Card : Button
     }
 
     private void HandleShadow(float delta)
+	//TODO make shadow actually follow card
     {
         var center = GetViewportRect().Size / 2.0f;
         float distance = GlobalPosition.X - center.X;
@@ -89,36 +92,11 @@ public partial class Card : Button
     }
     private void PlaceCardInSlot(CardSlot slot)
         {
+
             GlobalPosition = slot.GlobalPosition;
             slot.PlaceCard(this);
             _hoveredSlot = null;
         }
-
-
-    private void HandleMouseClick(InputEvent @event)
-    {
-        if (@event is InputEventMouseButton mouseEvent && mouseEvent.ButtonIndex == MouseButton.Left)
-        {
-            _followingMouse = mouseEvent.IsPressed();
-
-            if (!_followingMouse && _hoveredSlot != null)
-            {
-                GD.Print("Attempting to place card in slot");
-                PlaceCardInSlot(_hoveredSlot);
-            }
-
-            if (!_followingMouse)
-            {
-                _collisionShape.SetDeferred("disabled", false);
-                if (_tweenHandle != null && _tweenHandle.IsRunning())
-                    _tweenHandle.Kill();
-
-                _tweenHandle = CreateTween().SetEase(Tween.EaseType.InOut).SetTrans(Tween.TransitionType.Cubic);
-                _tweenHandle.TweenProperty(this, "rotation", 0.0f, 0.3f);
-            }
-        }
-    }
-
     public void Destroy()
     {
         _cardTexture.UseParentMaterial = true;
@@ -131,44 +109,44 @@ public partial class Card : Button
     }
 
     public override void _GuiInput(InputEvent @event)
-{
-    HandleMouseClick(@event);
+	{
+		if (!_placed) {
+			//if LMB is clicked, held, or released
+			if (@event is InputEventMouseButton mouseEvent && mouseEvent.ButtonIndex == MouseButton.Left)
+			{
+				_followingMouse = mouseEvent.IsPressed();
 
-    if (_followingMouse && @event is InputEventMouseMotion)
-    {
-        FollowMouse((float)GetProcessDeltaTime());
+				if (!_followingMouse && _hoveredSlot != null)
+				{
+					GD.Print("Attempting to place card in slot");
+					PlaceCardInSlot(_hoveredSlot);
+					_placed = true;
+				}
 
-        // Access the 2D physics space
-        var spaceState = GetWorld2D().DirectSpaceState;
+				if (!_followingMouse)
+				{
+					_collisionShape.SetDeferred("disabled", false);
+					if (_tweenHandle != null && _tweenHandle.IsRunning())
+						_tweenHandle.Kill();
 
-        // Perform an intersect point query to find CardSlot under the card
-        var query = new PhysicsPointQueryParameters2D
-        {
-            Position = GlobalPosition,
-            CollideWithAreas = true,
-            CollideWithBodies = true
-        };
-        var areaResults = spaceState.IntersectPoint(query);
-
-        _hoveredSlot = null;
-        foreach (var result in areaResults)
-    {
-            var collider = (Node)result["collider"];
-            if (collider is CardSlot slot)
-            {
-                _hoveredSlot = slot;
-                break;
-            }
-        }
-    }
-
-    // Place the card in the slot if dragging has stopped and a slot is available
-    if (!_followingMouse && _hoveredSlot != null)
-    {
-        PlaceCardInSlot(_hoveredSlot);
-    }
-}
-
+					_tweenHandle = CreateTween().SetEase(Tween.EaseType.InOut).SetTrans(Tween.TransitionType.Cubic);
+					_tweenHandle.TweenProperty(this, "rotation", 0.0f, 0.3f);
+				}
+				if (_followingMouse && @event is InputEventMouseMotion)
+				{
+					FollowMouse((float)GetProcessDeltaTime());
+				}
+			}
+		}
+	}
+	public void updateHoverStatus(bool hovering, CardSlot slot) {
+		if (hovering) {
+			_hoveredSlot = slot;
+		}
+		else {
+			_hoveredSlot = null;
+		}
+	}
     private void _onMouseEntered()
     {
         if (_tweenHover != null && _tweenHover.IsRunning())
