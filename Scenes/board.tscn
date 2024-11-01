@@ -23,11 +23,12 @@ texture = ExtResource("1_4ef2d")
 
 [node name="P2Slots" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_right = 40.0
+offset_top = 40.0
+offset_right = 1200.0
 offset_bottom = 40.0
 theme_override_constants/separation = 300
 
-[node name="cardSlot" parent="P2Slots" instance=ExtResource("1_ybx71")]
+[node name="cardSlot1" parent="P2Slots" instance=ExtResource("1_ybx71")]
 layout_mode = 2
 
 [node name="cardSlot2" parent="P2Slots" instance=ExtResource("1_ybx71")]
@@ -44,10 +45,10 @@ layout_mode = 2
 
 [node name="P1Slots" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 36.0
-offset_top = 411.5
-offset_right = 1236.0
-offset_bottom = 451.5
+offset_left = -0.5
+offset_top = 424.0
+offset_right = 1199.5
+offset_bottom = 424.0
 theme_override_constants/separation = 300
 
 [node name="cardSlot" parent="P1Slots" instance=ExtResource("1_ybx71")]

@@ -7,14 +7,29 @@ size = Vector2(163, 282)
 
 [node name="cardSlot" type="Control"]
 layout_mode = 3
+anchors_preset = 0
+offset_left = 361.0
+offset_top = 133.0
+offset_right = 361.0
+offset_bottom = 133.0
 script = ExtResource("1_dx7v0")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 0
-offset_right = 163.0
-offset_bottom = 282.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -81.5
+offset_top = -141.0
+offset_right = 81.5
+offset_bottom = 141.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-82, -142)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(82, 142)

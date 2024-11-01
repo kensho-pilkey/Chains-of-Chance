@@ -29,7 +29,7 @@ public partial class CardSlot : Control
 	public Vector2 GetCenterPosition()
     {
 		ColorRect colorRect = GetNode<ColorRect>("ColorRect");
-        Vector2 centerPosition = colorRect.GlobalPosition + (colorRect.Size / 2);
+        Vector2 centerPosition = colorRect.GlobalPosition + (colorRect.Size / 2.0f);
         return centerPosition;
     }
 	public void RemoveCard(Card card)
@@ -43,5 +43,19 @@ public partial class CardSlot : Control
         }
     }
 
+	private void _on_area_2d_area_entered(Area2D area) {
+		if (area.GetParent() is Card card && !_occupied)
+        {
+            Modulate = HoverColor; // Change color on hover
+			card.updateHoverStatus(true, this);
+        }
+	}
 	
+	private void _on_area_2d_area_exited(Area2D area) {
+		if (area.GetParent() is Card card && !_occupied)
+        {
+            Modulate = DefaultColor;
+			card.updateHoverStatus(false, this);
+        }
+	}
 }

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://beemq60umwn40"]
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 4.0
+offset_right = 44.0
+offset_bottom = 40.0
