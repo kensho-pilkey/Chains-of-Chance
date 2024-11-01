@@ -32,6 +32,10 @@ public partial class Card : Button
 
 	private CardData _cardData = null;
 
+	private Vector2 _handPosition;
+
+
+
     public override void _Ready()
 {
     AngleXMax = Mathf.DegToRad(AngleXMax);
@@ -103,8 +107,6 @@ public partial class Card : Button
             GlobalPosition = slot.GetCenterPosition() - (Size / 2.0f);
             slot.PlaceCard(this);
             _hoveredSlot = null;
-			GD.Print("Card GlobalPosition: ", GlobalPosition);
-			GD.Print("Slot CenterPosition: ", slot.GetCenterPosition());
         }
     public void Destroy()
     {
@@ -124,17 +126,21 @@ public partial class Card : Button
 			if (@event is InputEventMouseButton mouseEvent && mouseEvent.ButtonIndex == MouseButton.Left)
 			{
 				_followingMouse = mouseEvent.IsPressed();
-				
-
-				if (!_followingMouse && _hoveredSlot != null)
-				{
-					GD.Print("Attempting to place card in slot");
-					PlaceCardInSlot(_hoveredSlot);
-					_placed = true;
-				}
 
 				if (!_followingMouse)
 				{
+					if (_hoveredSlot != null)
+					{
+						GD.Print("Attempting to place card in slot");
+						PlaceCardInSlot(_hoveredSlot);
+						_placed = true;
+					}
+					else
+					{
+						// Not over a slot, return to hand
+						ReturnToHand();
+					}
+
 					if (_tweenHandle != null && _tweenHandle.IsRunning())
 						_tweenHandle.Kill();
 
@@ -184,4 +190,14 @@ public partial class Card : Button
         _tweenHover = CreateTween().SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Elastic);
         _tweenHover.TweenProperty(this, "scale", new Vector2(2f, 2f), 0.55f);
     }
+
+	public void SetHandPosition(Vector2 position)
+	{
+		_handPosition = position;
+	}
+
+	private void ReturnToHand()
+	{
+		Position = _handPosition;
+	}
 }

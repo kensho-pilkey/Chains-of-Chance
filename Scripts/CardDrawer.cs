@@ -70,30 +70,27 @@ public partial class CardDrawer : Control
     {
         _drawn = true;
 
-        // Kill existing tween if running
         if (_tween != null && _tween.IsRunning())
             _tween.Kill();
 
-        // Create new tween for drawing cards
         _tween = CreateTween();
         _tween.SetEase(Tween.EaseType.InOut).SetTrans(Tween.TransitionType.Cubic);
 
         for (int i = 0; i < number; i++)
         {
-            // Check if CardScene is valid and instantiate
-            if (CardScene != null && CardScene.Instantiate() is Button instance)
+            if (CardScene != null && CardScene.Instantiate() is Card instance)
             {
                 AddChild(instance);
                 instance.GlobalPosition = fromPos;
 
-                // Calculate the final position of each card
                 Vector2 finalPos = -(instance.Size / 2.0f) - new Vector2(CardOffsetX * (number - 1 - i), 0);
                 finalPos.X += (CardOffsetX * (number - 1)) / 2.0f;
-
-                // Calculate rotation angle for each card based on position in sequence
+                
                 float rotRadians = Mathf.LerpAngle(-RotMax, RotMax, (float)i / (number - 1));
-
-                // Animate position and rotation with parallel tweens
+                
+                // Set the initial hand position and rotation
+                instance.SetHandPosition(finalPos);
+                // Animate the card to its final hand position and rotation
                 _tween.Parallel().TweenProperty(instance, "position", finalPos, 0.3f + (i * 0.075f));
                 _tween.Parallel().TweenProperty(instance, "rotation", rotRadians, 0.3f + (i * 0.075f));
             }
@@ -103,10 +100,10 @@ public partial class CardDrawer : Control
             }
         }
 
-        // Set up callback and tween properties for sine offset multiplier
         _tween.TweenCallback(Callable.From(() => SetProcess(true)));
         _tween.TweenProperty(this, "SineOffsetMult", AnimOffsetY, 1.5f).From(0.0f);
     }
+
 
     public async void UndrawCards(Vector2 toPos)
     {
