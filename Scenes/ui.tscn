@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://beemq60umwn40"]
+[gd_scene load_steps=2 format=3 uid="uid://beemq60umwn40"]
+
+[ext_resource type="Texture2D" uid="uid://cvq8v02n843lc" path="res://Assets/Tiles_A_white.png" id="1_5b8gd"]
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -26,3 +28,18 @@ offset_left = 35.0
 offset_top = 4.0
 offset_right = 75.0
 offset_bottom = 44.0
+
+[node name="Deck" type="Button" parent="."]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="TextureRect" type="TextureRect" parent="Deck"]
+layout_mode = 0
+offset_left = 1764.0
+offset_top = 861.0
+offset_right = 1915.0
+offset_bottom = 1076.0
+texture = ExtResource("1_5b8gd")
+expand_mode = 1
+stretch_mode = 4

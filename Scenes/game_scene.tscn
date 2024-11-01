@@ -23,6 +23,7 @@ shader_parameter/burn_color = Color(1.5, 0.924, 0, 1)
 shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_bboy4")
 
 [node name="gameScene" type="Node2D"]
+scale = Vector2(2, 2)
 script = ExtResource("1_uuudh")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -30,10 +31,10 @@ position = Vector2(-5, 0)
 zoom = Vector2(0.2, 0.2)
 
 [node name="board" parent="." instance=ExtResource("3_6l1e4")]
-offset_left = -1196.0
-offset_top = -2023.0
-offset_right = -1156.0
-offset_bottom = -1983.0
+offset_left = -1271.5
+offset_top = -1095.0
+offset_right = -1231.5
+offset_bottom = -1055.0
 metadata/_edit_use_anchors_ = true
 
 [node name="Card2" parent="." instance=ExtResource("2_yb5w7")]

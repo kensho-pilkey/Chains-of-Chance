@@ -25,6 +25,7 @@ public partial class Card : Button
     private TextureRect _cardTexture;
     private Control _shadow;
     private CollisionShape2D _collisionShape;
+	private Label _label;
 	
     private CardSlot _hoveredSlot;
  	private bool _followingMouse = false;
@@ -46,6 +47,7 @@ public partial class Card : Button
     _cardTexture = GetNode<TextureRect>("CardTexture");
     _shadow = GetNode<Control>("Shadow");
 	//ADD card health dmg etc
+	_label = GetNode<Label>("Label");
 
     // Connect the signals to the methods
     MouseEntered += _onMouseEntered;
@@ -66,6 +68,7 @@ public partial class Card : Button
 	private void UpdateCardAppearance()
 {
     _cardTexture.Texture = GD.Load<Texture2D>(_cardData.AssetPath);
+	_label.Text = _cardData.Name + "\n" + _cardData.Damage + "\n" + _cardData.Health;
 
 }
     private void RotateVelocity(float delta)

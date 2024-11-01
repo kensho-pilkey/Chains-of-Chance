@@ -98,6 +98,16 @@ position = Vector2(75, 104.5)
 shape = SubResource("RectangleShape2D_xsth3")
 disabled = true
 
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 53.5
+offset_top = 12.75
+offset_right = 173.5
+offset_bottom = 87.75
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "
+"
+
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
