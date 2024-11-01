@@ -34,10 +34,16 @@ public partial class GameScene : Node2D
 		//TODO 
 	}
 	public void changeTurn() {
-		//TODO Swap turns
+		//TODO Swap turns, was thinking even turns could be player 1 and odd turns could be player 2 or something.
 		turn ++;
 	}
 	public void EndGame(Boolean player1Wins) {
-		//TODO switch to end scene
+		if (player1Wins) {
+			GD.Print("Player 1 Wins!");
+		}
+		else {
+			GD.Print("You lose!");
+		}
+		//TODO switch to end scene and implement end game logic
 	}
 }

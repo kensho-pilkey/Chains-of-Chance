@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bgwmcug2b3m44"]
+[gd_scene load_steps=9 format=3 uid="uid://bgwmcug2b3m44"]
 
 [ext_resource type="Script" path="res://Scripts/GameScene.cs" id="1_uuudh"]
 [ext_resource type="PackedScene" uid="uid://ccpeukrdsfbkm" path="res://Scenes/card.tscn" id="2_yb5w7"]
 [ext_resource type="PackedScene" uid="uid://crk55yf4cd35p" path="res://Scenes/board.tscn" id="3_6l1e4"]
 [ext_resource type="Shader" path="res://shaders/dissolve.gdshader" id="3_evu5b"]
+[ext_resource type="Script" path="res://Scripts/CardDrawer.cs" id="5_2wmh7"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_kntej"]
 seed = -15
@@ -40,3 +41,15 @@ offset_left = -26.0
 offset_top = 1972.0
 offset_right = 126.0
 offset_bottom = 2179.0
+
+[node name="CardDrawer" type="Control" parent="." node_paths=PackedStringArray("From")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -2024.0
+offset_top = 2130.0
+offset_right = -1984.0
+offset_bottom = 2170.0
+script = ExtResource("5_2wmh7")
+From = NodePath(".")
+CardScene = ExtResource("2_yb5w7")
+CardOffsetX = 120.0

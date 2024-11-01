@@ -6,27 +6,31 @@ public partial class Global : Node
 {
 	public int PlayerScore { get; set; } = 0;
 	public List<CardData> PlayerCards { get; private set; } = new List<CardData>();
+	public static Global Instance { get; private set; }
 	private static readonly Dictionary<string, string> NameAssetPairs = new Dictionary<string, string>
     {
-        { "Dragon", "res://assets/dragon.png" },
-        { "Phoenix", "res://assets/phoenix.png" },
-        { "Griffin", "res://assets/griffin.png" },
-        { "Unicorn", "res://assets/unicorn.png" },
-        { "Hydra", "res://assets/hydra.png" }
+        { "Dragon", "res://assets/Tiles_A_white.png" },
+        { "Phoenix", "res://assets/Tiles_A_white.png" },
+        { "Griffin", "res://assets/Tiles_A_white.png" },
+        { "Unicorn", "res://assets/Tiles_A_white.png" },
+        { "Hydra", "res://assets/Tiles_A_white.png" }
     };
 	private static readonly string[] Elements = { "Fire", "Water", "Grass" };
 	private static readonly Random RandomGenerator = new Random();
 	public override void _Ready()
 	{
+		// Initialize the singleton instance (allows us to ref this object and its data from anywhere)
+		Instance = this;
+		PlayerCards.Add(createRandomCard());
+		PlayerCards.Add(createRandomCard());
+		PlayerCards.Add(createRandomCard());
 		PlayerCards.Add(createRandomCard());
 		PlayerCards.Add(createRandomCard());
 		PlayerCards.Add(createRandomCard());
 		
-		foreach (var card in PlayerCards)
-			{
-				GD.Print(card.ToString());
-			}
-		
+	}
+	public CardData getRandomCard() {
+		return PlayerCards[RandomGenerator.Next(PlayerCards.Count)];
 	}
 	public CardData createRandomCard()
     {

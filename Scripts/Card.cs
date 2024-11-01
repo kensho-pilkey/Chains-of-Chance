@@ -30,6 +30,8 @@ public partial class Card : Button
  	private bool _followingMouse = false;
 	private bool _placed = false;
 
+	private CardData _cardData = null;
+
     public override void _Ready()
 {
     AngleXMax = Mathf.DegToRad(AngleXMax);
@@ -43,6 +45,9 @@ public partial class Card : Button
     // Connect the signals to the methods
     MouseEntered += _onMouseEntered;
     MouseExited += _onMouseExited;
+
+	_cardData = Global.Instance.getRandomCard();
+	GD.Print(_cardData.ToString());
 }
 
     public override void _Process(double delta)
