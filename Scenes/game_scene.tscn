@@ -37,5 +37,5 @@ offset_bottom = 354.0
 script = ExtResource("5_2wmh7")
 From = NodePath(".")
 CardScene = ExtResource("2_yb5w7")
-CardOffsetX = 120.0
+CardOffsetX = 200.0
 metadata/_edit_use_anchors_ = true
