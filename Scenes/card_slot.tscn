@@ -7,9 +7,6 @@ size = Vector2(163, 282)
 
 [node name="cardSlot" type="Control"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 167.0
-offset_bottom = 227.0
 script = ExtResource("1_dx7v0")
 
 [node name="ColorRect" type="ColorRect" parent="."]

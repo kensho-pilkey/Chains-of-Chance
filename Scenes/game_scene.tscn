@@ -37,18 +37,18 @@ offset_bottom = -2899.0
 
 [node name="Card2" parent="." instance=ExtResource("2_yb5w7")]
 material = SubResource("ShaderMaterial_ydb64")
-offset_left = -26.0
-offset_top = 1972.0
-offset_right = 126.0
-offset_bottom = 2179.0
+offset_left = -1111.0
+offset_top = -1298.0
+offset_right = -959.0
+offset_bottom = -1091.0
 
 [node name="CardDrawer" type="Control" parent="." node_paths=PackedStringArray("From")]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -2024.0
-offset_top = 2130.0
-offset_right = -1984.0
-offset_bottom = 2170.0
+offset_left = -2716.0
+offset_top = 1092.0
+offset_right = -2676.0
+offset_bottom = 1132.0
 script = ExtResource("5_2wmh7")
 From = NodePath(".")
 CardScene = ExtResource("2_yb5w7")

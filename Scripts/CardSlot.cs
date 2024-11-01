@@ -6,8 +6,8 @@ public partial class CardSlot : Control
     private bool _occupied = false;
     private Card _currentCard = null;
     [Export] private Color HoverColor = new Color(1, 1, 1, 0.5f); // Light gray
-    [Export] private Color DefaultColor = new Color(1, 1, 1, 0); // clear
-	[Export] private Color PlacedColor = new Color(0.5f, 0.5f, 1.0f, 0.0f); //Light blue
+    [Export] private Color DefaultColor = new Color(1, 1, 1, 1); // clear
+	[Export] private Color PlacedColor = new Color(0.5f, 0.5f, 1.0f, 0.5f); //Light blue
 
 
     public override void _Ready()
@@ -26,6 +26,12 @@ public partial class CardSlot : Control
         }
     }
 
+	public Vector2 GetCenterPosition()
+    {
+		ColorRect colorRect = GetNode<ColorRect>("ColorRect");
+        Vector2 centerPosition = colorRect.GlobalPosition + (colorRect.Size / 2);
+        return centerPosition;
+    }
 	public void RemoveCard(Card card)
     {
         if (_occupied)
@@ -37,19 +43,5 @@ public partial class CardSlot : Control
         }
     }
 
-	private void _on_area_2d_area_entered(Area2D area) {
-		if (area.GetParent() is Card card && !_occupied)
-        {
-            Modulate = HoverColor; // Change color on hover
-			card.updateHoverStatus(true, this);
-        }
-	}
 	
-	private void _on_area_2d_area_exited(Area2D area) {
-		if (area.GetParent() is Card card && !_occupied)
-        {
-            Modulate = DefaultColor;
-			card.updateHoverStatus(false, this);
-        }
-	}
 }
