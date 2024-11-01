@@ -1,13 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://beemq60umwn40"]
+[gd_scene load_steps=4 format=3 uid="uid://beemq60umwn40"]
 
+[ext_resource type="Script" path="res://Scripts/Ui.cs" id="1_0j38m"]
 [ext_resource type="Texture2D" uid="uid://cvq8v02n843lc" path="res://Assets/Tiles_A_white.png" id="1_5b8gd"]
+[ext_resource type="PackedScene" uid="uid://c4p858s3fsha1" path="res://Scenes/deck.tscn" id="3_htu72"]
 
 [node name="UI" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 4.0
-offset_right = 1924.0
+offset_right = 1920.0
 offset_bottom = 1080.0
+scale = Vector2(2.5, 2.5)
+script = ExtResource("1_0j38m")
 
 [node name="Shop" type="Button" parent="."]
 layout_mode = 0
@@ -16,6 +19,15 @@ offset_top = -1.0
 offset_right = 1917.0
 offset_bottom = 120.0
 text = "Shop"
+
+[node name="Play" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1689.0
+offset_top = 139.0
+offset_right = 1918.0
+offset_bottom = 260.0
+text = "Play
+"
 
 [node name="Player1Health" type="TextureProgressBar" parent="."]
 layout_mode = 0
@@ -29,17 +41,25 @@ offset_top = 4.0
 offset_right = 75.0
 offset_bottom = 44.0
 
-[node name="Deck" type="Button" parent="."]
+[node name="OpenDeck" type="Button" parent="."]
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 1779.0
+offset_top = 863.0
+offset_right = 1921.0
+offset_bottom = 1078.0
 
-[node name="TextureRect" type="TextureRect" parent="Deck"]
+[node name="TextureRect" type="TextureRect" parent="OpenDeck"]
 layout_mode = 0
-offset_left = 1764.0
-offset_top = 861.0
-offset_right = 1915.0
-offset_bottom = 1076.0
+offset_left = -7.0
+offset_top = 1.0
+offset_right = 144.0
+offset_bottom = 216.0
 texture = ExtResource("1_5b8gd")
 expand_mode = 1
 stretch_mode = 4
+
+[node name="Deck" parent="." instance=ExtResource("3_htu72")]
+visible = false
+layout_mode = 1
+
+[connection signal="pressed" from="OpenDeck" to="." method="_on_deck_pressed"]

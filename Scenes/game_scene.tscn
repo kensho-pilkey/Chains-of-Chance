@@ -1,34 +1,25 @@
-[gd_scene load_steps=9 format=3 uid="uid://bgwmcug2b3m44"]
+[gd_scene load_steps=6 format=3 uid="uid://bgwmcug2b3m44"]
 
 [ext_resource type="Script" path="res://Scripts/GameScene.cs" id="1_uuudh"]
 [ext_resource type="PackedScene" uid="uid://ccpeukrdsfbkm" path="res://Scenes/card.tscn" id="2_yb5w7"]
 [ext_resource type="PackedScene" uid="uid://crk55yf4cd35p" path="res://Scenes/board.tscn" id="3_6l1e4"]
-[ext_resource type="Shader" path="res://shaders/dissolve.gdshader" id="3_evu5b"]
 [ext_resource type="Script" path="res://Scripts/CardDrawer.cs" id="5_2wmh7"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_kntej"]
-seed = -15
-frequency = 0.0021
-fractal_octaves = 4
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_bboy4"]
-noise = SubResource("FastNoiseLite_kntej")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ydb64"]
-resource_local_to_scene = true
-shader = ExtResource("3_evu5b")
-shader_parameter/dissolve_value = 1.0
-shader_parameter/burn_size = 0.03
-shader_parameter/burn_color = Color(1.5, 0.924, 0, 1)
-shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_bboy4")
+[ext_resource type="PackedScene" uid="uid://beemq60umwn40" path="res://Scenes/ui.tscn" id="6_eyrht"]
 
 [node name="gameScene" type="Node2D"]
-scale = Vector2(2, 2)
 script = ExtResource("1_uuudh")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-5, 0)
-zoom = Vector2(0.2, 0.2)
+zoom = Vector2(0.4, 0.4)
+
+[node name="UI" parent="." instance=ExtResource("6_eyrht")]
+z_index = 1
+offset_left = -2403.0
+offset_top = -1350.0
+offset_right = -483.0
+offset_bottom = -270.0
+metadata/_edit_use_anchors_ = true
 
 [node name="board" parent="." instance=ExtResource("3_6l1e4")]
 offset_left = -1271.5
@@ -37,22 +28,14 @@ offset_right = -1231.5
 offset_bottom = -1055.0
 metadata/_edit_use_anchors_ = true
 
-[node name="Card2" parent="." instance=ExtResource("2_yb5w7")]
-material = SubResource("ShaderMaterial_ydb64")
-offset_left = 1157.0
-offset_top = 131.0
-offset_right = 1309.0
-offset_bottom = 338.0
-metadata/_edit_use_anchors_ = true
-
 [node name="CardDrawer" type="Control" parent="." node_paths=PackedStringArray("From")]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -1681.0
 offset_top = 314.0
-offset_right = -1641.0
+offset_right = 40.0
 offset_bottom = 354.0
 script = ExtResource("5_2wmh7")
 From = NodePath(".")
 CardScene = ExtResource("2_yb5w7")
 CardOffsetX = 120.0
+metadata/_edit_use_anchors_ = true

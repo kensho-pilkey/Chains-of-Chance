@@ -66,11 +66,11 @@ public partial class Card : Button
     }
 
 	private void UpdateCardAppearance()
-{
-    _cardTexture.Texture = GD.Load<Texture2D>(_cardData.AssetPath);
-	_label.Text = _cardData.Name + "\n" + _cardData.Damage + "\n" + _cardData.Health;
+	{
+		_cardTexture.Texture = GD.Load<Texture2D>(_cardData.AssetPath);
+		_label.Text = _cardData.Name + "\n" + _cardData.Damage + "\n" + _cardData.Health;
 
-}
+	}
     private void RotateVelocity(float delta)
     {
         if (!_followingMouse) return;
