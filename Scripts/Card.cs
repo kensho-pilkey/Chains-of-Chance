@@ -35,6 +35,8 @@ public partial class Card : Button
 
 	private Vector2 _handPosition;
 
+	private Boolean opponentCard;
+
 
 
     public override void _Ready()
@@ -56,6 +58,13 @@ public partial class Card : Button
 	_cardData = Global.Instance.getRandomCard();
 	GD.Print(_cardData.ToString());
 	UpdateCardAppearance();
+	if(GetParent() is OpponentSlot) {
+		opponentCard = true;
+		GD.Print("this me");
+	}
+	else {
+		opponentCard = false;
+	}
 }
 
     public override void _Process(double delta)
@@ -105,12 +114,21 @@ public partial class Card : Button
         var mousePos = GetGlobalMousePosition();
         GlobalPosition = mousePos - (Size / 2.0f);
     }
-    public void PlaceCardInSlot(CardSlot slot)
-        {
-            GlobalPosition = slot.GetCenterPosition() - (Size / 2.0f);
-            slot.PlaceCard(this);
-            _hoveredSlot = null;
-        }
+    public void PlaceCardInSlot(CardSlot slot) {
+		GlobalPosition = slot.GetCenterPosition() - (Size / 2.0f);
+		slot.PlaceCard(this);
+		_hoveredSlot = null;
+		_placed = true;
+    }
+
+	public void PlaceOpponentCardInSlot(CardSlot slot) {
+		// Scale = Vector2.One;
+		// Position = Position = slot.Position + (slot.Size - Size) / 2.0f;
+		slot.PlaceCard(this);
+        _hoveredSlot = null;
+		_placed = true;
+		Scale = Scale / 2;
+	}
     public void Destroy()
     {
         _cardTexture.UseParentMaterial = true;
@@ -136,7 +154,6 @@ public partial class Card : Button
 					{
 						GD.Print("Attempting to place card in slot");
 						PlaceCardInSlot(_hoveredSlot);
-						_placed = true;
 					}
 					else
 					{
@@ -163,36 +180,40 @@ public partial class Card : Button
 	}
     private void _onMouseEntered()
     {
-        if (_tweenHover != null && _tweenHover.IsRunning())
-            _tweenHover.Kill();
+		if (!opponentCard) {
+			if (_tweenHover != null && _tweenHover.IsRunning())
+            	_tweenHover.Kill();
 
-        _tweenHover = CreateTween().SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Elastic);
-        _tweenHover.TweenProperty(this, "scale", new Vector2(2.2f, 2.2f), 0.5f);
+			_tweenHover = CreateTween().SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Elastic);
+			_tweenHover.TweenProperty(this, "scale", new Vector2(2.2f, 2.2f), 0.5f);
+		}
     }
 
     private void _onMouseExited()
     {
-        if (_tweenRot != null && _tweenRot.IsRunning())
-            _tweenRot.Kill();
+		if (!opponentCard) {
+			if (_tweenRot != null && _tweenRot.IsRunning())
+				_tweenRot.Kill();
 
-        _tweenRot = CreateTween().SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Back).SetParallel(true);
+			_tweenRot = CreateTween().SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Back).SetParallel(true);
 
-        // Reset shader rotation values to 0
-        if (_cardTexture.Material is ShaderMaterial shaderMaterial)
-        {
-            _tweenRot.TweenProperty(shaderMaterial, "shader_parameter/x_rot", 0.0f, 0.5f);
-            _tweenRot.TweenProperty(shaderMaterial, "shader_parameter/y_rot", 0.0f, 0.5f);
-        }
+			// Reset shader rotation values to 0
+			if (_cardTexture.Material is ShaderMaterial shaderMaterial)
+			{
+				_tweenRot.TweenProperty(shaderMaterial, "shader_parameter/x_rot", 0.0f, 0.5f);
+				_tweenRot.TweenProperty(shaderMaterial, "shader_parameter/y_rot", 0.0f, 0.5f);
+			}
 
-        // Reset shadow rotation to 0
-        _tweenRot.TweenProperty(_shadow, "rotation", 0.0f, 0.5f);
+			// Reset shadow rotation to 0
+			_tweenRot.TweenProperty(_shadow, "rotation", 0.0f, 0.5f);
 
-        if (_tweenHover != null && _tweenHover.IsRunning())
-            _tweenHover.Kill();
+			if (_tweenHover != null && _tweenHover.IsRunning())
+				_tweenHover.Kill();
 
-        _tweenHover = CreateTween().SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Elastic);
-        _tweenHover.TweenProperty(this, "scale", new Vector2(2f, 2f), 0.55f);
-    }
+			_tweenHover = CreateTween().SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Elastic);
+			_tweenHover.TweenProperty(this, "scale", new Vector2(2f, 2f), 0.55f);
+		}
+	}
 
 	public void SetHandPosition(Vector2 position)
 	{

@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dcw4gmfkmfavk" path="res://Assets/wild-bg.png" id="1_4ef2d"]
 [ext_resource type="Script" path="res://Scripts/Board.cs" id="1_r58kg"]
 [ext_resource type="PackedScene" uid="uid://du3ohm1na5wf1" path="res://Scenes/card_slot.tscn" id="1_ybx71"]
-[ext_resource type="PackedScene" uid="uid://ccpeukrdsfbkm" path="res://Scenes/card.tscn" id="2_drc5n"]
+[ext_resource type="PackedScene" uid="uid://dwy8ckr8xnqlm" path="res://Scenes/opponent_slot.tscn" id="3_r0yvc"]
 
 [node name="board" type="Control"]
 layout_mode = 3
@@ -11,9 +11,7 @@ anchors_preset = 0
 offset_top = 5.0
 offset_right = 40.0
 offset_bottom = 45.0
-scale = Vector2(2, 2)
 script = ExtResource("1_r58kg")
-CardScene = ExtResource("2_drc5n")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 visible = false
@@ -26,33 +24,32 @@ scale = Vector2(4, 4)
 texture = ExtResource("1_4ef2d")
 
 [node name="P2Slots" type="HBoxContainer" parent="."]
-layout_mode = 0
-offset_top = 40.0
+layout_mode = 1
 offset_right = 1200.0
-offset_bottom = 40.0
+scale = Vector2(2, 2)
 theme_override_constants/separation = 300
 
-[node name="cardSlot1" parent="P2Slots" instance=ExtResource("1_ybx71")]
+[node name="OpponentSlot" parent="P2Slots" instance=ExtResource("3_r0yvc")]
 layout_mode = 2
 
-[node name="cardSlot2" parent="P2Slots" instance=ExtResource("1_ybx71")]
+[node name="OpponentSlot2" parent="P2Slots" instance=ExtResource("3_r0yvc")]
 layout_mode = 2
 
-[node name="cardSlot3" parent="P2Slots" instance=ExtResource("1_ybx71")]
+[node name="OpponentSlot3" parent="P2Slots" instance=ExtResource("3_r0yvc")]
 layout_mode = 2
 
-[node name="cardSlot4" parent="P2Slots" instance=ExtResource("1_ybx71")]
+[node name="OpponentSlot4" parent="P2Slots" instance=ExtResource("3_r0yvc")]
 layout_mode = 2
 
-[node name="cardSlot5" parent="P2Slots" instance=ExtResource("1_ybx71")]
+[node name="OpponentSlot5" parent="P2Slots" instance=ExtResource("3_r0yvc")]
 layout_mode = 2
 
 [node name="P1Slots" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_left = -0.5
-offset_top = 424.0
-offset_right = 1199.5
-offset_bottom = 424.0
+offset_top = 800.0
+offset_right = 1200.0
+offset_bottom = 800.0
+scale = Vector2(2, 2)
 theme_override_constants/separation = 300
 
 [node name="cardSlot" parent="P1Slots" instance=ExtResource("1_ybx71")]

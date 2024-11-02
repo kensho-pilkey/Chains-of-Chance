@@ -25,6 +25,16 @@ public partial class CardSlot : Control
             Modulate = PlacedColor; // Reset color when card is placed
         }
     }
+	public void PlaceOpponentCard(CardStill card)
+    {
+        if (!_occupied)
+        {
+            _occupied = true;
+            // _currentCard = card;
+            GD.Print("Card placed in slot.");
+            Modulate = PlacedColor; // Reset color when card is placed
+        }
+    }
 	public Boolean IsOccupied(){
 		return _occupied;
 	}
@@ -61,4 +71,13 @@ public partial class CardSlot : Control
 			card.updateHoverStatus(false, this);
         }
 	}
+	public void MoveCardToSlot()
+    {
+		GD.Print(_currentCard.GlobalPosition);
+		GD.Print(GlobalPosition);
+        _currentCard.GlobalPosition = GlobalPosition + (Size - _currentCard.Size) / 2.0f;
+        _occupied = true;
+		GD.Print(_currentCard.GlobalPosition);
+		GD.Print(GlobalPosition);
+    }
 }

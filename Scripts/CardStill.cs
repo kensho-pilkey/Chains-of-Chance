@@ -13,6 +13,10 @@ public partial class CardStill : Button
 		_cardData = Global.Instance.getRandomCard();
 		UpdateCardAppearance();
 	}
+	public void PlaceOpponentCardInSlot(CardSlot slot) {
+		GlobalPosition = slot.GetCenterPosition() - (Size / 2.0f);
+		slot.PlaceOpponentCard(this);
+	}
 
 	private void UpdateCardAppearance()
 	{
