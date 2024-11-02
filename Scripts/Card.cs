@@ -105,7 +105,7 @@ public partial class Card : Button
         var mousePos = GetGlobalMousePosition();
         GlobalPosition = mousePos - (Size / 2.0f);
     }
-    private void PlaceCardInSlot(CardSlot slot)
+    public void PlaceCardInSlot(CardSlot slot)
         {
             GlobalPosition = slot.GetCenterPosition() - (Size / 2.0f);
             slot.PlaceCard(this);

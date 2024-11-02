@@ -28,6 +28,7 @@ public partial class GameScene : Node2D
 	public void StartRound() {
 		//Player draws 5 cards 
 		//TODO card draw logic and storage of existing cards.
+		GetNode<Board>("board").PlayHand();
 
 	}
 	public void EndRound() {

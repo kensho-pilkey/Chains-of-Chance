@@ -7,6 +7,8 @@ public partial class Global : Node
 	public int PlayerScore { get; set; } = 0;
 	public List<CardData> PlayerCards { get; private set; } = new List<CardData>();
 	public static Global Instance { get; private set; }
+
+	public int LevelNum { get; set; } = 3;
 	private static readonly Dictionary<string, string> NameAssetPairs = new Dictionary<string, string>
     {
         { "Dragon", "res://assets/Tiles_A_white.png" },

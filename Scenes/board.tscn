@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://crk55yf4cd35p"]
+[gd_scene load_steps=5 format=3 uid="uid://crk55yf4cd35p"]
 
 [ext_resource type="Texture2D" uid="uid://dcw4gmfkmfavk" path="res://Assets/wild-bg.png" id="1_4ef2d"]
+[ext_resource type="Script" path="res://Scripts/Board.cs" id="1_r58kg"]
 [ext_resource type="PackedScene" uid="uid://du3ohm1na5wf1" path="res://Scenes/card_slot.tscn" id="1_ybx71"]
+[ext_resource type="PackedScene" uid="uid://ccpeukrdsfbkm" path="res://Scenes/card.tscn" id="2_drc5n"]
 
 [node name="board" type="Control"]
 layout_mode = 3
@@ -10,6 +12,8 @@ offset_top = 5.0
 offset_right = 40.0
 offset_bottom = 45.0
 scale = Vector2(2, 2)
+script = ExtResource("1_r58kg")
+CardScene = ExtResource("2_drc5n")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 visible = false

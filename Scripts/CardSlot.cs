@@ -25,6 +25,9 @@ public partial class CardSlot : Control
             Modulate = PlacedColor; // Reset color when card is placed
         }
     }
+	public Boolean IsOccupied(){
+		return _occupied;
+	}
 
 	public Vector2 GetCenterPosition()
     {
