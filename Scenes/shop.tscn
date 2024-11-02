@@ -59,3 +59,4 @@ offset_bottom = 629.0
 
 [connection signal="pressed" from="Buy" to="." method="_on_buy_pressed"]
 [connection signal="pressed" from="Buy" to="." method="OnBuyButtonPressed"]
+[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]

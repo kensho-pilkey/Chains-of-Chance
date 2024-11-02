@@ -23,8 +23,20 @@ texture = SubResource("PlaceholderTexture2D_63r63")
 
 [node name="CardDisplayContainer" type="GridContainer" parent="."]
 layout_mode = 0
-offset_right = 4825.0
-offset_bottom = 2677.0
+offset_right = 1942.0
+offset_bottom = 1064.0
 theme_override_constants/h_separation = 50
 theme_override_constants/v_separation = 300
 columns = 10
+
+[node name="Button" type="Button" parent="."]
+z_index = 1
+layout_mode = 0
+offset_left = 1788.0
+offset_top = 964.0
+offset_right = 1887.0
+offset_bottom = 1024.0
+text = "Exit
+"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

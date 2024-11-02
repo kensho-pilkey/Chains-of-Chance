@@ -52,4 +52,8 @@ public partial class Shop : Control
             GD.Print("No card selected to buy.");
         }
     }
+	private void _on_exit_pressed() {
+		GetParent<Control>().Visible = true;
+		Visible = false;
+	}
 }

@@ -4,7 +4,7 @@ using System;
 public partial class Ui : Control
 {
 	private void _on_deck_pressed(){
-		GetNode<Control>("Deck").Visible = true;
+		GetNode<Control>("Deck").Visible = !GetNode<Control>("Deck").Visible;
 	}
 	private void _on_shop_pressed(){
 		GetNode<Control>("Shop").Visible = true;
