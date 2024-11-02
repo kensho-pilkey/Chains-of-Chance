@@ -16,18 +16,18 @@ script = ExtResource("1_0j38m")
 
 [node name="Shopbtn" type="Button" parent="."]
 layout_mode = 0
-offset_left = 1688.0
-offset_top = -1.0
-offset_right = 1917.0
-offset_bottom = 120.0
+offset_left = 719.2
+offset_top = 11.1999
+offset_right = 948.2
+offset_bottom = 132.2
 text = "Shop"
 
 [node name="Play" type="Button" parent="."]
 layout_mode = 0
-offset_left = 1689.0
-offset_top = 139.0
-offset_right = 1918.0
-offset_bottom = 260.0
+offset_left = 954.8
+offset_top = 10.4
+offset_right = 1183.8
+offset_bottom = 131.4
 text = "Play
 "
 
