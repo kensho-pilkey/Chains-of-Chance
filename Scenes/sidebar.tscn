@@ -8,3 +8,19 @@ anchor_bottom = 1.0
 offset_right = -1469.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="TurnInfo" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 52.0
+offset_right = 51.0
+offset_bottom = 75.0
+theme_override_font_sizes/font_size = 30
+text = "Turn 1"
+
+[node name="LevelInfo" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 30
+text = "Level 1-1"
