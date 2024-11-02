@@ -108,12 +108,12 @@ public void Attack()
 					if (playerCard._Health <= 0)
 					{
 						playerSlot.RemoveCard();
-						//playerCard.Destroy();
+						playerCard.Destroy();
 					}
 					if (opponentCard._Health <= 0)
 					{
 						opponentSlot.RemoveCard();
-						//opponentCard.Destroy();
+						opponentCard.Destroy();
 					}
 				}
 				//If no card in front deal dmg to hp bar TODO

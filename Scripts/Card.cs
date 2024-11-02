@@ -132,16 +132,10 @@ public partial class Card : Button
 		_placed = true;
 		Scale = Scale / 2;
 	}
-    public void Destroy()
-    {
-        _cardTexture.UseParentMaterial = true;
-        if (_tweenDestroy != null && _tweenDestroy.IsRunning())
-            _tweenDestroy.Kill();
-        
-        _tweenDestroy = CreateTween().SetEase(Tween.EaseType.InOut).SetTrans(Tween.TransitionType.Cubic);
-        _tweenDestroy.TweenProperty(_cardTexture.Material, "shader_parameter/dissolve_value", 0.0f, 2.0f).From(1.0f);
+ 	public void Destroy()
+	{
 		QueueFree();
-    }
+	}
 
     public override void _GuiInput(InputEvent @event)
 	{
