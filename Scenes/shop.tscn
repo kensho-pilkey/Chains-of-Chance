@@ -42,3 +42,6 @@ offset_left = 330.0
 offset_top = 372.0
 offset_right = 1631.0
 offset_bottom = 629.0
+
+[connection signal="pressed" from="Buy" to="." method="_on_buy_pressed"]
+[connection signal="pressed" from="Buy" to="." method="OnBuyButtonPressed"]

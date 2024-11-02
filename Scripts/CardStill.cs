@@ -29,7 +29,6 @@ public partial class CardStill : Button
 	}
 	private void _on_pressed() {
 		if (GetParent().GetParent() is Shop shop) {
-			GD.Print("hihihih");
 			shop.OnCardSelected(this);
 		}
 	}
