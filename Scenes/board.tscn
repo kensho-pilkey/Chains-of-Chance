@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://crk55yf4cd35p"]
+[gd_scene load_steps=6 format=3 uid="uid://crk55yf4cd35p"]
 
-[ext_resource type="Texture2D" uid="uid://dcw4gmfkmfavk" path="res://Assets/wild-bg.png" id="1_4ef2d"]
 [ext_resource type="Script" path="res://Scripts/Board.cs" id="1_r58kg"]
 [ext_resource type="PackedScene" uid="uid://du3ohm1na5wf1" path="res://Scenes/card_slot.tscn" id="1_ybx71"]
+[ext_resource type="Texture2D" uid="uid://bl58ween766dp" path="res://Assets/Wood Floor.png" id="2_7y1so"]
+[ext_resource type="Texture2D" uid="uid://dlep1v7hqrhvf" path="res://Assets/newbg.png" id="2_u63c0"]
 [ext_resource type="PackedScene" uid="uid://dwy8ckr8xnqlm" path="res://Scenes/opponent_slot.tscn" id="3_r0yvc"]
 
 [node name="board" type="Control"]
@@ -13,15 +14,23 @@ offset_right = 40.0
 offset_bottom = 45.0
 script = ExtResource("1_r58kg")
 
+[node name="bg" type="Sprite2D" parent="."]
+texture_repeat = 2
+position = Vector2(1176.5, 290.5)
+scale = Vector2(14.3025, 9.4825)
+texture = ExtResource("2_7y1so")
+region_enabled = true
+region_rect = Rect2(0.48, 0.105, 400, 400)
+
 [node name="TextureRect" type="TextureRect" parent="."]
-visible = false
+texture_repeat = 2
 layout_mode = 2
-offset_left = 5.0
-offset_top = 11.0
-offset_right = 825.0
-offset_bottom = 733.0
-scale = Vector2(4, 4)
-texture = ExtResource("1_4ef2d")
+offset_left = -197.0
+offset_top = -533.0
+offset_right = 1192.0
+offset_bottom = 468.0
+scale = Vector2(2, 2)
+texture = ExtResource("2_u63c0")
 
 [node name="P2Slots" type="HBoxContainer" parent="."]
 layout_mode = 1

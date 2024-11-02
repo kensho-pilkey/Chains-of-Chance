@@ -15,6 +15,9 @@ public partial class CardSlot : Control
 		_health = new RandomNumberGenerator().RandiRange(4, 5);
         Modulate = DefaultColor;
     }
+	public override void _Process(double delta) {
+		GetNode<Sprite2D>("Sprite2D").Frame = 5 - _health;
+	}
 
     public void PlaceCard(Card card)
     {

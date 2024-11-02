@@ -109,7 +109,7 @@ public void Attack()
 					{
 						playerSlot.RemoveCard();
 						playerCard.Destroy();
-						//playerSlot.TakeDamage();
+						playerSlot.TakeDamage();
 					}
 					if (opponentCard._Health <= 0)
 					{
