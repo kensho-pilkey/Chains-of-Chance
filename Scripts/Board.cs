@@ -29,31 +29,31 @@ public partial class Board : Control
 	}
 	public void PlayHand()
 {
-    if (OpponentCards.Count == 0 || !hasSlotAvailable())
-    {
-        GD.Print("Opponent has no more cards to play.");
-        return;
+    while (OpponentCards.Count != 0 && hasSlotAvailable())
+	{
+		CardData selectedCard = OpponentCards[0];
+
+		// Get the next available slot
+		OpponentSlot availableSlot = getNextSlot();
+		
+		// Check if there is an available slot before placing the card
+		if (availableSlot != null)
+		{
+			_cardInstance = availableSlot.SpawnCard();
+
+			GD.Print("Opponent played card: " + selectedCard.Name);
+
+			// Remove the played card from the opponent's deck
+			OpponentCards.RemoveAt(0);
+		}
+		else
+		{
+			GD.Print("No open slot available to place the card.");
+		} 
     }
-
-    CardData selectedCard = OpponentCards[0];
-
-	// Get the next available slot
-	OpponentSlot availableSlot = getNextSlot();
-	
-	// Check if there is an available slot before placing the card
-	if (availableSlot != null)
-	{
-		_cardInstance = availableSlot.SpawnCard();
-
-		GD.Print("Opponent played card: " + selectedCard.Name);
-
-		// Remove the played card from the opponent's deck
-		OpponentCards.RemoveAt(0);
-	}
-	else
-	{
-		GD.Print("No open slot available to place the card.");
-	} 
+	GD.Print("Opponent has no more cards to play.");
+    return;
+    
 
 }
 
