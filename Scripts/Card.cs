@@ -36,6 +36,9 @@ public partial class Card : Button
 	private Vector2 _handPosition;
 
 	private Boolean opponentCard;
+	public int _Health { get; set; }
+
+	private int _Damage;
 
 
 
@@ -56,11 +59,10 @@ public partial class Card : Button
     MouseExited += _onMouseExited;
 
 	_cardData = Global.Instance.getRandomCard();
-	GD.Print(_cardData.ToString());
+	//GD.Print(_cardData.ToString());
 	UpdateCardAppearance();
 	if(GetParent() is OpponentSlot) {
 		opponentCard = true;
-		GD.Print("this me");
 	}
 	else {
 		opponentCard = false;
@@ -78,7 +80,8 @@ public partial class Card : Button
 	{
 		_cardTexture.Texture = GD.Load<Texture2D>(_cardData.AssetPath);
 		_label.Text = _cardData.Name + "\n" + _cardData.Damage + "\n" + _cardData.Health;
-
+		_Health = _cardData.Health;
+		_Damage = _cardData.Damage;
 	}
     private void RotateVelocity(float delta)
     {
@@ -137,7 +140,7 @@ public partial class Card : Button
         
         _tweenDestroy = CreateTween().SetEase(Tween.EaseType.InOut).SetTrans(Tween.TransitionType.Cubic);
         _tweenDestroy.TweenProperty(_cardTexture.Material, "shader_parameter/dissolve_value", 0.0f, 2.0f).From(1.0f);
-        _tweenDestroy.Parallel().TweenProperty(_shadow, "self_modulate:a", 0.0f, 1.0f);
+		QueueFree();
     }
 
     public override void _GuiInput(InputEvent @event)
@@ -152,7 +155,6 @@ public partial class Card : Button
 				{
 					if (_hoveredSlot != null)
 					{
-						GD.Print("Attempting to place card in slot");
 						PlaceCardInSlot(_hoveredSlot);
 					}
 					else
@@ -224,4 +226,11 @@ public partial class Card : Button
 	{
 		Position = _handPosition;
 	}
+	public void TakeDamage(int damage) {
+		_Health -= damage;
+	}
+	public void Attack(Card card) {
+		card.TakeDamage(_Damage);
+	}
+
 }

@@ -22,6 +22,7 @@ public partial class OpponentSlot : Control
             
             _currentCard.Position = (Size - _currentCard.Size) / 2.0f;
 			_currentCard.Scale = _currentCard.Scale / 2;
+			_occupied = true;
 			Modulate = PlacedColor;
 			return _currentCard;
 			
@@ -33,4 +34,17 @@ public partial class OpponentSlot : Control
 	public Boolean IsOccupied(){
 		return _occupied;
 	}
+	public Card GetCard() {
+		return _currentCard;
+	}
+	public void RemoveCard()
+    {
+        if (_occupied)
+        {
+            _occupied = false;
+            _currentCard = null;
+            GD.Print("Card removed from slot.");
+            Modulate = DefaultColor; // Reset color when card is placed
+        }
+    }
 }

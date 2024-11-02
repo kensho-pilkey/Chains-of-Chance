@@ -72,4 +72,5 @@ visible = false
 layout_mode = 1
 
 [connection signal="pressed" from="Shopbtn" to="." method="_on_shop_pressed"]
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="OpenDeck" to="." method="_on_deck_pressed"]

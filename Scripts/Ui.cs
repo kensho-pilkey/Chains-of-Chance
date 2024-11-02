@@ -11,5 +11,6 @@ public partial class Ui : Control
 	}
 	private void _on_play_pressed(){
 		//initiate attack phase of round
+		GetParent().GetNode<Board>("board").Attack();
 	}
 }

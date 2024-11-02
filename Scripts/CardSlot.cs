@@ -21,7 +21,6 @@ public partial class CardSlot : Control
         {
             _occupied = true;
             _currentCard = card;
-            GD.Print("Card placed in slot.");
             Modulate = PlacedColor; // Reset color when card is placed
         }
     }
@@ -31,7 +30,6 @@ public partial class CardSlot : Control
         {
             _occupied = true;
             // _currentCard = card;
-            GD.Print("Card placed in slot.");
             Modulate = PlacedColor; // Reset color when card is placed
         }
     }
@@ -45,7 +43,7 @@ public partial class CardSlot : Control
         Vector2 centerPosition = colorRect.GlobalPosition + (colorRect.Size / 2.0f);
         return centerPosition;
     }
-	public void RemoveCard(Card card)
+	public void RemoveCard()
     {
         if (_occupied)
         {
@@ -80,4 +78,7 @@ public partial class CardSlot : Control
 		GD.Print(_currentCard.GlobalPosition);
 		GD.Print(GlobalPosition);
     }
+	public Card GetCard() {
+		return _currentCard;
+	}
 }

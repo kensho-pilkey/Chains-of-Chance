@@ -6,16 +6,24 @@ public partial class Board : Control
 {
 	public List<CardData> OpponentCards { get; private set; } = new List<CardData>();
 	private List<OpponentSlot> _opponentSlots = new List<OpponentSlot>(); 
+	private List<CardSlot> _playerSlots = new List<CardSlot>();
 	private Control _opponentPlayArea;
+	private Control _playerPlayArea;
+
 	private Card _cardInstance;
 	public override void _Ready()
 	{
 		_opponentPlayArea = GetNode<HBoxContainer>("P2Slots");
+		_playerPlayArea = GetNode<HBoxContainer>("P1Slots");
 		generateCards(Global.Instance.LevelNum * 5);
 		foreach (OpponentSlot slot in _opponentPlayArea.GetChildren())
         {
             _opponentSlots.Add(slot);
         }
+		foreach (CardSlot slot in _playerPlayArea.GetChildren())
+		{
+			_playerSlots.Add(slot);
+		}
 	}
 
 	public override void _Process(double delta)
@@ -77,5 +85,40 @@ public partial class Board : Control
     GD.Print("No available slots found.");
     return null; // No open slots
 }
+public void Attack()
+	{
+		// Iterate over each slot, assuming slots are in corresponding positions
+		for (int i = 0; i < _playerSlots.Count && i < _opponentSlots.Count; i++)
+		{
+			CardSlot playerSlot = _playerSlots[i];
+			OpponentSlot opponentSlot = _opponentSlots[i];
 
+			if (playerSlot.IsOccupied() && opponentSlot.IsOccupied())
+			{
+				Card playerCard = playerSlot.GetCard();
+				Card opponentCard = opponentSlot.GetCard();
+
+				// Process the attack
+				if (playerCard != null && opponentCard != null)
+				{
+					playerCard.Attack(opponentCard);
+					opponentCard.Attack(playerCard);
+
+					// Check health and remove cards if defeated
+					if (playerCard._Health <= 0)
+					{
+						playerSlot.RemoveCard();
+						//playerCard.Destroy();
+					}
+					if (opponentCard._Health <= 0)
+					{
+						opponentSlot.RemoveCard();
+						//opponentCard.Destroy();
+					}
+				}
+				//If no card in front deal dmg to hp bar TODO
+				//TODO also fix destroy method in card its beat
+			}
+		}
+	}
 }
