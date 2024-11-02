@@ -20,4 +20,17 @@ public partial class CardStill : Button
 		_label.Text = _cardData.Name + "\n" + _cardData.Damage + "\n" + _cardData.Health;
 
 	}
+
+	public void Select() {
+		GetNode<TextureRect>("glow").Visible = true;
+	}
+	public void UnSelect() {
+		GetNode<TextureRect>("glow").Visible = false;
+	}
+	private void _on_pressed() {
+		if (GetParent().GetParent() is Shop shop) {
+			GD.Print("hihihih");
+			shop.OnCardSelected(this);
+		}
+	}
 }

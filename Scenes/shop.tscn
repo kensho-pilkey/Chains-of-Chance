@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgw5mulqsvs4h"]
+
+[ext_resource type="Script" path="res://Scripts/Shop.cs" id="1_g7wyb"]
+[ext_resource type="PackedScene" uid="uid://dawpew6if4hk4" path="res://Scenes/card_still.tscn" id="2_a1n4s"]
+
+[node name="Shop" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+script = ExtResource("1_g7wyb")
+CardScene = ExtResource("2_a1n4s")
+
+[node name="Buy" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1379.0
+offset_top = 940.0
+offset_right = 1615.0
+offset_bottom = 1042.0
+theme_override_font_sizes/font_size = 40
+text = "Buy"
+
+[node name="Sell" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1650.0
+offset_top = 937.0
+offset_right = 1886.0
+offset_bottom = 1039.0
+theme_override_font_sizes/font_size = 40
+text = "Sell"
+
+[node name="CreatureShop" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 325.0
+offset_top = 57.0
+offset_right = 1626.0
+offset_bottom = 317.0
+
+[node name="SpecialShop" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 330.0
+offset_top = 372.0
+offset_right = 1631.0
+offset_bottom = 629.0
