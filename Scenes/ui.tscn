@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://beemq60umwn40"]
+[gd_scene load_steps=6 format=3 uid="uid://beemq60umwn40"]
 
 [ext_resource type="Script" path="res://Scripts/Ui.cs" id="1_0j38m"]
 [ext_resource type="Texture2D" uid="uid://cvq8v02n843lc" path="res://Assets/Tiles_A_white.png" id="1_5b8gd"]
 [ext_resource type="PackedScene" uid="uid://c4p858s3fsha1" path="res://Scenes/deck.tscn" id="3_htu72"]
 [ext_resource type="PackedScene" uid="uid://sodx12pxauxw" path="res://Scenes/sidebar.tscn" id="4_hw6e0"]
+[ext_resource type="PackedScene" uid="uid://bgw5mulqsvs4h" path="res://Scenes/shop.tscn" id="5_pi2ce"]
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -13,7 +14,7 @@ offset_bottom = 1080.0
 scale = Vector2(2.5, 2.5)
 script = ExtResource("1_0j38m")
 
-[node name="Shop" type="Button" parent="."]
+[node name="Shopbtn" type="Button" parent="."]
 layout_mode = 0
 offset_left = 1688.0
 offset_top = -1.0
@@ -66,4 +67,9 @@ layout_mode = 1
 [node name="Sidebar" parent="." instance=ExtResource("4_hw6e0")]
 layout_mode = 1
 
+[node name="Shop" parent="." instance=ExtResource("5_pi2ce")]
+visible = false
+layout_mode = 1
+
+[connection signal="pressed" from="Shopbtn" to="." method="_on_shop_pressed"]
 [connection signal="pressed" from="OpenDeck" to="." method="_on_deck_pressed"]

@@ -1,15 +1,26 @@
-[gd_scene load_steps=3 format=3 uid="uid://bgw5mulqsvs4h"]
+[gd_scene load_steps=4 format=3 uid="uid://bgw5mulqsvs4h"]
 
 [ext_resource type="Script" path="res://Scripts/Shop.cs" id="1_g7wyb"]
 [ext_resource type="PackedScene" uid="uid://dawpew6if4hk4" path="res://Scenes/card_still.tscn" id="2_a1n4s"]
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_7vv38"]
+
 [node name="Shop" type="Control"]
+z_index = 2
 layout_mode = 3
-anchors_preset = 0
-offset_right = 1920.0
-offset_bottom = 1080.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_g7wyb")
 CardScene = ExtResource("2_a1n4s")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = SubResource("PlaceholderTexture2D_7vv38")
 
 [node name="Buy" type="Button" parent="."]
 layout_mode = 0
@@ -20,16 +31,18 @@ offset_bottom = 1042.0
 theme_override_font_sizes/font_size = 40
 text = "Buy"
 
-[node name="Sell" type="Button" parent="."]
+[node name="Exit" type="Button" parent="."]
 layout_mode = 0
 offset_left = 1650.0
 offset_top = 937.0
 offset_right = 1886.0
 offset_bottom = 1039.0
 theme_override_font_sizes/font_size = 40
-text = "Sell"
+text = "Exit
+"
 
 [node name="CreatureShop" type="HBoxContainer" parent="."]
+z_index = 1
 layout_mode = 0
 offset_left = 325.0
 offset_top = 57.0
@@ -37,6 +50,7 @@ offset_right = 1626.0
 offset_bottom = 317.0
 
 [node name="SpecialShop" type="HBoxContainer" parent="."]
+z_index = 1
 layout_mode = 0
 offset_left = 330.0
 offset_top = 372.0

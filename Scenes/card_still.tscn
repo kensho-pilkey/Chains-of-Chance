@@ -63,6 +63,7 @@ script = ExtResource("2_emvll")
 [node name="glow" type="TextureRect" parent="."]
 visible = false
 self_modulate = Color(0.203922, 0.498039, 0.992157, 1)
+visibility_layer = 3
 material = SubResource("CanvasItemMaterial_18rtb")
 layout_mode = 1
 anchors_preset = 8
