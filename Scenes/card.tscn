@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://ccpeukrdsfbkm"]
+[gd_scene load_steps=12 format=3 uid="uid://ccpeukrdsfbkm"]
 
 [ext_resource type="Texture2D" uid="uid://cvq8v02n843lc" path="res://Assets/Tiles_A_white.png" id="1_3sp1f"]
 [ext_resource type="Shader" path="res://shaders/fake_3D.gdshader" id="1_7h7yf"]
 [ext_resource type="Shader" path="res://shaders/dissolve.gdshader" id="1_8jfk0"]
 [ext_resource type="Script" path="res://Scripts/Card.cs" id="1_borcn"]
+[ext_resource type="Texture2D" uid="uid://bni3krme8x26k" path="res://Assets/card_sprite.png" id="5_bt2h7"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_kntej"]
 seed = -15
@@ -34,7 +35,7 @@ shader_parameter/x_rot = 0.0
 shader_parameter/inset = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xsth3"]
-size = Vector2(130, 175)
+size = Vector2(140.5, 224)
 
 [node name="Card" type="Button"]
 material = SubResource("ShaderMaterial_3ph3s")
@@ -44,10 +45,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -76.0
-offset_top = -103.5
-offset_right = 76.0
-offset_bottom = 103.5
+offset_left = -145.0
+offset_top = -203.0
+offset_right = 7.0
+offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2, 2)
@@ -74,7 +75,8 @@ grow_vertical = 2
 texture = ExtResource("1_3sp1f")
 expand_mode = 1
 
-[node name="CardTexture" type="TextureRect" parent="."]
+[node name="CardTexture2" type="TextureRect" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_cho03")
 layout_mode = 1
 anchors_preset = 8
@@ -91,19 +93,37 @@ grow_vertical = 2
 texture = ExtResource("1_3sp1f")
 expand_mode = 1
 
+[node name="CardTexture" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.5
+offset_top = -103.5
+offset_right = -5.5
+offset_bottom = 8.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+texture = ExtResource("5_bt2h7")
+stretch_mode = 2
+
 [node name="DestroyArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DestroyArea"]
-position = Vector2(75, 104.5)
+visible = false
+position = Vector2(71, 111.5)
 shape = SubResource("RectangleShape2D_xsth3")
 disabled = true
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 53.5
-offset_top = 12.75
-offset_right = 173.5
-offset_bottom = 87.75
+offset_left = 13.0
+offset_top = 29.5
+offset_right = 133.0
+offset_bottom = 104.5
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "
 "

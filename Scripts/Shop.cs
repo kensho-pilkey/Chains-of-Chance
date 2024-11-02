@@ -55,5 +55,6 @@ public partial class Shop : Control
 	private void _on_exit_pressed() {
 		GetParent<Control>().Visible = true;
 		Visible = false;
+		
 	}
 }

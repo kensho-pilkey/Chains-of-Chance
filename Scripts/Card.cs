@@ -29,7 +29,7 @@ public partial class Card : Button
 	
     private CardSlot _hoveredSlot;
  	private bool _followingMouse = false;
-	private bool _placed = false;
+	public bool _placed = false;
 
 	private CardData _cardData = null;
 
@@ -78,10 +78,19 @@ public partial class Card : Button
 
 	private void UpdateCardAppearance()
 	{
-		_cardTexture.Texture = GD.Load<Texture2D>(_cardData.AssetPath);
+		//_cardTexture.Texture = GD.Load<Texture2D>(_cardData.AssetPath);
 		_label.Text = _cardData.Name + "\n" + _cardData.Damage + "\n" + _cardData.Health;
 		_Health = _cardData.Health;
 		_Damage = _cardData.Damage;
+		if(_cardData.ElementType == "Fire") {
+			_cardTexture.Texture = GD.Load<Texture2D>("res://Assets/fire_card_sprite.png");
+		}
+		else if(_cardData.ElementType == "Water") {
+			_cardTexture.Texture = GD.Load<Texture2D>("res://Assets/water_card_sprite.png");
+		}
+		else if(_cardData.ElementType == "Grass") {
+			_cardTexture.Texture = GD.Load<Texture2D>("res://Assets/grass_card_sprite.png");
+		}
 	}
     private void RotateVelocity(float delta)
     {

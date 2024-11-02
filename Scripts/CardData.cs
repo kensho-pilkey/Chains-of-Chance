@@ -7,7 +7,7 @@ public class CardData
     public int Damage { get; set; }
     public int Health { get; set; }
     public string ElementType { get; set; }
-
+	
     // Constructor to initialize the card data
     public CardData(string name, string assetPath, int damage, int health, string elementType)
     {

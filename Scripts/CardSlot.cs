@@ -5,13 +5,14 @@ public partial class CardSlot : Control
 {
     private bool _occupied = false;
     private Card _currentCard = null;
+	private int _health;
     [Export] private Color HoverColor = new Color(1, 1, 1, 0.5f); // Light gray
     [Export] private Color DefaultColor = new Color(1, 1, 1, 1); // clear
 	[Export] private Color PlacedColor = new Color(0.5f, 0.5f, 1.0f, 0.5f); //Light blue
 
-
     public override void _Ready()
     {
+		_health = new RandomNumberGenerator().RandiRange(4, 5);
         Modulate = DefaultColor;
     }
 
@@ -80,5 +81,8 @@ public partial class CardSlot : Control
     }
 	public Card GetCard() {
 		return _currentCard;
+	}
+	public void TakeDamage() {
+		_health -= 1;
 	}
 }

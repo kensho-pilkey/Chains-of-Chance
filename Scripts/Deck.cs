@@ -29,5 +29,6 @@ public partial class Deck : Control
     }
     private void _on_button_pressed(){
         Visible = false;
+        GetParent().GetNode<Control>("Sidebar").Visible = true;
     }
 }
