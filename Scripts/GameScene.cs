@@ -22,6 +22,30 @@ public partial class GameScene : Node2D
 			Global.Instance.StartNextTurn();
 		}
 	}
+	public async void ScreenShake(float intensity = 50.0f, float duration = 1.0f, float frequency = 0.05f)
+	{
+		var camera = GetNode<Camera2D>("Camera2D"); // Adjust the path as needed
+		Vector2 originalPosition = camera.Position;
+
+		float timeElapsed = 0.0f;
+		while (timeElapsed < duration)
+		{
+			// Apply random offset with intensity
+			camera.Position = originalPosition + new Vector2(
+				(GD.Randf() * 2 - 1) * intensity, 
+				(GD.Randf() * 2 - 1) * intensity
+			);
+
+			// Wait for a short interval before next shake
+			await ToSignal(GetTree().CreateTimer(frequency), "timeout");
+			timeElapsed += frequency;
+		}
+
+		// Reset camera to original position after shake ends
+		camera.Position = originalPosition;
+	}
+
+
 
 	public void StartRound() {
 		//Player draws 5 cards 

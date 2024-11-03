@@ -114,6 +114,9 @@ public void Attack()
 				lastElement = currentElement;
 			}
 		}
+		if (maxMultiplier > 1) {
+			GetParent<GameScene>().ScreenShake(50.0f, 0.5f, 0.03f);
+		}
 		Global.Instance.Multiplier = maxMultiplier;
 
 		// Iterate over each slot, assuming slots are in corresponding positions

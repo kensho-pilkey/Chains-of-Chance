@@ -60,7 +60,10 @@ public partial class Global : Node
 
         return new CardData(nameAsset.Key, nameAsset.Value, damage, health, element);
     }
-
+	public void AddCard(CardData card) {
+		PlayerCards.Add(card);
+		availableCardsForTurn.Add(card);
+	}
 	private KeyValuePair<string, string> GetRandomNameAsset()
     {
         // Convert dictionary keys to a list to access randomly
@@ -97,6 +100,7 @@ public partial class Global : Node
 		OpponentHealth = 100;
 		Multiplier = 1;
 		Money += 10;
+		
 	}
 
 	public CardData DrawUniqueCard()
