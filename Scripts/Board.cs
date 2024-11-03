@@ -85,105 +85,90 @@ public partial class Board : Control
     GD.Print("No available slots found.");
     return null; // No open slots
 }
+private int _currentAttackIndex = 0;
+private Timer _attackTimer;
+
 public void Attack()
 	{
-		//Check for adjacent matching elements
-		// Add X1 multiplier per matching card pair = X2 three = X3 etc.
-		int maxMultiplier = 1;
-		int currentMultiplier = 1;
-		string lastElement = null;
-
-		int maxCreatureStreak = 1;
-		int currentCreatureStreak = 1;
-		string lastCreatureName = null;
-
-		for (int i = 0; i < _playerSlots.Count; i++)
+		// Setup or retrieve the Timer node
+		if (_attackTimer == null)
 		{
-			if (_playerSlots[i].IsOccupied())
-			{
-				// Get the current card's element and creature name
-				string currentElement = _playerSlots[i].GetCard()._cardData.ElementType;
-				string currentCreatureName = _playerSlots[i].GetCard()._cardData.Name;
-
-				// Check for the longest streak of matching elements
-				if (currentElement == lastElement)
-				{
-					currentMultiplier++;
-				}
-				else
-				{
-					currentMultiplier = 1; // Reset if element changes
-				}
-				maxMultiplier = Math.Max(maxMultiplier, currentMultiplier);
-				lastElement = currentElement;
-
-				// Check for the longest streak of matching creature names
-				if (currentCreatureName == lastCreatureName)
-				{
-					currentCreatureStreak++;
-				}
-				else
-				{
-					currentCreatureStreak = 1; // Reset if creature name changes
-				}
-				maxCreatureStreak = Math.Max(maxCreatureStreak, currentCreatureStreak);
-				lastCreatureName = currentCreatureName;
-			}
+            _attackTimer = new Timer
+            {
+                WaitTime = 1.0f,
+                OneShot = true
+            };
+            _attackTimer.Timeout += OnAttackTimerTimeout;
+			AddChild(_attackTimer);
 		}
-		if (maxMultiplier > 1 || maxCreatureStreak > 1) {
-			GetParent<GameScene>().ScreenShake(50.0f, 0.5f, 0.03f);
-		}
-		Global.Instance.Multiplier = maxMultiplier + maxCreatureStreak;
 
-		// Iterate over each slot, assuming slots are in corresponding positions
-		for (int i = 0; i < _playerSlots.Count && i < _opponentSlots.Count; i++)
+		// Reset the attack index
+		_currentAttackIndex = 0;
+
+		// Start the first attack cycle
+		if (_playerSlots.Count > 0 && _opponentSlots.Count > 0)
 		{
-			CardSlot playerSlot = _playerSlots[i];
-			OpponentSlot opponentSlot = _opponentSlots[i];
+			ProcessAttack();
+			_attackTimer.Start();
+		}
+	}
 
-			if (playerSlot.IsOccupied() && opponentSlot.IsOccupied())
-			{
-				Card playerCard = playerSlot.GetCard();
-				Card opponentCard = opponentSlot.GetCard();
+	private void OnAttackTimerTimeout()
+	{
+		// Move to the next attack
+		_currentAttackIndex++;
 
-				// Process the attack
-				if (playerCard != null && opponentCard != null)
-				{
-					playerCard.Attack(opponentCard);
-					opponentCard.Attack(playerCard);
-
-					// Check health and remove cards if defeated
-					if (playerCard._Health <= 0)
-					{
-						playerSlot.RemoveCard();
-						playerCard.Destroy();
-						playerSlot.TakeDamage();
-					}
-					if (opponentCard._Health <= 0)
-					{
-						opponentSlot.RemoveCard();
-						opponentCard.Destroy();
-						opponentSlot.TakeDamage();
-					}
-				}
-			}
-			else if (playerSlot.IsOccupied() && !opponentSlot.IsOccupied())
-			{
-				// Handle the case where the opponent slot is empty
-				Global.Instance.OpponentHealth -= playerSlot.GetCard()._Damage *  Global.Instance.Multiplier;
-
-			}
-			else if (!playerSlot.IsOccupied() && opponentSlot.IsOccupied())
-			{
-				// Handle the case where the player slot is empty
-				Global.Instance.PlayerHealth -= opponentSlot.GetCard()._Damage;
-			}
-			else {
-				// Both slots are empty
-			}
-			//trigger next card draw ig
+		// Check if there are more pairs to process
+		if (_currentAttackIndex < _playerSlots.Count && _currentAttackIndex < _opponentSlots.Count)
+		{
+			ProcessAttack();
+			_attackTimer.Start(); // Start the timer again for the next pair
+		}
+		else {
 			PlayHand();
 			GetParent().GetNode<CardDrawer>("CardDrawer").DrawCards(GetParent().GetNode<CardDrawer>("CardDrawer").GlobalPosition, 3);
 		}
 	}
+
+	private void ProcessAttack()
+	{
+		CardSlot playerSlot = _playerSlots[_currentAttackIndex];
+		OpponentSlot opponentSlot = _opponentSlots[_currentAttackIndex];
+
+		if (playerSlot.IsOccupied() && opponentSlot.IsOccupied())
+		{
+			Card playerCard = playerSlot.GetCard();
+			Card opponentCard = opponentSlot.GetCard();
+
+			if (playerCard != null && opponentCard != null)
+			{
+				playerCard.Attack(opponentCard);
+				opponentCard.Attack(playerCard);
+
+				if (playerCard._Health <= 0)
+				{
+					playerSlot.RemoveCard();
+					playerCard.Destroy();
+					playerSlot.TakeDamage();
+				}
+				if (opponentCard._Health <= 0)
+				{
+					opponentSlot.RemoveCard();
+					opponentCard.Destroy();
+					opponentSlot.TakeDamage();
+				}
+			}
+		}
+		else if (playerSlot.IsOccupied() && !opponentSlot.IsOccupied())
+		{
+			Global.Instance.OpponentHealth -= playerSlot.GetCard()._Damage * Global.Instance.Multiplier;
+		}
+		else if (!playerSlot.IsOccupied() && opponentSlot.IsOccupied())
+		{
+			Global.Instance.PlayerHealth -= opponentSlot.GetCard()._Damage;
+		}
+		
+	}
+
+
 }
