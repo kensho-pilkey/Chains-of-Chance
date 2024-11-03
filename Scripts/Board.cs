@@ -92,32 +92,48 @@ public void Attack()
 		int maxMultiplier = 1;
 		int currentMultiplier = 1;
 		string lastElement = null;
+
+		int maxCreatureStreak = 1;
+		int currentCreatureStreak = 1;
+		string lastCreatureName = null;
+
 		for (int i = 0; i < _playerSlots.Count; i++)
 		{
-			if (_playerSlots[i].IsOccupied()) {
+			if (_playerSlots[i].IsOccupied())
+			{
+				// Get the current card's element and creature name
 				string currentElement = _playerSlots[i].GetCard()._cardData.ElementType;
+				string currentCreatureName = _playerSlots[i].GetCard()._cardData.Name;
 
-				// Check if this element matches the last one
+				// Check for the longest streak of matching elements
 				if (currentElement == lastElement)
 				{
-					// Increment the current matching sequence
 					currentMultiplier++;
 				}
 				else
 				{
-					// Reset current sequence if the element doesn't match
-					currentMultiplier = 1;
+					currentMultiplier = 1; // Reset if element changes
 				}
-
-				// Update maxMultiplier if the current sequence is the longest we've seen
 				maxMultiplier = Math.Max(maxMultiplier, currentMultiplier);
 				lastElement = currentElement;
+
+				// Check for the longest streak of matching creature names
+				if (currentCreatureName == lastCreatureName)
+				{
+					currentCreatureStreak++;
+				}
+				else
+				{
+					currentCreatureStreak = 1; // Reset if creature name changes
+				}
+				maxCreatureStreak = Math.Max(maxCreatureStreak, currentCreatureStreak);
+				lastCreatureName = currentCreatureName;
 			}
 		}
-		if (maxMultiplier > 1) {
+		if (maxMultiplier > 1 || maxCreatureStreak > 1) {
 			GetParent<GameScene>().ScreenShake(50.0f, 0.5f, 0.03f);
 		}
-		Global.Instance.Multiplier = maxMultiplier;
+		Global.Instance.Multiplier = Math.Max(maxMultiplier, maxCreatureStreak);
 
 		// Iterate over each slot, assuming slots are in corresponding positions
 		for (int i = 0; i < _playerSlots.Count && i < _opponentSlots.Count; i++)
