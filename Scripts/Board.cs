@@ -133,6 +133,9 @@ public void Attack()
 			else {
 				// Both slots are empty
 			}
+			//trigger next card draw ig
+			PlayHand();
+			//GetParent().GetNode<CardDrawer>("CardDrawer").DrawCards(GetNode<CardDrawer>("CardDrawer").GlobalPosition, 3);
 		}
 	}
 }

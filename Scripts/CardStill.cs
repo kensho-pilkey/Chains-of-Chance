@@ -22,7 +22,20 @@ public partial class CardStill : Button
 	{
 		_cardTexture.Texture = GD.Load<Texture2D>(_cardData.AssetPath);
 		_label.Text = _cardData.Name + "\n" + _cardData.Damage + "\n" + _cardData.Health;
+		if(_cardData.ElementType == "Fire") {
+			_cardTexture.Texture = GD.Load<Texture2D>("res://Assets/fire_card_sprite.png");
+		}
+		else if(_cardData.ElementType == "Water") {
+			_cardTexture.Texture = GD.Load<Texture2D>("res://Assets/water_card_sprite.png");
+		}
+		else if(_cardData.ElementType == "Grass") {
+			_cardTexture.Texture = GD.Load<Texture2D>("res://Assets/grass_card_sprite.png");
+		}
 
+	}
+	public void AddData(CardData data) {
+		_cardData = data;
+		UpdateCardAppearance();
 	}
 
 	public void Select() {

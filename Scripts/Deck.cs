@@ -24,6 +24,7 @@ public partial class Deck : Control
             if (CardScene != null && CardScene.Instantiate() is CardStill instance)
             {
                 _cardDisplayContainer.AddChild(instance);
+                instance.AddData(cardData);
             }
         }
     }

@@ -7,6 +7,7 @@ public partial class GameScene : Node2D
 
 	public override void _Ready()
 	{
+		Global.Instance.StartTurn();
 		StartRound();
 	}
 
@@ -24,7 +25,6 @@ public partial class GameScene : Node2D
 	public void StartRound() {
 		//Player draws 5 cards 
 		//TODO card draw logic and storage of existing cards.
-		Global.Instance.StartTurn();
 		GetNode<Board>("board").PlayHand();
 		GetNode<CardDrawer>("CardDrawer").DrawCards(GetNode<CardDrawer>("CardDrawer").GlobalPosition, 7);
 	}

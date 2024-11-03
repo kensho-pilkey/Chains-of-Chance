@@ -11,7 +11,7 @@ public partial class Global : Node
 	private List<CardData> availableCardsForTurn = new List<CardData>();
 	public static Global Instance { get; private set; }
 
-	public int LevelNum { get; set; } = 3;
+	public int LevelNum { get; set; } = 2;
 	private static readonly Dictionary<string, string> NameAssetPairs = new Dictionary<string, string>
     {
         { "Dragon", "res://assets/Tiles_A_white.png" },

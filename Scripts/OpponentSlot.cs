@@ -59,6 +59,8 @@ public partial class OpponentSlot : Control
         }
     }
 	public void TakeDamage() {
-		_health -= 1;
+		if (_health > 0) {
+			_health -= 1;
+		}
 	}
 }

@@ -86,6 +86,8 @@ public partial class CardSlot : Control
 		return _currentCard;
 	}
 	public void TakeDamage() {
-		_health -= 1;
+		if (_health > 0) {
+			_health -= 1;
+		}
 	}
 }
