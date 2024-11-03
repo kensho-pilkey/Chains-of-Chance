@@ -8,6 +8,7 @@ public partial class Global : Node
 	public int PlayerHealth { get; set; } = 100;
 	public int OpponentHealth { get; set; } = 100;
 	public List<CardData> PlayerCards { get; private set; } = new List<CardData>();
+	public List<CardData> OpponentCards { get; private set; } = new List<CardData>();
 	private List<CardData> availableCardsForTurn = new List<CardData>();
 	public static Global Instance { get; private set; }
 
