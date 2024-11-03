@@ -18,6 +18,7 @@ CardScene = ExtResource("2_a1n4s")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 visible = false
+layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 texture = SubResource("PlaceholderTexture2D_7vv38")

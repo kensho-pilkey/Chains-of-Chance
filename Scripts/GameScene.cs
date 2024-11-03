@@ -4,10 +4,6 @@ using System;
 public partial class GameScene : Node2D
 {
 	private int turn = 0;
-	private int player1Score = 0;
-	private int player2Score = 0;
-	private int player1Health = 100;
-	private int player2Health = 100;
 
 	public override void _Ready()
 	{
@@ -17,10 +13,10 @@ public partial class GameScene : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if(player1Health <= 0) {
+		if(Global.Instance.PlayerHealth <= 0) {
 			EndGame(false);
 		}
-		else if (player2Health <= 0) {
+		else if (Global.Instance.OpponentHealth <= 0) {
 			EndGame(true);
 		}
 	}
@@ -28,7 +24,9 @@ public partial class GameScene : Node2D
 	public void StartRound() {
 		//Player draws 5 cards 
 		//TODO card draw logic and storage of existing cards.
+		Global.Instance.StartTurn();
 		GetNode<Board>("board").PlayHand();
+		GetNode<CardDrawer>("CardDrawer").DrawCards(GetNode<CardDrawer>("CardDrawer").GlobalPosition, 7);
 	}
 	public void AttackPhase() {
 		//whoever placed first 

@@ -5,7 +5,10 @@ using System.Collections.Generic;
 public partial class Global : Node
 {
 	public int PlayerScore { get; set; } = 0;
+	public int PlayerHealth { get; set; } = 100;
+	public int OpponentHealth { get; set; } = 100;
 	public List<CardData> PlayerCards { get; private set; } = new List<CardData>();
+	private List<CardData> availableCardsForTurn = new List<CardData>();
 	public static Global Instance { get; private set; }
 
 	public int LevelNum { get; set; } = 3;
@@ -29,6 +32,13 @@ public partial class Global : Node
 		PlayerCards.Add(createRandomCard());
 		PlayerCards.Add(createRandomCard());
 		PlayerCards.Add(createRandomCard());
+		PlayerCards.Add(createRandomCard());
+		PlayerCards.Add(createRandomCard());
+		PlayerCards.Add(createRandomCard());
+		PlayerCards.Add(createRandomCard());
+		PlayerCards.Add(createRandomCard());
+		PlayerCards.Add(createRandomCard());
+		ShuffleCards();
 		
 	}
 	public CardData getRandomCard() {
@@ -57,7 +67,39 @@ public partial class Global : Node
 
         return new KeyValuePair<string, string>(randomKey, NameAssetPairs[randomKey]);
     }
+	public void ShuffleCards()
+	{
+		int n = PlayerCards.Count;
+		for (int i = n - 1; i > 0; i--)
+		{
+			int j = RandomGenerator.Next(i + 1);
+			// Swap elements at i and j
+			CardData temp = PlayerCards[i];
+			PlayerCards[i] = PlayerCards[j];
+			PlayerCards[j] = temp;
+		}
+	}
+	public void StartTurn()
+	{
+		// Reset available cards at the start of each turn
+		availableCardsForTurn = new List<CardData>(PlayerCards);
+		ShuffleCards();
+	}
 
+	public CardData DrawUniqueCard()
+	{
+		if (availableCardsForTurn.Count == 0)
+		{
+			GD.Print("No more unique cards available for this turn!");
+			return null;
+		}
+		
+		int index = RandomGenerator.Next(availableCardsForTurn.Count);
+		CardData drawnCard = availableCardsForTurn[index];
+		availableCardsForTurn.RemoveAt(index); // Remove the drawn card from the pool
+		
+		return drawnCard;
+	}
 
 	public override void _Process(double delta)
 	{

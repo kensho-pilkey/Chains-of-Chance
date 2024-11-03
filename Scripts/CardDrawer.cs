@@ -34,21 +34,8 @@ public partial class CardDrawer : Control
         // Convert the max rotation from degrees to radians
         RotMax = Mathf.DegToRad(RotMax);
 
-        // Check if From and CardScene are assigned
-        if (From == null)
-        {
-            GD.PrintErr("From property is not assigned in the Inspector.");
-            return;
-        }
-
-        if (CardScene == null)
-        {
-            GD.PrintErr("CardScene property is not assigned in the Inspector.");
-            return;
-        }
-
         // Delay and call DrawCards after 2 seconds to demonstrate the animation
-        GetTree().CreateTimer(2.0f).Timeout += () => DrawCards(From.GlobalPosition, 10);
+        //GetTree().CreateTimer(2.0f).Timeout += () => DrawCards(From.GlobalPosition, 10);
     }
 
     public override void _Process(double delta)
@@ -82,7 +69,7 @@ public partial class CardDrawer : Control
             {
                 AddChild(instance);
                 instance.GlobalPosition = fromPos;
-
+                instance.AddData(Global.Instance.DrawUniqueCard());
                 Vector2 finalPos = -(instance.Size / 2.0f) - new Vector2(CardOffsetX * (number - 1 - i), 0);
                 finalPos.X += (CardOffsetX * (number - 1)) / 2.0f;
                 

@@ -53,6 +53,25 @@ offset_bottom = 147.0
 theme_override_font_sizes/font_size = 30
 text = "Payout: $10"
 
+[node name="PlayerHealth" type="Label" parent="."]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 307.0
+offset_right = 172.0
+offset_bottom = 349.0
+theme_override_font_sizes/font_size = 30
+text = "Player HP
+"
+
+[node name="OpponentHealth" type="Label" parent="."]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 364.0
+offset_right = 178.0
+offset_bottom = 406.0
+theme_override_font_sizes/font_size = 30
+text = "CPU HP"
+
 [node name="MoneyInfo" type="Label" parent="."]
 layout_mode = 0
 offset_left = 23.0
@@ -92,3 +111,13 @@ offset_top = 754.0
 offset_right = 362.0
 offset_bottom = 1075.0
 texture = SubResource("PlaceholderTexture2D_rp5ud")
+
+[node name="Draw" type="Button" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 23.0
+offset_top = 578.0
+offset_right = 165.0
+offset_bottom = 650.0
+theme_override_font_sizes/font_size = 30
+text = "Draw"

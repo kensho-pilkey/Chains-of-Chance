@@ -118,8 +118,20 @@ public void Attack()
 						opponentSlot.TakeDamage();
 					}
 				}
-				//If no card in front deal dmg to hp bar TODO
-				//TODO also fix destroy method in card its beat
+			}
+			else if (playerSlot.IsOccupied() && !opponentSlot.IsOccupied())
+			{
+				// Handle the case where the opponent slot is empty
+				Global.Instance.OpponentHealth -= playerSlot.GetCard()._Damage;
+
+			}
+			else if (!playerSlot.IsOccupied() && opponentSlot.IsOccupied())
+			{
+				// Handle the case where the player slot is empty
+				Global.Instance.PlayerHealth -= opponentSlot.GetCard()._Damage;
+			}
+			else {
+				// Both slots are empty
 			}
 		}
 	}

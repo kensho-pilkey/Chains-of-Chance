@@ -38,7 +38,7 @@ public partial class Card : Button
 	private Boolean opponentCard;
 	public int _Health { get; set; }
 
-	private int _Damage;
+	public int _Damage;
 
 
 
@@ -91,6 +91,10 @@ public partial class Card : Button
 		else if(_cardData.ElementType == "Grass") {
 			_cardTexture.Texture = GD.Load<Texture2D>("res://Assets/grass_card_sprite.png");
 		}
+	}
+	public void AddData(CardData data) {
+		_cardData = data;
+		UpdateCardAppearance();
 	}
     private void RotateVelocity(float delta)
     {
