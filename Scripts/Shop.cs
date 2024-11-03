@@ -80,18 +80,30 @@ public partial class Shop : Control
         if (_selectedCard != null)
         {
             // Implement buying logic here, e.g., adding to player inventory
-            GD.Print("Bought Card: " + _selectedCard.Name);
-			Global.Instance.AddCard(_selectedCard._cardData);
-            _selectedCard.QueueFree(); // Remove the bought card from the shop
-            _selectedCard = null; // Reset selection after buying
+            GD.Print(Global.Instance.Money);
+            if (Global.Instance.Money >= _selectedCard.cost) {
+                Global.Instance.Money -= _selectedCard.cost;
+                GD.Print("Bought Card: " + _selectedCard.Name);
+                Global.Instance.AddCard(_selectedCard._cardData);
+                _selectedCard.QueueFree(); // Remove the bought card from the shop
+                _selectedCard = null; // Reset selection after buying
+            }
+            else {
+                GD.Print("Not enough money to buy card.");
+            }
         }
         else if (_selectedSpecial != null)
         { // Implement buying logic for special cards
-            GD.Print("Bought Special: " + _selectedSpecial.Name);
-			//Global.Instance.AddSpecial(_selectedSpecial._specialData);
-            _selectedSpecial.QueueFree(); // Remove the bought card from the shop
-            _selectedSpecial = null; // Reset selection after buying
-            
+             if (Global.Instance.Money >= _selectedSpecial.cost) {
+                GD.Print("Bought Special: " + _selectedSpecial.Name);
+                //Global.Instance.AddSpecial(_selectedSpecial._specialData);
+                _selectedSpecial.UseSpecial();
+                _selectedSpecial.QueueFree(); // Remove the bought card from the shop
+                _selectedSpecial = null; // Reset selection after buying
+             }
+             else {
+                GD.Print("Not enough money to buy card.");
+            }
         }
         else {
             GD.Print("No card selected to buy.");

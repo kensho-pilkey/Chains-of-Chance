@@ -6,7 +6,7 @@ public partial class CardStill : Button
 	private TextureRect _cardTexture;
 	private Label _label;
 	public CardData _cardData = null;
-	private int cost = 1;
+	public int cost = 1;
 	public override void _Ready()
 	{
 		_cardTexture = GetNode<TextureRect>("CardTexture");

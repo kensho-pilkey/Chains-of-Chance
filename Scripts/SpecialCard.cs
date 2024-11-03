@@ -6,15 +6,15 @@ public partial class SpecialCard : Button
     [Export] public string EffectType;  // Type of special effect (e.g., "DoubleHealth", "AddCards")
     [Export] public int EffectValue;    // Value of the effect (e.g., 2 for "Add 2 Cards")
 	[Export] public string Description;
-    private Label _label;
+    private RichTextLabel _label;
     private TextureRect _cardTexture;
-	private int cost = 1;
+	public int cost = 1;
 
     public override void _Ready()
     {
         // Set up nodes
 		cost = new RandomNumberGenerator().RandiRange(8, 12);
-        _label = GetNode<Label>("Label");
+        _label = GetNode<RichTextLabel>("Label");
         _cardTexture = GetNode<TextureRect>("CardTexture");
 
         UpdateCardAppearance();
@@ -25,23 +25,31 @@ public partial class SpecialCard : Button
         // Set card name and texture based on the effect
         _label.Text = EffectType;
         switch (EffectType)
-        {
-            case "DoubleHealth":
+		{
+			case "DoubleHealth":
 				Description = "Doubles the player's health.";
-				_label.Text = _label.Text + "\n" + Description;
-                _cardTexture.Texture = GD.Load<Texture2D>("res://Assets/card_sprite.png");
-                break;
-            case "AddCards":
-                _cardTexture.Texture = GD.Load<Texture2D>("res://Assets/card_sprite.png");
-                break;
-            case "Shield":
-                _cardTexture.Texture = GD.Load<Texture2D>("res://Assets/card_sprite.png");
-                break;
-            // Add more cases for other special effects as needed
-            default:
-                _cardTexture.Texture = GD.Load<Texture2D>("res://Assets/card_sprite.png");
-                break;
-        }
+				_cardTexture.Texture = GD.Load<Texture2D>("res://Assets/card_sprite.png");
+				break;
+			case "AddCards":
+				Description = $"Adds {EffectValue} random card(s) to your deck.";
+				_cardTexture.Texture = GD.Load<Texture2D>("res://Assets/card_sprite.png");
+				break;
+			case "Shield":
+				Description = $"Grants a shield for {EffectValue} turn(s) to a card.";
+				_cardTexture.Texture = GD.Load<Texture2D>("res://Assets/card_sprite.png");
+				break;
+			default:
+				Description = "An unknown power.";
+				_cardTexture.Texture = GD.Load<Texture2D>("res://Assets/card_sprite.png");
+				break;
+		}
+
+
+		_label.BbcodeEnabled = true;
+		_label.Text = $"[center]{EffectType}[/center]\n\n[center]{Description}[/center]";
+
+
+
     }
 	public void Select() {
 		GetNode<TextureRect>("glow").Visible = true;
@@ -56,7 +64,7 @@ public partial class SpecialCard : Button
 		}
 	}
 
-    private void UseSpecial()
+    public void UseSpecial()
     {
         // Trigger the effect based on the EffectType
         switch (EffectType)
