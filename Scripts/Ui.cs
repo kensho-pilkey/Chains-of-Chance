@@ -10,10 +10,12 @@ public partial class Ui : Control
 	}
 	private void _on_shop_pressed(){
 		GetNode<Control>("Shop").Visible = true;
+		GetNode<Control>("Sidebar").Visible = false;
 	}
 	private void _on_play_pressed(){
 		//initiate attack phase of round
 		GetParent().GetNode<Board>("board").Attack();
 		
+
 	}
 }

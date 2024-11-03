@@ -251,7 +251,10 @@ public partial class Card : Button
 		_Health -= damage;
 	}
 	public void Attack(Card card) {
-		var finalDmg = _Damage * Global.Instance.Multiplier;
+		var finalDmg = _Damage;
+		if (!opponentCard) {
+			finalDmg *= Global.Instance.Multiplier;
+		} 
 
 		// Load and instantiate the popup
 		var popupScene = (PackedScene)ResourceLoader.Load("res://Scenes/damage_popup.tscn");

@@ -1,9 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://c4p858s3fsha1"]
+[gd_scene load_steps=3 format=3 uid="uid://c4p858s3fsha1"]
 
 [ext_resource type="Script" path="res://Scripts/Deck.cs" id="1_gmaqh"]
 [ext_resource type="PackedScene" uid="uid://dawpew6if4hk4" path="res://Scenes/card_still.tscn" id="2_364ld"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_63r63"]
 
 [node name="Deck" type="Control"]
 layout_mode = 3
@@ -15,11 +13,11 @@ grow_vertical = 2
 script = ExtResource("1_gmaqh")
 CardScene = ExtResource("2_364ld")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="ColorRect" parent="."]
 layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
-texture = SubResource("PlaceholderTexture2D_63r63")
+color = Color(0, 0, 0, 0.752941)
 
 [node name="CardDisplayContainer" type="GridContainer" parent="."]
 layout_mode = 0

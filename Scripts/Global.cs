@@ -96,6 +96,7 @@ public partial class Global : Node
 		// PlayerHealth = 100;
 		OpponentHealth = 100;
 		Multiplier = 1;
+		Money += 10;
 	}
 
 	public CardData DrawUniqueCard()

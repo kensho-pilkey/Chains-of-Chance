@@ -2,8 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Shop.cs" id="1_g7wyb"]
 [ext_resource type="PackedScene" uid="uid://dawpew6if4hk4" path="res://Scenes/card_still.tscn" id="2_a1n4s"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_7vv38"]
+[ext_resource type="FontFile" uid="uid://u0upmi42jtpa" path="res://Assets/fonts/Carnevalee Freakshow.ttf" id="3_x0li6"]
 
 [node name="Shop" type="Control"]
 z_index = 2
@@ -16,12 +15,43 @@ grow_vertical = 2
 script = ExtResource("1_g7wyb")
 CardScene = ExtResource("2_a1n4s")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-visible = false
+[node name="TextureRect" type="ColorRect" parent="."]
 layout_mode = 0
+offset_left = 547.0
+offset_top = 145.0
 offset_right = 1920.0
 offset_bottom = 1080.0
-texture = SubResource("PlaceholderTexture2D_7vv38")
+color = Color(0, 0, 0, 0.752941)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1133.0
+offset_top = 137.0
+offset_right = 1488.0
+offset_bottom = 250.0
+theme_override_fonts/font = ExtResource("3_x0li6")
+theme_override_font_sizes/font_size = 100
+text = "Shop"
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 749.0
+offset_top = 333.0
+offset_right = 1104.0
+offset_bottom = 446.0
+theme_override_fonts/font = ExtResource("3_x0li6")
+theme_override_font_sizes/font_size = 50
+text = "Creature Cards"
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1502.0
+offset_top = 337.0
+offset_right = 1857.0
+offset_bottom = 450.0
+theme_override_fonts/font = ExtResource("3_x0li6")
+theme_override_font_sizes/font_size = 50
+text = "Special Cards"
 
 [node name="Buy" type="Button" parent="."]
 layout_mode = 0
@@ -45,18 +75,18 @@ text = "Exit
 [node name="CreatureShop" type="HBoxContainer" parent="."]
 z_index = 1
 layout_mode = 0
-offset_left = 325.0
-offset_top = 57.0
-offset_right = 1626.0
-offset_bottom = 317.0
+offset_left = 656.0
+offset_top = 471.0
+offset_right = 1140.0
+offset_bottom = 601.0
 
 [node name="SpecialShop" type="HBoxContainer" parent="."]
 z_index = 1
 layout_mode = 0
-offset_left = 330.0
-offset_top = 372.0
-offset_right = 1631.0
-offset_bottom = 629.0
+offset_left = 1324.0
+offset_top = 461.0
+offset_right = 1880.0
+offset_bottom = 523.0
 
 [connection signal="pressed" from="Buy" to="." method="_on_buy_pressed"]
 [connection signal="pressed" from="Buy" to="." method="OnBuyButtonPressed"]

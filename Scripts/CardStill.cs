@@ -5,7 +5,8 @@ public partial class CardStill : Button
 {
 	private TextureRect _cardTexture;
 	private Label _label;
-	private CardData _cardData = null;
+	public CardData _cardData = null;
+	private int cost = 1;
 	public override void _Ready()
 	{
 		_cardTexture = GetNode<TextureRect>("CardTexture");
@@ -21,12 +22,15 @@ public partial class CardStill : Button
 		_label.Text = _cardData.Name + "\n" + _cardData.Damage + "\n" + _cardData.Health;
 		if(_cardData.ElementType == "Fire") {
 			_cardTexture.Texture = GD.Load<Texture2D>("res://Assets/fire_card_sprite.png");
+			cost = new RandomNumberGenerator().RandiRange(1, 4);
 		}
 		else if(_cardData.ElementType == "Water") {
 			_cardTexture.Texture = GD.Load<Texture2D>("res://Assets/water_card_sprite.png");
+			cost = 5;
 		}
 		else if(_cardData.ElementType == "Grass") {
 			_cardTexture.Texture = GD.Load<Texture2D>("res://Assets/grass_card_sprite.png");
+			cost = 5;
 		}
 
 	}
@@ -44,6 +48,7 @@ public partial class CardStill : Button
 	private void _on_pressed() {
 		if (GetParent().GetParent() is Shop shop) {
 			shop.OnCardSelected(this);
+			GetParent().GetParent().GetNode<Button>("Buy").Text = "Buy $" + cost;
 		}
 	}
 }

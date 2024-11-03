@@ -1,10 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://ccpeukrdsfbkm"]
+[gd_scene load_steps=19 format=3 uid="uid://ccpeukrdsfbkm"]
 
 [ext_resource type="Texture2D" uid="uid://cvq8v02n843lc" path="res://Assets/Tiles_A_white.png" id="1_3sp1f"]
 [ext_resource type="Shader" path="res://shaders/fake_3D.gdshader" id="1_7h7yf"]
 [ext_resource type="Shader" path="res://shaders/dissolve.gdshader" id="1_8jfk0"]
 [ext_resource type="Script" path="res://Scripts/Card.cs" id="1_borcn"]
 [ext_resource type="Texture2D" uid="uid://bni3krme8x26k" path="res://Assets/card_sprite.png" id="5_bt2h7"]
+[ext_resource type="FontFile" uid="uid://u0upmi42jtpa" path="res://Assets/fonts/Carnevalee Freakshow.ttf" id="6_521cu"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_kntej"]
 seed = -15
@@ -207,6 +208,8 @@ offset_top = 29.5
 offset_right = 133.0
 offset_bottom = 104.5
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_521cu")
+theme_override_font_sizes/font_size = 30
 text = "
 "
 
