@@ -272,6 +272,10 @@ public partial class Card : Button
 		card.TakeDamage(finalDmg);
 	}
 
-
+	public void SetCardData(CardData data)
+	{
+    _cardData = data; // Store reference if needed
+    UpdateCardAppearance(); // Call to update the visuals
+	}
 
 }
