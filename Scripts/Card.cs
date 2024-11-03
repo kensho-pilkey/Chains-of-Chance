@@ -239,13 +239,22 @@ public partial class Card : Button
 	public void Attack(Card card) {
 		var finalDmg = _Damage * Global.Instance.Multiplier;
 
+		// Load and instantiate the popup
 		var popupScene = (PackedScene)ResourceLoader.Load("res://Scenes/damage_popup.tscn");
-    	var popup = (DamagePopup)popupScene.Instantiate();
-    	popup.Position = Position;
-    	popup.SetDamage(finalDmg);
-    	GetParent().AddChild(popup);
-		
+		var popup = (DamagePopup)popupScene.Instantiate();
+
+		// Get the PopupLayer (Node2D) and convert the position
+		var popupLayer = GetTree().Root.GetNode<Node2D>("gameScene/PopupLayer");
+		popup.Position = popupLayer.ToLocal(card.GlobalPosition);  // Convert to local coordinates of PopupLayer
+		popup.SetDamage(finalDmg);
+
+		// Add the popup to the PopupLayer
+		popupLayer.AddChild(popup);
+
+		// Apply damage to the target card
 		card.TakeDamage(finalDmg);
 	}
+
+
 
 }

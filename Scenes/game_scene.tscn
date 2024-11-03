@@ -40,3 +40,5 @@ From = NodePath(".")
 CardScene = ExtResource("2_yb5w7")
 CardOffsetX = 200.0
 metadata/_edit_use_anchors_ = true
+
+[node name="PopupLayer" type="Node2D" parent="."]

@@ -10,6 +10,7 @@ public partial class DamagePopup : Label
 
     public override void _Ready()
     {
+        Scale = new Vector2(3, 3); 
         Modulate = new Color(1, 1, 1, 1);  // Start fully opaque
     }
 
