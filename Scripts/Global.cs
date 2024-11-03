@@ -95,6 +95,7 @@ public partial class Global : Node
 		GD.Print("Level: " + LevelNum);
 		// PlayerHealth = 100;
 		OpponentHealth = 100;
+		Multiplier = 1;
 	}
 
 	public CardData DrawUniqueCard()

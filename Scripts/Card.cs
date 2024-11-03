@@ -237,7 +237,15 @@ public partial class Card : Button
 		_Health -= damage;
 	}
 	public void Attack(Card card) {
-		card.TakeDamage(_Damage * Global.Instance.Multiplier);
+		var finalDmg = _Damage * Global.Instance.Multiplier;
+
+		var popupScene = (PackedScene)ResourceLoader.Load("res://Scenes/damage_popup.tscn");
+    	var popup = (DamagePopup)popupScene.Instantiate();
+    	popup.Position = Position;
+    	popup.SetDamage(finalDmg);
+    	GetParent().AddChild(popup);
+		
+		card.TakeDamage(finalDmg);
 	}
 
 }

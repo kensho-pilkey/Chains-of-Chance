@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4dyo1bfiggyj"]
+
+[ext_resource type="Script" path="res://Scripts/DamagePopup.cs" id="1_twric"]
+
+[node name="DamagePopup" type="Label"]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("1_twric")
