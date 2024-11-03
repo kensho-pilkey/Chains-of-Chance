@@ -59,6 +59,7 @@ public partial class OpponentSlot : Control
         }
     }
 	public void TakeDamage() {
+		Modulate = new Color(1, 1, 1, 1);
 		if (_health > 0) {
 			_health -= 1;
 		}

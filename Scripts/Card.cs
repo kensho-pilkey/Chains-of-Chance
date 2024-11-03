@@ -26,7 +26,8 @@ public partial class Card : Button
     private Control _shadow;
     private CollisionShape2D _collisionShape;
 	private Label _label;
-	
+	private GpuParticles2D _burnParticles;
+	private AnimationPlayer _animationPlayer;
     private CardSlot _hoveredSlot;
  	private bool _followingMouse = false;
 	public bool _placed = false;
@@ -53,7 +54,8 @@ public partial class Card : Button
     _shadow = GetNode<Control>("Shadow");
 	//ADD card health dmg etc
 	_label = GetNode<Label>("Label");
-
+	_burnParticles = GetNode<GpuParticles2D>("BurnParticles");
+	_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
     // Connect the signals to the methods
     MouseEntered += _onMouseEntered;
     MouseExited += _onMouseExited;
@@ -147,8 +149,20 @@ public partial class Card : Button
 	}
  	public void Destroy()
 	{
-		QueueFree();
+		_animationPlayer.Play("fade");
+
+		// Start emitting particles if you want
+		_burnParticles.Emitting = true;
+
+		// Queue the card for removal after the animation finishes
+		//_animationPlayer.Connect("animation_finished", OnFadeComplete);
+		GetTree().CreateTimer(1.0f).Timeout += () => {
+			_burnParticles.Emitting = false; // Stop emitting particles
+			QueueFree(); // Remove the card from the scene
+		};
 	}
+
+	// Method to handle after the animation finishes
 
     public override void _GuiInput(InputEvent @event)
 	{

@@ -12,6 +12,7 @@ anchors_preset = 0
 script = ExtResource("1_dx7v0")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

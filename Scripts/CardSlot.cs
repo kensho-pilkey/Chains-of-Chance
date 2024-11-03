@@ -9,9 +9,9 @@ public partial class CardSlot : Control
 
     [Export] private Color HoverColor = new Color(1.0f, 1.0f, 1.0f, 0.5f);
     [Export] private Color DefaultColor = new Color(1, 1, 1, 1); // clear
-	[Export] private Color BlueColor = new Color(0.5f, 0.5f, 1.0f, 0.8f); //Light blue
-	[Export] private Color RedColor = new Color(1.0f, 0.5f, 0.5f, 0.8f); //Light red
-	[Export] private Color GreenColor = new Color(0.5f, 1.0f, 0.5f, 0.8f); //Light green
+	[Export] private Color BlueColor = new Color(0.5f, 0.5f, 1.0f, 1f); //Light blue
+	[Export] private Color RedColor = new Color(1.0f, 0.5f, 0.5f, 1f); //Light red
+	[Export] private Color GreenColor = new Color(0.5f, 1.0f, 0.5f, 1f); //Light green
 
     public override void _Ready()
     {
