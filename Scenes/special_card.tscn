@@ -13,39 +13,20 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -4.0
-offset_top = -4.0
-offset_right = 53.0
-offset_bottom = 40.0
+offset_left = -143.0
+offset_top = -207.0
+offset_right = -6.0
+offset_bottom = 14.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(2, 2)
 script = ExtResource("1_lal0i")
 EffectType = "\"DoubleHealth\""
 EffectValue = 2
 
-[node name="CardTexture" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -35.0
-offset_top = -56.0
-offset_right = 35.0
-offset_bottom = 56.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("1_fegae")
-
-[node name="Label" type="Label" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-
 [node name="glow" type="TextureRect" parent="."]
 visible = false
-self_modulate = Color(0.203922, 0.498039, 0.992157, 1)
+self_modulate = Color(0.783713, 0.344133, 0.595988, 1)
 visibility_layer = 3
 material = SubResource("CanvasItemMaterial_btjyg")
 layout_mode = 1
@@ -54,13 +35,44 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -121.0
-offset_top = -152.0
-offset_right = 121.0
-offset_bottom = 152.0
+offset_left = -111.5
+offset_top = -153.5
+offset_right = 111.5
+offset_bottom = 150.5
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_e6dr7")
 expand_mode = 1
+
+[node name="CardTexture" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -71.5
+offset_top = -111.5
+offset_right = -1.5
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+texture = ExtResource("1_fegae")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.5
+offset_top = -76.0
+offset_right = 44.5
+offset_bottom = 23.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="pressed" from="." to="." method="_on_pressed"]

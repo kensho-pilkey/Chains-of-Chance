@@ -81,14 +81,16 @@ offset_left = 656.0
 offset_top = 471.0
 offset_right = 1140.0
 offset_bottom = 601.0
+alignment = 1
 
 [node name="SpecialShop" type="HBoxContainer" parent="."]
 z_index = 1
 layout_mode = 0
-offset_left = 1324.0
-offset_top = 461.0
-offset_right = 1880.0
-offset_bottom = 523.0
+offset_left = 1331.0
+offset_top = 528.0
+offset_right = 1887.0
+offset_bottom = 648.0
+alignment = 1
 
 [connection signal="pressed" from="Buy" to="." method="_on_buy_pressed"]
 [connection signal="pressed" from="Buy" to="." method="OnBuyButtonPressed"]

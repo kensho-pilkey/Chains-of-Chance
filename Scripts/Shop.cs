@@ -46,13 +46,21 @@ public partial class Shop : Control
 		if (_selectedCard != null) {
 			_selectedCard.UnSelect();
 		}
+        if (_selectedSpecial != null) {
+			_selectedSpecial.UnSelect();
+            _selectedSpecial = null;
+		}
         _selectedCard = card;
 		_selectedCard.Select();
     }
     public void OnSpecialSelected(SpecialCard card)
     {
-		if (_selectedCard != null) {
+		if (_selectedSpecial != null) {
+			_selectedSpecial.UnSelect();
+		}
+        if (_selectedCard != null) {
 			_selectedCard.UnSelect();
+            _selectedCard = null;
 		}
         _selectedSpecial = card;
 		_selectedSpecial.Select();

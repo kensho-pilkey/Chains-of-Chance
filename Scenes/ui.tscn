@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://beemq60umwn40"]
+[gd_scene load_steps=7 format=3 uid="uid://beemq60umwn40"]
 
 [ext_resource type="Script" path="res://Scripts/Ui.cs" id="1_0j38m"]
 [ext_resource type="Texture2D" uid="uid://bni3krme8x26k" path="res://Assets/card_sprite.png" id="2_n8bxm"]
+[ext_resource type="FontFile" uid="uid://u0upmi42jtpa" path="res://Assets/fonts/Carnevalee Freakshow.ttf" id="3_7md1t"]
 [ext_resource type="PackedScene" uid="uid://c4p858s3fsha1" path="res://Scenes/deck.tscn" id="3_htu72"]
 [ext_resource type="PackedScene" uid="uid://sodx12pxauxw" path="res://Scenes/sidebar.tscn" id="4_hw6e0"]
 [ext_resource type="PackedScene" uid="uid://bgw5mulqsvs4h" path="res://Scenes/shop.tscn" id="5_pi2ce"]
@@ -58,6 +59,17 @@ offset_right = 182.4
 offset_bottom = 223.6
 texture = ExtResource("2_n8bxm")
 stretch_mode = 4
+
+[node name="Label" type="Label" parent="OpenDeck"]
+layout_mode = 0
+offset_left = 31.6
+offset_top = 70.801
+offset_right = 162.6
+offset_bottom = 130.801
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_7md1t")
+theme_override_font_sizes/font_size = 50
+text = "Deck"
 
 [node name="Deck" parent="." instance=ExtResource("3_htu72")]
 visible = false
