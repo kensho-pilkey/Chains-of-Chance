@@ -72,6 +72,15 @@ offset_bottom = 406.0
 theme_override_font_sizes/font_size = 30
 text = "CPU HP"
 
+[node name="CurrentMult" type="Label" parent="."]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 426.0
+offset_right = 187.0
+offset_bottom = 468.0
+theme_override_font_sizes/font_size = 30
+text = "x1"
+
 [node name="MoneyInfo" type="Label" parent="."]
 layout_mode = 0
 offset_left = 23.0

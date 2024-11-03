@@ -87,6 +87,35 @@ public partial class Board : Control
 }
 public void Attack()
 	{
+		//Check for adjacent matching elements
+		// Add X1 multiplier per matching card pair = X2 three = X3 etc.
+		int maxMultiplier = 1;
+		int currentMultiplier = 1;
+		string lastElement = null;
+		for (int i = 0; i < _playerSlots.Count; i++)
+		{
+			if (_playerSlots[i].IsOccupied()) {
+				string currentElement = _playerSlots[i].GetCard()._cardData.ElementType;
+
+				// Check if this element matches the last one
+				if (currentElement == lastElement)
+				{
+					// Increment the current matching sequence
+					currentMultiplier++;
+				}
+				else
+				{
+					// Reset current sequence if the element doesn't match
+					currentMultiplier = 1;
+				}
+
+				// Update maxMultiplier if the current sequence is the longest we've seen
+				maxMultiplier = Math.Max(maxMultiplier, currentMultiplier);
+				lastElement = currentElement;
+			}
+		}
+		Global.Instance.Multiplier = maxMultiplier;
+
 		// Iterate over each slot, assuming slots are in corresponding positions
 		for (int i = 0; i < _playerSlots.Count && i < _opponentSlots.Count; i++)
 		{
@@ -122,7 +151,7 @@ public void Attack()
 			else if (playerSlot.IsOccupied() && !opponentSlot.IsOccupied())
 			{
 				// Handle the case where the opponent slot is empty
-				Global.Instance.OpponentHealth -= playerSlot.GetCard()._Damage;
+				Global.Instance.OpponentHealth -= playerSlot.GetCard()._Damage *  Global.Instance.Multiplier;
 
 			}
 			else if (!playerSlot.IsOccupied() && opponentSlot.IsOccupied())

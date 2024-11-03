@@ -31,7 +31,7 @@ public partial class Card : Button
  	private bool _followingMouse = false;
 	public bool _placed = false;
 
-	private CardData _cardData = null;
+	public CardData _cardData = null;
 
 	private Vector2 _handPosition;
 
@@ -237,7 +237,7 @@ public partial class Card : Button
 		_Health -= damage;
 	}
 	public void Attack(Card card) {
-		card.TakeDamage(_Damage);
+		card.TakeDamage(_Damage * Global.Instance.Multiplier);
 	}
 
 }

@@ -12,6 +12,8 @@ public partial class Global : Node
 	public static Global Instance { get; private set; }
 
 	public int LevelNum { get; set; } = 1;
+	public int Money { get; set; } = 10;
+	public int Multiplier { get; set; } = 1;
 	private static readonly Dictionary<string, string> NameAssetPairs = new Dictionary<string, string>
     {
         { "Dragon", "res://assets/Tiles_A_white.png" },

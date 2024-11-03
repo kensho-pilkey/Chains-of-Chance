@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://beemq60umwn40"]
 
 [ext_resource type="Script" path="res://Scripts/Ui.cs" id="1_0j38m"]
-[ext_resource type="Texture2D" uid="uid://cvq8v02n843lc" path="res://Assets/Tiles_A_white.png" id="1_5b8gd"]
+[ext_resource type="Texture2D" uid="uid://bni3krme8x26k" path="res://Assets/card_sprite.png" id="2_n8bxm"]
 [ext_resource type="PackedScene" uid="uid://c4p858s3fsha1" path="res://Scenes/deck.tscn" id="3_htu72"]
 [ext_resource type="PackedScene" uid="uid://sodx12pxauxw" path="res://Scenes/sidebar.tscn" id="4_hw6e0"]
 [ext_resource type="PackedScene" uid="uid://bgw5mulqsvs4h" path="res://Scenes/shop.tscn" id="5_pi2ce"]
@@ -45,19 +45,18 @@ offset_bottom = 44.0
 
 [node name="OpenDeck" type="Button" parent="."]
 layout_mode = 0
-offset_left = 1779.0
-offset_top = 863.0
-offset_right = 1921.0
-offset_bottom = 1078.0
+offset_left = 1780.4
+offset_top = 854.799
+offset_right = 1922.4
+offset_bottom = 1069.8
 
 [node name="TextureRect" type="TextureRect" parent="OpenDeck"]
 layout_mode = 0
-offset_left = -7.0
-offset_top = 1.0
-offset_right = 144.0
-offset_bottom = 216.0
-texture = ExtResource("1_5b8gd")
-expand_mode = 1
+offset_left = -1.6
+offset_top = -8.4
+offset_right = 182.4
+offset_bottom = 223.6
+texture = ExtResource("2_n8bxm")
 stretch_mode = 4
 
 [node name="Deck" parent="." instance=ExtResource("3_htu72")]

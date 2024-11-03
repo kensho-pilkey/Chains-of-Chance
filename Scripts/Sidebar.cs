@@ -8,6 +8,7 @@ public partial class Sidebar : Control
 	private Label _money;
 	private Label _playerHealth;
 	private Label _opponentHealth;
+	private Label _multiplier;
 	public override void _Ready()
 	{
 		_turn = GetNode<Label>("TurnInfo");
@@ -15,19 +16,13 @@ public partial class Sidebar : Control
 		_money = GetNode<Label>("MoneyInfo");
 		_playerHealth = GetNode<Label>("PlayerHealth");
 		_opponentHealth = GetNode<Label>("OpponentHealth");
+		_multiplier = GetNode<Label>("CurrentMult");
 	}
 	public override void _Process(double delta) {
 		_playerHealth.Text = "Player Health: " + Global.Instance.PlayerHealth;
 		_opponentHealth.Text = "Opponent Health: " + Global.Instance.OpponentHealth;
+		_level.Text = "Level: " + Global.Instance.LevelNum;
+		_money.Text = "$" + Global.Instance.Money;
+		_multiplier.Text = "X" + Global.Instance.Multiplier;
 	}
-	public void UpdateTurn(int turn) {
-		_turn.Text = "Turn: " + turn;
-	}
-	public void UpdateLevel(int level) {
-		_level.Text = "Level: " + level;
-	}
-	public void UpdateMoney(int money) {
-		_money.Text = "Money: " + money;
-	}
-	
 }

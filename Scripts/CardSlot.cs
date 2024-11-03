@@ -6,9 +6,12 @@ public partial class CardSlot : Control
     private bool _occupied = false;
     private Card _currentCard = null;
 	private int _health;
-    [Export] private Color HoverColor = new Color(1, 1, 1, 0.5f); // Light gray
+
+    [Export] private Color HoverColor = new Color(1.0f, 1.0f, 1.0f, 0.5f);
     [Export] private Color DefaultColor = new Color(1, 1, 1, 1); // clear
-	[Export] private Color PlacedColor = new Color(0.5f, 0.5f, 1.0f, 0.5f); //Light blue
+	[Export] private Color BlueColor = new Color(0.5f, 0.5f, 1.0f, 0.8f); //Light blue
+	[Export] private Color RedColor = new Color(1.0f, 0.5f, 0.5f, 0.8f); //Light red
+	[Export] private Color GreenColor = new Color(0.5f, 1.0f, 0.5f, 0.8f); //Light green
 
     public override void _Ready()
     {
@@ -25,18 +28,18 @@ public partial class CardSlot : Control
         {
             _occupied = true;
             _currentCard = card;
-            Modulate = PlacedColor; // Reset color when card is placed
+            if (card._cardData.ElementType == "Fire") {
+				Modulate = RedColor;
+			}
+			else if (card._cardData.ElementType == "Water") {
+				Modulate = BlueColor;
+			}
+			else if (card._cardData.ElementType == "Grass") {
+				Modulate = GreenColor;
+			}
         }
     }
-	public void PlaceOpponentCard(CardStill card)
-    {
-        if (!_occupied)
-        {
-            _occupied = true;
-            // _currentCard = card;
-            Modulate = PlacedColor; // Reset color when card is placed
-        }
-    }
+
 	public Boolean IsOccupied(){
 		return _occupied;
 	}
@@ -61,7 +64,7 @@ public partial class CardSlot : Control
 	private void _on_area_2d_area_entered(Area2D area) {
 		if (area.GetParent() is Card card && !_occupied)
         {
-            Modulate = HoverColor; // Change color on hover
+            GetNode<Sprite2D>("Sprite2D").Modulate = HoverColor; // Change color on hover
 			card.updateHoverStatus(true, this);
         }
 	}
@@ -69,7 +72,7 @@ public partial class CardSlot : Control
 	private void _on_area_2d_area_exited(Area2D area) {
 		if (area.GetParent() is Card card && !_occupied)
         {
-            Modulate = DefaultColor;
+            GetNode<Sprite2D>("Sprite2D").Modulate = DefaultColor;
 			card.updateHoverStatus(false, this);
         }
 	}
