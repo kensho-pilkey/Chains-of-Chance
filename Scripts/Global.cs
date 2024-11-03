@@ -11,7 +11,7 @@ public partial class Global : Node
 	private List<CardData> availableCardsForTurn = new List<CardData>();
 	public static Global Instance { get; private set; }
 
-	public int LevelNum { get; set; } = 2;
+	public int LevelNum { get; set; } = 1;
 	private static readonly Dictionary<string, string> NameAssetPairs = new Dictionary<string, string>
     {
         { "Dragon", "res://assets/Tiles_A_white.png" },
@@ -85,6 +85,15 @@ public partial class Global : Node
 		availableCardsForTurn = new List<CardData>(PlayerCards);
 		ShuffleCards();
 	}
+	public void StartNextTurn() {
+		availableCardsForTurn = new List<CardData>(PlayerCards);
+		ShuffleCards();
+		GetTree().ChangeSceneToFile("res://Scenes/game_scene.tscn");
+		LevelNum ++;
+		GD.Print("Level: " + LevelNum);
+		// PlayerHealth = 100;
+		OpponentHealth = 100;
+	}
 
 	public CardData DrawUniqueCard()
 	{
@@ -99,6 +108,10 @@ public partial class Global : Node
 		availableCardsForTurn.RemoveAt(index); // Remove the drawn card from the pool
 		
 		return drawnCard;
+	}
+
+	public int CardCount() {
+		return availableCardsForTurn.Count;
 	}
 
 	public override void _Process(double delta)

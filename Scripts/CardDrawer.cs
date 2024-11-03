@@ -56,41 +56,44 @@ public partial class CardDrawer : Control
     public void DrawCards(Vector2 fromPos, int number)
     {
         _drawn = true;
+        if(Global.Instance.CardCount() >= number) {
+            if (_tween != null && _tween.IsRunning())
+                _tween.Kill();
 
-        if (_tween != null && _tween.IsRunning())
-            _tween.Kill();
-
-        _tween = CreateTween();
-        _tween.SetEase(Tween.EaseType.InOut).SetTrans(Tween.TransitionType.Cubic);
-
-        for (int i = 0; i < number; i++)
-        {
-            if (CardScene != null && CardScene.Instantiate() is Card instance)
+            _tween = CreateTween();
+            _tween.SetEase(Tween.EaseType.InOut).SetTrans(Tween.TransitionType.Cubic);
+        
+            for (int i = 0; i < number; i++)
             {
-                AddChild(instance);
-                instance.GlobalPosition = fromPos;
-                instance.AddData(Global.Instance.DrawUniqueCard());
-                Vector2 finalPos = -(instance.Size / 2.0f) - new Vector2(CardOffsetX * (number - 1 - i), 0);
-                finalPos.X += (CardOffsetX * (number - 1)) / 2.0f;
-                
-                float rotRadians = Mathf.LerpAngle(-RotMax, RotMax, (float)i / (number - 1));
-                
-                // Set the initial hand position and rotation
-                instance.SetHandPosition(finalPos);
-                // Animate the card to its final hand position and rotation
-                _tween.Parallel().TweenProperty(instance, "position", finalPos, 0.3f + (i * 0.075f));
-                _tween.Parallel().TweenProperty(instance, "rotation", rotRadians, 0.3f + (i * 0.075f));
+                if (CardScene != null && CardScene.Instantiate() is Card instance)
+                {
+                    AddChild(instance);
+                    instance.GlobalPosition = fromPos;
+                    instance.AddData(Global.Instance.DrawUniqueCard());
+                    Vector2 finalPos = -(instance.Size / 2.0f) - new Vector2(CardOffsetX * (number - 1 - i), 0);
+                    finalPos.X += (CardOffsetX * (number - 1)) / 2.0f;
+                    
+                    float rotRadians = Mathf.LerpAngle(-RotMax, RotMax, (float)i / (number - 1));
+                    
+                    // Set the initial hand position and rotation
+                    instance.SetHandPosition(finalPos);
+                    // Animate the card to its final hand position and rotation
+                    _tween.Parallel().TweenProperty(instance, "position", finalPos, 0.3f + (i * 0.075f));
+                    _tween.Parallel().TweenProperty(instance, "rotation", rotRadians, 0.3f + (i * 0.075f));
+                }
+                else
+                {
+                    GD.PrintErr("CardScene is null or could not be instantiated as a Button.");
+                }
             }
-            else
-            {
-                GD.PrintErr("CardScene is null or could not be instantiated as a Button.");
-            }
+            _tween.TweenCallback(Callable.From(() => SetProcess(true)));
+            _tween.TweenProperty(this, "SineOffsetMult", AnimOffsetY, 1.5f).From(0.0f);
+        }
+        else {
+            GD.Print("Not enough cards in the deck!");
         }
 
-        _tween.TweenCallback(Callable.From(() => SetProcess(true)));
-        _tween.TweenProperty(this, "SineOffsetMult", AnimOffsetY, 1.5f).From(0.0f);
     }
-
 
     public async void UndrawCards(Vector2 toPos)
     {

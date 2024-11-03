@@ -135,7 +135,7 @@ public void Attack()
 			}
 			//trigger next card draw ig
 			PlayHand();
-			//GetParent().GetNode<CardDrawer>("CardDrawer").DrawCards(GetNode<CardDrawer>("CardDrawer").GlobalPosition, 3);
+			GetParent().GetNode<CardDrawer>("CardDrawer").DrawCards(GetParent().GetNode<CardDrawer>("CardDrawer").GlobalPosition, 3);
 		}
 	}
 }

@@ -19,6 +19,7 @@ public partial class GameScene : Node2D
 		}
 		else if (Global.Instance.OpponentHealth <= 0) {
 			EndGame(true);
+			Global.Instance.StartNextTurn();
 		}
 	}
 
