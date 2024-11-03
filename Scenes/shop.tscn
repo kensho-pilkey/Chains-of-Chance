@@ -90,6 +90,7 @@ offset_left = 1331.0
 offset_top = 528.0
 offset_right = 1887.0
 offset_bottom = 648.0
+theme_override_constants/separation = 150
 alignment = 1
 
 [connection signal="pressed" from="Buy" to="." method="_on_buy_pressed"]

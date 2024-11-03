@@ -4,12 +4,14 @@ using System;
 public partial class CardStill : Button
 {
 	private TextureRect _cardTexture;
+	private TextureRect _cardImage;
 	private Label _label;
 	public CardData _cardData = null;
 	public int cost = 1;
 	public override void _Ready()
 	{
 		_cardTexture = GetNode<TextureRect>("CardTexture");
+		_cardImage = GetNode<TextureRect>("CardImage");
 		_label = GetNode<Label>("Label");
 		_cardData = Global.Instance.getRandomCard();
 		UpdateCardAppearance();
@@ -18,7 +20,7 @@ public partial class CardStill : Button
 
 	private void UpdateCardAppearance()
 	{
-		_cardTexture.Texture = GD.Load<Texture2D>(_cardData.AssetPath);
+		_cardImage.Texture = GD.Load<Texture2D>(_cardData.AssetPath);
 		_label.Text = _cardData.Name + "\n" + _cardData.Damage + "\n" + _cardData.Health;
 		if(_cardData.ElementType == "Fire") {
 			_cardTexture.Texture = GD.Load<Texture2D>("res://Assets/fire_card_sprite.png");

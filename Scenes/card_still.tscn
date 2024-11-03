@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://dawpew6if4hk4"]
+[gd_scene load_steps=13 format=3 uid="uid://dawpew6if4hk4"]
 
 [ext_resource type="Shader" path="res://shaders/dissolve.gdshader" id="1_cj6bi"]
 [ext_resource type="Script" path="res://Scripts/CardStill.cs" id="2_emvll"]
 [ext_resource type="Texture2D" uid="uid://bt3536o0xi6gm" path="res://Assets/squareGlow.jpg" id="3_msor4"]
 [ext_resource type="Shader" path="res://shaders/fake_3D.gdshader" id="4_03fm2"]
 [ext_resource type="Texture2D" uid="uid://bni3krme8x26k" path="res://Assets/card_sprite.png" id="5_sl7fs"]
+[ext_resource type="Texture2D" uid="uid://vytnyxyfejp" path="res://Assets/cardArt/badger.png" id="6_fi217"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_kntej"]
 seed = -15
@@ -96,5 +97,12 @@ offset_bottom = 102.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "
 "
+
+[node name="CardImage" type="TextureRect" parent="."]
+offset_left = 16.0
+offset_top = 44.0
+offset_right = 126.0
+offset_bottom = 131.0
+texture = ExtResource("6_fi217")
 
 [connection signal="pressed" from="." to="." method="_on_pressed"]

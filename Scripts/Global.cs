@@ -17,11 +17,9 @@ public partial class Global : Node
 	public int Multiplier { get; set; } = 1;
 	private static readonly Dictionary<string, string> NameAssetPairs = new Dictionary<string, string>
     {
-        { "Dragon", "res://assets/Tiles_A_white.png" },
-        { "Phoenix", "res://assets/Tiles_A_white.png" },
-        { "Griffin", "res://assets/Tiles_A_white.png" },
-        { "Unicorn", "res://assets/Tiles_A_white.png" },
-        { "Hydra", "res://assets/Tiles_A_white.png" }
+        { "Badger", "res://Assets/cardArt/badger.png" },
+        { "Blue Dragon", "res://Assets/cardArt/blue_dragon.png" },
+        { "Frill", "res://Assets/cardArt/frilled_lizard.png" },
     };
 	private static readonly string[] Elements = { "Fire", "Water", "Grass" };
 	private static readonly Random RandomGenerator = new Random();

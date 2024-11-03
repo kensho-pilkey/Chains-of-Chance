@@ -23,9 +23,11 @@ public partial class Card : Button
     private Vector2 _lastPos;
     private Vector2 _velocity;
     private TextureRect _cardTexture;
+	private TextureRect _cardImage;
     private Control _shadow;
     private CollisionShape2D _collisionShape;
-	private Label _label;
+	private Label _name;
+	private Label _dmghp;
 	private GpuParticles2D _burnParticles;
 	private AnimationPlayer _animationPlayer;
     private CardSlot _hoveredSlot;
@@ -51,9 +53,11 @@ public partial class Card : Button
     _collisionShape.SetDeferred("disabled", false);
 
     _cardTexture = GetNode<TextureRect>("CardTexture");
+	_cardImage = GetNode<TextureRect>("CardImage");
     _shadow = GetNode<Control>("Shadow");
 	//ADD card health dmg etc
-	_label = GetNode<Label>("Label");
+	_name = GetNode<Label>("Name");
+	_dmghp = GetNode<Label>("DmgHp");
 	_burnParticles = GetNode<GpuParticles2D>("BurnParticles");
 	_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
     // Connect the signals to the methods
@@ -80,10 +84,12 @@ public partial class Card : Button
 
 	private void UpdateCardAppearance()
 	{
-		//_cardTexture.Texture = GD.Load<Texture2D>(_cardData.AssetPath);
-		_label.Text = _cardData.Name + "\n" + _cardData.Damage + "\n" + _cardData.Health;
+		_cardImage.Texture = GD.Load<Texture2D>(_cardData.AssetPath);
+		_name.Text = _cardData.Name;
+		_dmghp.Text = _cardData.Damage + "       " + _cardData.Health;
 		_Health = _cardData.Health;
 		_Damage = _cardData.Damage;
+
 		if(_cardData.ElementType == "Fire") {
 			_cardTexture.Texture = GD.Load<Texture2D>("res://Assets/fire_card_sprite.png");
 		}
@@ -249,6 +255,7 @@ public partial class Card : Button
 	}
 	public void TakeDamage(int damage) {
 		_Health -= damage;
+		_dmghp.Text = _Damage + "       " + _Health;
 	}
 	public void Attack(Card card) {
 		var finalDmg = _Damage;
@@ -270,6 +277,7 @@ public partial class Card : Button
 
 		// Apply damage to the target card
 		card.TakeDamage(finalDmg);
+
 	}
 
 	public void SetCardData(CardData data)
