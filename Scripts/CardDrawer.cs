@@ -1,176 +1,143 @@
-using Godot;
 using System;
+using System.Collections.Generic;
+using Godot;
 
 public partial class CardDrawer : Control
 {
-    // Exported variables for easy configuration in the inspector
-    [Export] public Control From { get; set; } // Starting position control
-    [Export] public PackedScene CardScene { get; set; } // Scene to instantiate cards from
-    [Export] public float CardOffsetX { get; set; } = 20.0f; // Horizontal offset for cards
-    [Export] public float RotMax { get; set; } = 10.0f; // Max rotation in degrees, converted to radians
-    [Export] public float AnimOffsetY { get; set; } = 0.3f; // Y-axis offset multiplier for animation
-    [Export] public float TimeMultiplier { get; set; } = 2.0f; // Sine wave speed multiplier
+    [Export] public PackedScene CardScene { get; set; } // Card scene to instantiate
+    [Export] public float CardOffsetX { get; set; } = 20.0f; // Horizontal offset between cards
+    [Export] public float RotMax { get; set; } = 10.0f; // Maximum rotation angle in degrees
 
-    // Tween variables for handling animations
-    private Tween _tween;
-    private Tween _tweenAnimate;
-
-    // Other variables
-    private float _time = 0.0f; // Time tracker for sine animation
-    private float _sineOffsetMult = 0.0f; // Offset multiplier for sine movement
-    private bool _drawn = false; // Tracks whether cards are drawn or not
-
-    // Public property for sine offset, so it can be tweened
-    public float SineOffsetMult
-    {
-        get => _sineOffsetMult;
-        set => _sineOffsetMult = value;
-    }
+    private List<Card> _hand = new List<Card>(); // List to keep track of cards in hand
+    private Control _deckButton; // Reference to the deck button
+    private bool _isDrawingCards = false; // Flag to prevent multiple draw calls
 
     public override void _Ready()
     {
-        SetProcess(false);
-
-        // Convert the max rotation from degrees to radians
+        // Convert rotation from degrees to radians for calculations
         RotMax = Mathf.DegToRad(RotMax);
 
-        // Delay and call DrawCards after 2 seconds to demonstrate the animation
-        //GetTree().CreateTimer(2.0f).Timeout += () => DrawCards(From.GlobalPosition, 10);
+        // Get the deck button node
+        _deckButton = GetParent().GetNode<Control>("UI").GetNode<Button>("OpenDeck");
     }
 
-    public override void _Process(double delta)
+    public void DrawCards(int number)
     {
-        // Update time and animate each card's position with sine wave motion
-        _time += (float)delta;
-        for (int i = 0; i < GetChildCount(); i++)
+        if (_isDrawingCards)
+            return; // Prevent starting multiple draw sequences
+
+        _isDrawingCards = true;
+
+        // Adjust the number of cards to draw based on available cards
+        if (Global.Instance.CardCount() < number && Global.Instance.CardCount() > 0)
+            number = Global.Instance.CardCount();
+
+        if (Global.Instance.CardCount() >= number)
         {
-            if (GetChild(i) is Button card)
-            {
-                // Apply sine wave offset to each card's position on the Y-axis
-                float val = Mathf.Sin(i + (_time * TimeMultiplier));
-                card.Position += new Vector2(0, val * _sineOffsetMult);
-            }
+            // Start drawing cards one by one
+            DrawNextCard(number);
+        }
+        else
+        {
+            GD.Print("Not enough cards in the deck!");
+            _isDrawingCards = false;
         }
     }
 
-    public void DrawCards(Vector2 fromPos, int number)
-{
-    _drawn = true;
-
-    // Adjust `number` based on available cards
-    if (Global.Instance.CardCount() < number && Global.Instance.CardCount() > 0)
+    private void DrawNextCard(int remainingCards)
     {
-        number = Global.Instance.CardCount();
-    }
-
-    // Proceed only if there are enough cards in the deck
-    if (Global.Instance.CardCount() >= number)
-    {
-        if (_tween != null && _tween.IsRunning())
-            _tween.Kill();
-
-        _tween = CreateTween();
-        _tween.SetEase(Tween.EaseType.InOut).SetTrans(Tween.TransitionType.Cubic);
-
-        for (int i = 0; i < number; i++)
+        if (CardScene != null && CardScene.Instantiate() is Card instance)
         {
-            if (CardScene != null && CardScene.Instantiate() is Card instance)
+            AddChild(instance);
+
+            // Set the card's starting position to the deck button's position
+            instance.GlobalPosition = _deckButton.GlobalPosition;
+
+            // Initialize the card with data
+            instance.AddData(Global.Instance.DrawUniqueCard());
+
+            // Add the new card to the hand list
+            _hand.Add(instance);
+
+            // Reposition and animate the hand
+            UpdateHandLayout();
+
+            if (remainingCards > 1)
             {
-                AddChild(instance);
-                instance.GlobalPosition = fromPos;
-                instance.AddData(Global.Instance.DrawUniqueCard());
-
-                // Handle positioning differently if only one card
-                Vector2 finalPos;
-                float rotRadians;
-                
-                if (number == 1)
-                {
-                    // Center position and zero rotation for a single card
-                    finalPos = -instance.Size / 2.0f;
-                    rotRadians = 0;
-                }
-                else
-                {
-                    // Standard calculation for multiple cards
-                    finalPos = -(instance.Size / 2.0f) - new Vector2(CardOffsetX * (number - 1 - i), 0);
-                    finalPos.X += (CardOffsetX * (number - 1)) / 2.0f;
-                    rotRadians = Mathf.LerpAngle(-RotMax, RotMax, (float)i / (number - 1));
-                }
-
-                // Set the initial hand position and rotation
-                instance.SetHandPosition(finalPos);
-
-                // Animate the card to its final hand position and rotation
-                _tween.Parallel().TweenProperty(instance, "position", finalPos, 0.3f + (i * 0.075f));
-                _tween.Parallel().TweenProperty(instance, "rotation", rotRadians, 0.3f + (i * 0.075f));
+                // Schedule the next card draw after 0.25 seconds
+                var timer = GetTree().CreateTimer(0.25f);
+                timer.Timeout += () => DrawNextCard(remainingCards - 1);
             }
             else
             {
-                GD.PrintErr("CardScene is null or could not be instantiated as a Button.");
+                // All cards have been drawn
+                _isDrawingCards = false;
             }
         }
-
-        _tween.TweenCallback(Callable.From(() => SetProcess(true)));
-        _tween.TweenProperty(this, "SineOffsetMult", AnimOffsetY, 1.5f).From(0.0f);
-    }
-    else
-    {
-        GD.Print("Not enough cards in the deck!");
-    }
-}
-
-    public async void UndrawCards(Vector2 toPos)
-    {
-        _drawn = false;
-
-        // Kill existing tween if running
-        if (_tween != null && _tween.IsRunning())
-            _tween.Kill();
-
-        // Create new tween for undrawing cards
-        _tween = CreateTween();
-        _tween.SetEase(Tween.EaseType.InOut).SetTrans(Tween.TransitionType.Cubic);
-        _tween.TweenProperty(this, "SineOffsetMult", 0.0f, 0.9f);
-
-        int childCount = GetChildCount();
-
-        for (int i = childCount - 1; i >= 0; i--)
-        {
-            if (GetChild(i) is Button c)
-            {
-                // Animate cards back to the specified position and reset rotation
-                _tween.Parallel().TweenProperty(c, "global_position", toPos, 0.3f + ((childCount - i) * 0.075f));
-                _tween.Parallel().TweenProperty(c, "rotation", 0.0f, 0.3f + ((childCount - i) * 0.075f));
-            }
-        }
-
-        // Wait for tween to finish before removing cards
-        await ToSignal(_tween, "finished");
-
-        foreach (Node child in GetChildren())
-        {
-            child.QueueFree();
-        }
-    }
-
-    public void AnimateCards()
-    {
-        if (_tweenAnimate != null && _tweenAnimate.IsRunning())
-            _tweenAnimate.Kill();
-
-        // Create a looping tween for continuous animation (optional)
-        _tweenAnimate = CreateTween();
-        _tweenAnimate.SetEase(Tween.EaseType.InOut).SetTrans(Tween.TransitionType.Cubic);
-        _tweenAnimate.SetLoops();
-    }
-
-    private void _OnDrawButtonPressed()
-    {
-        // Toggle between drawing and undrawing cards
-        if (_drawn)
-            UndrawCards(From.GlobalPosition);
         else
-            DrawCards(From.GlobalPosition, 10);
+        {
+            GD.PrintErr("CardScene is null or could not be instantiated as a Card.");
+            _isDrawingCards = false;
+        }
+    }
+
+    private void UpdateHandLayout()
+    {
+        int number = _hand.Count;
+
+        for (int i = 0; i < number; i++)
+        {
+            Card card = _hand[i];
+
+            // Calculate the final position for the card
+            Vector2 finalPos = -(card.Size / 2.0f) - new Vector2(CardOffsetX * (number - 1 - i), 0);
+            finalPos.X += (CardOffsetX * (number - 1)) / 2.0f;
+
+            // Calculate the rotation angle for the card
+            float rotRadians = (number == 1) ? 0 : Mathf.LerpAngle(-RotMax, RotMax, (float)i / (number - 1));
+
+            // Create a tween for this card's movement and rotation
+            var cardTween = CreateTween();
+            cardTween.SetEase(Tween.EaseType.InOut).SetTrans(Tween.TransitionType.Cubic);
+
+            // Animate the card to its new position and rotation
+            cardTween.TweenProperty(card, "position", finalPos, 0.5f);
+
+            card.SetHandPosition(finalPos);
+        }
+    }
+
+    public void RemoveCard(Card card)
+    {
+        if (_hand.Contains(card))
+        {
+            _hand.Remove(card);
+
+            // Reposition the hand after removing a card
+            UpdateHandLayout();
+        }
+    }
+
+    public void UndrawCards(Vector2 toPos)
+    {
+        if (_hand.Count == 0)
+            return;
+
+        foreach (Card card in _hand)
+        {
+            // Create a tween for moving the card back to the specified position
+            var cardTween = CreateTween();
+            cardTween.SetEase(Tween.EaseType.InOut).SetTrans(Tween.TransitionType.Cubic);
+
+            // Animate the card back and reset rotation
+            cardTween.TweenProperty(card, "global_position", toPos, 0.3f);
+            cardTween.TweenProperty(card, "rotation", 0.0f, 0.3f);
+
+            // Queue free the card after the tween completes
+            cardTween.TweenCallback(Callable.From(() => card.QueueFree()));
+        }
+
+        // Clear the hand after all cards are undrawn
+        _hand.Clear();
     }
 }

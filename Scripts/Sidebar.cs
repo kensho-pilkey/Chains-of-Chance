@@ -25,9 +25,9 @@ public partial class Sidebar : Control
 		_playerHealth.Text = "Player Health: " + Global.Instance.PlayerHealth.ToString();
 		_opponentHealth.Text = "Opponent Health: " + Global.Instance.OpponentHealth.ToString();
 		_level.Text = "Level: " + Global.Instance.LevelNum.ToString();
-		_money.Text = "$ " + Global.Instance.Money.ToString();
+		_money.Text = Global.Instance.Money.ToString();
 		_multiplier.Text = "X" + Global.Instance.Multiplier.ToString();
 		_cardCount.Text = Global.Instance.CardCount().ToString();
-		_drawCount.Text = "Draws " + Global.Instance.Draws.ToString() + " / 3";
+		_drawCount.Text = Global.Instance.Draws.ToString();
 	}
 }

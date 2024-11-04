@@ -20,7 +20,7 @@ script = ExtResource("1_5l8q0")
 
 [node name="bg" type="Panel" parent="."]
 layout_mode = 0
-offset_left = -7.0
+offset_left = -15.0
 offset_top = -4.0
 offset_right = 405.0
 offset_bottom = 1111.0
@@ -28,30 +28,30 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_vyl0j")
 
 [node name="LevelInfo" type="Label" parent="."]
 layout_mode = 0
-offset_left = 111.0
-offset_top = -3.0
-offset_right = 300.0
-offset_bottom = 87.0
+offset_left = 56.0
+offset_top = 25.0
+offset_right = 331.0
+offset_bottom = 153.0
 theme_override_fonts/font = ExtResource("2_b1boa")
-theme_override_font_sizes/font_size = 80
+theme_override_font_sizes/font_size = 120
 text = "Level 1"
 
 [node name="DrawCount" type="Label" parent="."]
 layout_mode = 0
-offset_left = 16.0
-offset_top = 182.0
-offset_right = 158.0
-offset_bottom = 228.0
+offset_left = 208.0
+offset_top = 445.0
+offset_right = 350.0
+offset_bottom = 535.0
 theme_override_fonts/font = ExtResource("2_ir2bv")
-theme_override_font_sizes/font_size = 40
-text = "Draws 1 / 3"
+theme_override_font_sizes/font_size = 80
+text = "3"
 
 [node name="RewardInfo" type="Label" parent="."]
 layout_mode = 0
-offset_left = 16.0
-offset_top = 127.0
-offset_right = 170.0
-offset_bottom = 173.0
+offset_left = 20.0
+offset_top = 152.0
+offset_right = 174.0
+offset_bottom = 198.0
 theme_override_fonts/font = ExtResource("2_ir2bv")
 theme_override_font_sizes/font_size = 40
 text = "Payout: $10"
@@ -91,16 +91,28 @@ text = "x1"
 
 [node name="MoneyInfo" type="Label" parent="."]
 layout_mode = 0
-offset_left = 28.0
-offset_top = 563.0
-offset_right = 155.0
-offset_bottom = 653.0
+offset_left = 207.0
+offset_top = 557.0
+offset_right = 285.0
+offset_bottom = 647.0
 theme_override_colors/font_color = Color(0.682353, 0.537255, 0, 1)
 theme_override_fonts/font = ExtResource("2_ir2bv")
 theme_override_font_sizes/font_size = 80
-text = "$ 10"
+text = "10"
+
+[node name="MoneySymbol" type="Label" parent="."]
+layout_mode = 0
+offset_left = 116.0
+offset_top = 539.0
+offset_right = 163.0
+offset_bottom = 652.0
+theme_override_colors/font_color = Color(0.682353, 0.537255, 0, 1)
+theme_override_fonts/font = ExtResource("2_ir2bv")
+theme_override_font_sizes/font_size = 100
+text = "$"
 
 [node name="sortby" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 271.0
 offset_top = 752.0
@@ -125,29 +137,31 @@ offset_bottom = 50.0
 
 [node name="CardCount" type="Label" parent="."]
 layout_mode = 0
-offset_left = 92.0
-offset_top = 669.0
-offset_right = 166.0
-offset_bottom = 779.0
+offset_left = 209.0
+offset_top = 665.0
+offset_right = 283.0
+offset_bottom = 775.0
 theme_override_fonts/font = ExtResource("2_ir2bv")
 theme_override_font_sizes/font_size = 80
 text = "1"
 
 [node name="Card" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 24.0
-offset_top = 684.0
-offset_right = 69.0
-offset_bottom = 756.0
+offset_left = 108.0
+offset_top = 681.0
+offset_right = 153.0
+offset_bottom = 753.0
 texture = ExtResource("4_0kmc8")
 expand_mode = 1
 
-[node name="Draw" type="Button" parent="."]
-visible = false
+[node name="DrawSymbol" type="Label" parent="."]
+modulate = Color(0.04, 1, 0.12, 1)
 layout_mode = 0
-offset_left = 23.0
-offset_top = 578.0
-offset_right = 165.0
-offset_bottom = 650.0
-theme_override_font_sizes/font_size = 30
-text = "Draw"
+offset_left = 102.0
+offset_top = 455.0
+offset_right = 178.0
+offset_bottom = 541.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_b1boa")
+theme_override_font_sizes/font_size = 80
+text = "+1"

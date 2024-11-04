@@ -38,6 +38,11 @@ public partial class Deck : Control
     private void _on_button_pressed(){
         Visible = false;
         GetParent().GetNode<Control>("Sidebar").Visible = true;
+        GetParent().GetNode<Button>("Draw").Visible = true;
+        GetParent().GetNode<Button>("Play").Visible = true;
+
+
         RemoveCards();
+
     }
 }

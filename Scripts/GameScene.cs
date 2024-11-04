@@ -55,7 +55,7 @@ public partial class GameScene : Node2D
 		//Player draws 5 cards 
 		//TODO card draw logic and storage of existing cards.
 		GetNode<Board>("board").PlayHand();
-		GetNode<CardDrawer>("CardDrawer").DrawCards(GetNode<CardDrawer>("CardDrawer").GlobalPosition, 7);
+		GetNode<CardDrawer>("CardDrawer").DrawCards(7);
 	}
 	public void EndRound() {
 		//TODO 

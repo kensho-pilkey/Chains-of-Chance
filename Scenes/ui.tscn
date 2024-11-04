@@ -1,7 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://beemq60umwn40"]
+[gd_scene load_steps=13 format=3 uid="uid://beemq60umwn40"]
 
 [ext_resource type="Script" path="res://Scripts/Ui.cs" id="1_0j38m"]
-[ext_resource type="Texture2D" uid="uid://bni3krme8x26k" path="res://Assets/card_sprite.png" id="2_n8bxm"]
+[ext_resource type="Texture2D" uid="uid://dqsaa44rxwc4j" path="res://Assets/card_back.png" id="2_n8rj6"]
 [ext_resource type="FontFile" uid="uid://u0upmi42jtpa" path="res://Assets/fonts/Carnevalee Freakshow.ttf" id="3_7md1t"]
 [ext_resource type="PackedScene" uid="uid://c4p858s3fsha1" path="res://Scenes/deck.tscn" id="3_htu72"]
 [ext_resource type="PackedScene" uid="uid://sodx12pxauxw" path="res://Scenes/sidebar.tscn" id="4_hw6e0"]
@@ -21,8 +21,13 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ff4s"]
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x2q1d"]
-bg_color = Color(0.28, 0.28, 0.28, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -73,20 +78,20 @@ offset_bottom = 1069.8
 
 [node name="TextureRect" type="TextureRect" parent="OpenDeck"]
 layout_mode = 0
-offset_left = -1.6
-offset_top = -8.4
-offset_right = 182.4
-offset_bottom = 223.6
-texture = ExtResource("2_n8bxm")
+offset_left = -3.6
+offset_top = -11.199
+offset_right = 141.4
+offset_bottom = 220.801
+texture = ExtResource("2_n8rj6")
 stretch_mode = 4
 
 [node name="Label" type="Label" parent="OpenDeck"]
 layout_mode = 0
-offset_left = 31.6
-offset_top = 70.801
-offset_right = 162.6
-offset_bottom = 130.801
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+offset_left = 30.0
+offset_top = 99.601
+offset_right = 161.0
+offset_bottom = 159.601
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("3_7md1t")
 theme_override_font_sizes/font_size = 50
 text = "Deck"
@@ -129,6 +134,7 @@ offset_bottom = 1068.2
 focus_mode = 0
 theme_override_fonts/font = ExtResource("7_1s321")
 theme_override_font_sizes/font_size = 40
+theme_override_styles/disabled = SubResource("StyleBoxFlat_7ff4s")
 theme_override_styles/hover = SubResource("StyleBoxFlat_x2q1d")
 theme_override_styles/normal = SubResource("StyleBoxFlat_8as6b")
 text = "Draw"

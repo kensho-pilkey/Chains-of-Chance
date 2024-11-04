@@ -131,6 +131,9 @@ public partial class Card : Button
 		slot.PlaceCard(this);
 		_hoveredSlot = null;
 		_placed = true;
+		if (GetParent() is CardDrawer spawner) {
+			spawner.RemoveCard(this);
+		}	
     }
 
 	public void PlaceOpponentCardInSlot(CardSlot slot) {
@@ -264,7 +267,9 @@ public partial class Card : Button
 	{
 		_handPosition = position;
 	}
-
+	public Vector2 GetHandPosition() {
+		return _handPosition;
+	}
 	private void ReturnToHand()
 	{
 		Position = _handPosition;

@@ -28,7 +28,7 @@ offset_right = -1159.0
 offset_bottom = -411.0
 metadata/_edit_use_anchors_ = true
 
-[node name="CardDrawer" type="Control" parent="." node_paths=PackedStringArray("From")]
+[node name="CardDrawer" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_left = -17.0
@@ -36,7 +36,6 @@ offset_top = 972.0
 offset_right = 23.0
 offset_bottom = 1012.0
 script = ExtResource("5_2wmh7")
-From = NodePath(".")
 CardScene = ExtResource("2_yb5w7")
 CardOffsetX = 200.0
 metadata/_edit_use_anchors_ = true
