@@ -16,6 +16,7 @@ scale = Vector2(2.5, 2.5)
 script = ExtResource("1_0j38m")
 
 [node name="Shopbtn" type="Button" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 719.2
 offset_top = 11.1999

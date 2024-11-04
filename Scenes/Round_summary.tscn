@@ -1,32 +1,330 @@
-[gd_scene load_steps=2 format=3 uid="uid://d4c2y3hpotigt"]
+[gd_scene load_steps=8 format=3 uid="uid://d4c2y3hpotigt"]
 
 [ext_resource type="Script" path="res://Scripts/RoundSummary.cs" id="1_ov3bs"]
+[ext_resource type="Texture2D" uid="uid://doxafoxse3dsd" path="res://Assets/Screenshot 2024-11-02 at 5.59.49 PM.png" id="2_afsqa"]
+[ext_resource type="PackedScene" uid="uid://bgw5mulqsvs4h" path="res://Scenes/shop.tscn" id="2_s8df4"]
+[ext_resource type="PackedScene" uid="uid://sodx12pxauxw" path="res://Scenes/sidebar.tscn" id="4_al313"]
+[ext_resource type="Texture2D" uid="uid://bt3536o0xi6gm" path="res://Assets/squareGlow.jpg" id="5_52yuf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0h5y0"]
+bg_color = Color(0.75, 0.75, 0.75, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_kpyaf"]
+blend_mode = 1
 
 [node name="RoundSummary" type="Node2D"]
 script = ExtResource("1_ov3bs")
 
+[node name="bg" type="Sprite2D" parent="."]
+texture_repeat = 2
+position = Vector2(1191, 378)
+scale = Vector2(2.369, 1.576)
+texture = ExtResource("2_afsqa")
+region_enabled = true
+region_rect = Rect2(0.48, 0.105, 2000, 2000)
+
 [node name="PlayedCardsLabel" type="Label" parent="."]
+visible = false
 text = "Played Cards:
 "
 
 [node name="DefeatedCardsLabel" type="Label" parent="."]
+visible = false
 offset_top = 40.0
 offset_bottom = 40.0
 text = "Defeated Cards:
 "
 
 [node name="GoldLabel" type="Label" parent="."]
+visible = false
 offset_top = 80.0
 offset_bottom = 80.0
 text = "Gold Earned: 0"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
+[node name="Shop" parent="." instance=ExtResource("2_s8df4")]
+offset_left = -955.0
+offset_top = -542.0
+offset_right = -955.0
+offset_bottom = -542.0
+
 [node name="Next" type="Button" parent="."]
-offset_left = 822.0
-offset_top = 462.0
-offset_right = 929.0
-offset_bottom = 523.0
+z_index = 2
+offset_left = 694.0
+offset_top = 401.0
+offset_right = 911.0
+offset_bottom = 499.0
+theme_override_font_sizes/font_size = 40
 text = "Next"
+
+[node name="Sidebar" parent="." instance=ExtResource("4_al313")]
+offset_left = -954.0
+offset_top = -550.0
+offset_right = -954.0
+offset_bottom = -550.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+z_index = 2
+offset_left = -538.0
+offset_top = -531.0
+offset_right = 872.0
+offset_bottom = -484.0
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="Panel" type="Panel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(50, 10)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0h5y0")
+
+[node name="glow" type="TextureRect" parent="HBoxContainer/Panel"]
+visible = false
+self_modulate = Color(1.92523e-06, 0.630279, 0.306845, 1)
+visibility_layer = 3
+material = SubResource("CanvasItemMaterial_kpyaf")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.0
+offset_top = -29.5
+offset_right = 31.0
+offset_bottom = 29.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_52yuf")
+expand_mode = 1
+
+[node name="Panel2" type="Panel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(50, 10)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0h5y0")
+
+[node name="glow" type="TextureRect" parent="HBoxContainer/Panel2"]
+visible = false
+self_modulate = Color(1.92523e-06, 0.630279, 0.306845, 1)
+visibility_layer = 3
+material = SubResource("CanvasItemMaterial_kpyaf")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.0
+offset_top = -29.5
+offset_right = 31.0
+offset_bottom = 29.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_52yuf")
+expand_mode = 1
+
+[node name="Panel3" type="Panel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(50, 10)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0h5y0")
+
+[node name="glow" type="TextureRect" parent="HBoxContainer/Panel3"]
+visible = false
+self_modulate = Color(1.92523e-06, 0.630279, 0.306845, 1)
+visibility_layer = 3
+material = SubResource("CanvasItemMaterial_kpyaf")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.0
+offset_top = -29.5
+offset_right = 31.0
+offset_bottom = 29.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_52yuf")
+expand_mode = 1
+
+[node name="Panel4" type="Panel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(50, 10)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0h5y0")
+
+[node name="glow" type="TextureRect" parent="HBoxContainer/Panel4"]
+visible = false
+self_modulate = Color(1.92523e-06, 0.630279, 0.306845, 1)
+visibility_layer = 3
+material = SubResource("CanvasItemMaterial_kpyaf")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.0
+offset_top = -29.5
+offset_right = 31.0
+offset_bottom = 29.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_52yuf")
+expand_mode = 1
+
+[node name="Panel5" type="Panel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(50, 10)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0h5y0")
+
+[node name="glow" type="TextureRect" parent="HBoxContainer/Panel5"]
+visible = false
+self_modulate = Color(1.92523e-06, 0.630279, 0.306845, 1)
+visibility_layer = 3
+material = SubResource("CanvasItemMaterial_kpyaf")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.0
+offset_top = -29.5
+offset_right = 31.0
+offset_bottom = 29.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_52yuf")
+expand_mode = 1
+
+[node name="Panel6" type="Panel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(50, 10)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0h5y0")
+
+[node name="glow" type="TextureRect" parent="HBoxContainer/Panel6"]
+visible = false
+self_modulate = Color(1.92523e-06, 0.630279, 0.306845, 1)
+visibility_layer = 3
+material = SubResource("CanvasItemMaterial_kpyaf")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.0
+offset_top = -29.5
+offset_right = 31.0
+offset_bottom = 29.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_52yuf")
+expand_mode = 1
+
+[node name="Panel7" type="Panel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(50, 10)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0h5y0")
+
+[node name="glow" type="TextureRect" parent="HBoxContainer/Panel7"]
+visible = false
+self_modulate = Color(1.92523e-06, 0.630279, 0.306845, 1)
+visibility_layer = 3
+material = SubResource("CanvasItemMaterial_kpyaf")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.0
+offset_top = -29.5
+offset_right = 31.0
+offset_bottom = 29.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_52yuf")
+expand_mode = 1
+
+[node name="Panel8" type="Panel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(50, 10)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0h5y0")
+
+[node name="glow" type="TextureRect" parent="HBoxContainer/Panel8"]
+visible = false
+self_modulate = Color(1.92523e-06, 0.630279, 0.306845, 1)
+visibility_layer = 3
+material = SubResource("CanvasItemMaterial_kpyaf")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.0
+offset_top = -29.5
+offset_right = 31.0
+offset_bottom = 29.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_52yuf")
+expand_mode = 1
+
+[node name="Panel9" type="Panel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(50, 10)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0h5y0")
+
+[node name="glow" type="TextureRect" parent="HBoxContainer/Panel9"]
+visible = false
+self_modulate = Color(1.92523e-06, 0.630279, 0.306845, 1)
+visibility_layer = 3
+material = SubResource("CanvasItemMaterial_kpyaf")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.0
+offset_top = -29.5
+offset_right = 31.0
+offset_bottom = 29.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_52yuf")
+expand_mode = 1
+
+[node name="Panel10" type="Panel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(50, 10)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0h5y0")
+
+[node name="glow" type="TextureRect" parent="HBoxContainer/Panel10"]
+visible = false
+self_modulate = Color(1.92523e-06, 0.630279, 0.306845, 1)
+visibility_layer = 3
+material = SubResource("CanvasItemMaterial_kpyaf")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.0
+offset_top = -29.5
+offset_right = 31.0
+offset_bottom = 29.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_52yuf")
+expand_mode = 1
 
 [connection signal="pressed" from="Next" to="." method="_on_next_pressed"]
