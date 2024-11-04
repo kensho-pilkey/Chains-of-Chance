@@ -124,13 +124,7 @@ public void Attack()
 			_attackTimer.Timeout += OnAttackTimerTimeout;
 			AddChild(_attackTimer);
 		}
-<<<<<<< Updated upstream
-=======
-		if (maxMultiplier > 1 || maxCreatureStreak > 1) {
-			GetParent<GameScene>().ScreenShake(50.0f, 0.5f, 0.03f);
-		}
-		Global.Instance.Multiplier = maxMultiplier + maxCreatureStreak;
->>>>>>> Stashed changes
+
 
 		// Reset the attack index
 		_currentAttackIndex = 0;

@@ -16,13 +16,13 @@ public partial class GameScene : Node2D
 	{
 		if(Global.Instance.PlayerHealth <= 0) {
 			GetTree().CreateTimer(1.0f).Timeout += () => {
-				EndGame(false);
-				//GetTree().ChangeSceneToFile("res://scenes/GameOver.tscn");
+				//EndGame(false);
+				GetTree().ChangeSceneToFile("res://scenes/GameOver.tscn");
 			};
 		}
 		else if (Global.Instance.OpponentHealth <= 0) {
 			GetTree().CreateTimer(1.0f).Timeout += () => {
-				EndGame(true);
+				//EndGame(true);
 				Global.Instance.EndRound();
 				//Global.Instance.StartNextTurn();
 			};

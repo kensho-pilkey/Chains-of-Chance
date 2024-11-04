@@ -26,10 +26,10 @@ public partial class RoundSummary : Node2D
         playedCardsLabel = GetNode<Label>("PlayedCardsLabel");
         defeatedCardsLabel = GetNode<Label>("DefeatedCardsLabel");
         goldLabel = GetNode<Label>("GoldLabel");
+        for (int i = 0; i < Global.Instance.LevelNum; i++) {
 
-        GetTree().CreateTimer(1.0f).Timeout += () => {
-            GetNode<HBoxContainer>("HBoxContainer").GetChild(Global.Instance.LevelNum - 1).GetNode<TextureRect>("glow").Visible = true;
-        };
+            GetNode<HBoxContainer>("HBoxContainer").GetChild(i).GetNode<TextureRect>("glow").Visible = true;
+        }
     }
 
     public void AddPlayedCard(Card card)
