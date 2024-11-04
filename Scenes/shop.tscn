@@ -19,7 +19,7 @@ SpecialScene = ExtResource("3_i5bpm")
 
 [node name="TextureRect" type="ColorRect" parent="."]
 layout_mode = 0
-offset_left = 392.0
+offset_left = 406.0
 offset_top = 2.0
 offset_right = 1920.0
 offset_bottom = 1080.0

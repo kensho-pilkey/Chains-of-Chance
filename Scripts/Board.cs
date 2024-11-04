@@ -109,12 +109,13 @@ public partial class Board : Control
     return null; // No open slots
 }
 
-public void Attack()
+public async void Attack()
 {
 	if (_playerTurn) {
 		_playerTurn = false;
 		CalculateMultipliers();
 
+		await ToSignal(GetTree().CreateTimer(1.2f), "timeout");
 		// Setup or retrieve the Timer node
 		if (_attackTimer == null)
 		{
@@ -137,35 +138,64 @@ public void Attack()
 		}
 	}
 }
-
-private void CalculateMultipliers()
+private async void CalculateMultipliers()
 {
-    int maxMultiplier = 1;
-    int currentMultiplier = 1;
-    string lastElement = null;
+    // Initialize multipliers for each element
+    int maxFireStreak = 1;
+    int currentFireStreak = 1;
 
+    int maxWaterStreak = 1;
+    int currentWaterStreak = 1;
+
+    int maxGrassStreak = 1;
+    int currentGrassStreak = 1;
+
+    // Creature streak
     int maxCreatureStreak = 1;
     int currentCreatureStreak = 1;
     string lastCreatureName = null;
+
+    // Track the last element to identify streaks
+    string lastElement = null;
 
     for (int i = 0; i < _playerSlots.Count; i++)
     {
         if (_playerSlots[i].IsOccupied())
         {
+            // Get the current card's element and creature name
             string currentElement = _playerSlots[i].GetCard()._cardData.ElementType;
             string currentCreatureName = _playerSlots[i].GetCard()._cardData.Name;
 
+            // Check for the longest streak of matching elements
             if (currentElement == lastElement)
             {
-                currentMultiplier++;
+                // Update the appropriate element streak
+                switch (currentElement)
+                {
+                    case "Fire":
+                        currentFireStreak++;
+                        maxFireStreak = Math.Max(maxFireStreak, currentFireStreak);
+                        break;
+                    case "Water":
+                        currentWaterStreak++;
+                        maxWaterStreak = Math.Max(maxWaterStreak, currentWaterStreak);
+                        break;
+                    case "Grass":
+                        currentGrassStreak++;
+                        maxGrassStreak = Math.Max(maxGrassStreak, currentGrassStreak);
+                        break;
+                }
             }
             else
             {
-                currentMultiplier = 1; // Reset if element changes
+                // Reset element streaks if the element changes
+                currentFireStreak = currentElement == "Fire" ? 1 : 0;
+                currentWaterStreak = currentElement == "Water" ? 1 : 0;
+                currentGrassStreak = currentElement == "Grass" ? 1 : 0;
             }
-            maxMultiplier = Math.Max(maxMultiplier, currentMultiplier);
             lastElement = currentElement;
 
+            // Check for the longest streak of matching creature names
             if (currentCreatureName == lastCreatureName)
             {
                 currentCreatureStreak++;
@@ -179,11 +209,28 @@ private void CalculateMultipliers()
         }
     }
 
-    // if (maxMultiplier > 1 || maxCreatureStreak > 1)
-    // {
-    //     GetParent<GameScene>().ScreenShake(50.0f, 0.5f, 0.03f);
-    // }
-    Global.Instance.Multiplier = maxMultiplier + maxCreatureStreak;
+    // Set global or return values for multipliers (e.g., total maximum streaks)
+    int maxElementStreak = Math.Max(Math.Max(maxFireStreak, maxWaterStreak), maxGrassStreak);
+    Global.Instance.Multiplier = maxElementStreak + maxCreatureStreak;
+
+	GetNode<AnimationPlayer>("AnimationPlayer").Play("firePopup");
+	GetParent<GameScene>().ScreenShake(5.0f, 0.3f, 0.03f);
+	GetNode<Label>("Fire").Text = "X" + maxFireStreak;
+	await ToSignal(GetTree().CreateTimer(0.3f), "timeout");
+	GetNode<AnimationPlayer>("AnimationPlayer").Play("waterPopup");
+	GetNode<Label>("Water").Text = "X" + maxWaterStreak;
+	GetParent<GameScene>().ScreenShake(5.0f, 0.3f, 0.03f);
+	await ToSignal(GetTree().CreateTimer(0.3f), "timeout");
+	GetNode<AnimationPlayer>("AnimationPlayer").Play("grassPopup");
+	GetNode<Label>("Grass").Text = "X" + maxGrassStreak;
+	GetParent<GameScene>().ScreenShake(5.0f, 0.3f, 0.03f);
+	await ToSignal(GetTree().CreateTimer(0.3f), "timeout");
+	GetNode<AnimationPlayer>("AnimationPlayer").Play("matchPopup");
+	GetNode<Label>("Match").Text = "X" + maxCreatureStreak;
+	GetParent<GameScene>().ScreenShake(5.0f, 0.3f, 0.03f);
+	await ToSignal(GetTree().CreateTimer(0.3f), "timeout");
+	GetNode<AnimationPlayer>("AnimationPlayer").Play("fade");
+	
 }
 
 private void OnAttackTimerTimeout()

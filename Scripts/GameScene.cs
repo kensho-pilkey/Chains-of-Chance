@@ -21,11 +21,9 @@ public partial class GameScene : Node2D
 			};
 		}
 		else if (Global.Instance.OpponentHealth <= 0) {
-			GetTree().CreateTimer(1.0f).Timeout += () => {
 				//EndGame(true);
-				Global.Instance.EndRound();
+			Global.Instance.EndRound();
 				//Global.Instance.StartNextTurn();
-			};
 		}
 	}
 	public async void ScreenShake(float intensity = 50.0f, float duration = 1.0f, float frequency = 0.05f)

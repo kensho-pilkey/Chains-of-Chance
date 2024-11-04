@@ -22,7 +22,7 @@ script = ExtResource("1_5l8q0")
 layout_mode = 0
 offset_left = -7.0
 offset_top = -4.0
-offset_right = 391.0
+offset_right = 405.0
 offset_bottom = 1111.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_vyl0j")
 
@@ -123,6 +123,7 @@ offset_right = 77.0
 offset_bottom = 50.0
 
 [node name="TextureRect" type="TextureRect" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 2.0
 offset_top = 754.0
