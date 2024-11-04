@@ -67,6 +67,7 @@ public partial class GameScene : Node2D
 	public void EndGame(Boolean player1Wins) {
 		if (player1Wins) {
 			GD.Print("Player 1 Wins!");
+   			GetTree().ChangeSceneToFile("res://Scenes/WinScreen.tscn");
 		}
 		else {
 			GD.Print("You lose!");
