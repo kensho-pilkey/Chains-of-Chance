@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://ccpeukrdsfbkm"]
+[gd_scene load_steps=21 format=3 uid="uid://ccpeukrdsfbkm"]
 
 [ext_resource type="Texture2D" uid="uid://cvq8v02n843lc" path="res://Assets/Tiles_A_white.png" id="1_3sp1f"]
 [ext_resource type="Shader" path="res://shaders/fake_3D.gdshader" id="1_7h7yf"]
@@ -87,6 +87,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(815, 337)]
+}
 
 [sub_resource type="Animation" id="Animation_b00td"]
 resource_name = "fade"
@@ -115,8 +127,24 @@ tracks/1/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_w7v5g"]
+resource_name = "Attack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(815, 337), Vector2(815, -500), Vector2(815, 337)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ldpr3"]
 _data = {
+"Attack": SubResource("Animation_w7v5g"),
 "RESET": SubResource("Animation_3l10k"),
 "fade": SubResource("Animation_b00td")
 }
@@ -129,10 +157,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -145.0
-offset_top = -203.0
-offset_right = 7.0
-offset_bottom = 4.0
+offset_left = -76.0
+offset_top = -103.5
+offset_right = 76.0
+offset_bottom = 103.5
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2, 2)

@@ -17,6 +17,7 @@ public partial class Card : Button
     private float _oscillatorVelocity = 0.0f;
     
     private Tween _tweenRot;
+	private Tween _tweenAttack;
     private Tween _tweenHover;
     private Tween _tweenDestroy;
     private Tween _tweenHandle;
@@ -167,6 +168,34 @@ public partial class Card : Button
 			QueueFree(); // Remove the card from the scene
 		};
 	}
+	public void PlayAttackAnimation()
+{
+    // Ensure there are no running tweens for this animation
+    if (_tweenAttack != null && _tweenAttack.IsRunning())
+        _tweenAttack.Kill();
+
+    // Create a new tween for the attack animation
+    _tweenAttack = CreateTween();
+
+    // Set up positions for the attack animation
+    Vector2 startPosition = Position;
+    Vector2 attackPosition = new Vector2(Position.X, Position.Y - 300);
+	if (opponentCard) {
+		attackPosition = new Vector2(Position.X, Position.Y + 300);
+	}
+
+    // Move forward quickly (0.2 seconds)
+    _tweenAttack.TweenProperty(this, "position", attackPosition, 0.2f)
+        .SetTrans(Tween.TransitionType.Linear)
+        .SetEase(Tween.EaseType.In);
+
+    // Retract slowly back to the original position (0.8 seconds)
+    _tweenAttack.TweenProperty(this, "position", startPosition, 0.8f)
+        .SetTrans(Tween.TransitionType.Linear)
+        .SetEase(Tween.EaseType.Out);
+}
+
+
 
 	// Method to handle after the animation finishes
 
