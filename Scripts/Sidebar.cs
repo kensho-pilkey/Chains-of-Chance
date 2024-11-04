@@ -23,7 +23,7 @@ public partial class Sidebar : Control
 	public override void _Process(double delta)
 	{
 		_playerHealth.Text = "Player Health: " + Global.Instance.PlayerHealth.ToString();
-		_opponentHealth.Text = "Opponent Health: " + Global.Instance.OpponentHealth.ToString();
+		_opponentHealth.Text = "Opponent Health: \n" + Global.Instance.OpponentHealth.ToString();
 		_level.Text = "Level: " + Global.Instance.LevelNum.ToString();
 		_money.Text = Global.Instance.Money.ToString();
 		_multiplier.Text = "X" + Global.Instance.Multiplier.ToString();
