@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://6rn3p80lhoam"]
+
+[sub_resource type="Theme" id="Theme_jlsxc"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_yrtkb"]
+
+[node name="WinScreen" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Label" type="Label" parent="."]
+offset_left = -332.0
+offset_top = -332.0
+offset_right = 337.0
+offset_bottom = -113.0
+theme = SubResource("Theme_jlsxc")
+theme_override_font_sizes/font_size = 15
+text = "You Won!"
+label_settings = SubResource("LabelSettings_yrtkb")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Quit" type="Button" parent="."]
+offset_left = 175.0
+offset_top = 150.0
+offset_right = 562.0
+offset_bottom = 322.0
+text = "Quit"
+
+[node name="Play Again" type="Button" parent="."]
+offset_left = -755.0
+offset_top = 130.0
+offset_right = -190.0
+offset_bottom = 333.0
+text = "Play Again"
