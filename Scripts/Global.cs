@@ -59,6 +59,20 @@ public partial class Global : Node
 
         return new CardData(nameAsset.Key, nameAsset.Value, damage, health, element);
     }
+	public CardData createOpponentCard()
+    {
+        // Select a random name-asset pair
+        var nameAsset = GetRandomNameAsset();
+
+        // Randomly select element type
+        string element = Elements[RandomGenerator.Next(Elements.Length)];
+
+        // Randomly assign damage (1-8) and health (3-10)
+        int damage = RandomGenerator.Next(1, 4) * LevelNum;
+        int health = RandomGenerator.Next(1, 5) * LevelNum;
+
+        return new CardData(nameAsset.Key, nameAsset.Value, damage, health, element);
+    }
 	public void AddCard(CardData card) {
 		PlayerCards.Add(card);
 		availableCardsForTurn.Add(card);
@@ -88,6 +102,9 @@ public partial class Global : Node
 		// Reset available cards at the start of each turn
 		availableCardsForTurn = new List<CardData>(PlayerCards);
 		ShuffleCards();
+	}
+	public void EndRound() {
+		GetTree().ChangeSceneToFile("res://Scenes/Round_summary.tscn");
 	}
 	public void StartNextTurn() {
 		availableCardsForTurn = new List<CardData>(PlayerCards);

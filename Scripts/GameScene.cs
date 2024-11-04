@@ -15,11 +15,17 @@ public partial class GameScene : Node2D
 	public override void _Process(double delta)
 	{
 		if(Global.Instance.PlayerHealth <= 0) {
-			EndGame(false);
+			GetTree().CreateTimer(1.0f).Timeout += () => {
+				EndGame(false);
+				//GetTree().ChangeSceneToFile("res://scenes/GameOver.tscn");
+			};
 		}
 		else if (Global.Instance.OpponentHealth <= 0) {
-			EndGame(true);
-			Global.Instance.StartNextTurn();
+			GetTree().CreateTimer(1.0f).Timeout += () => {
+				EndGame(true);
+				Global.Instance.EndRound();
+				//Global.Instance.StartNextTurn();
+			};
 		}
 	}
 	public async void ScreenShake(float intensity = 50.0f, float duration = 1.0f, float frequency = 0.05f)
@@ -52,10 +58,6 @@ public partial class GameScene : Node2D
 		//TODO card draw logic and storage of existing cards.
 		GetNode<Board>("board").PlayHand();
 		GetNode<CardDrawer>("CardDrawer").DrawCards(GetNode<CardDrawer>("CardDrawer").GlobalPosition, 7);
-	}
-	public void AttackPhase() {
-		//whoever placed first 
-		GetNode<Board>("board").Attack();
 	}
 	public void EndRound() {
 		//TODO 

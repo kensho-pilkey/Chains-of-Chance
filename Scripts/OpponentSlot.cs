@@ -25,13 +25,13 @@ public partial class OpponentSlot : Control
         GetNode<Sprite2D>("Sprite2D").Frame = 5 - _health;
     }
 
-    public Card SpawnCard() {
+    public Card SpawnCard(CardData data) {
 		if (_currentCard == null) {
 			_currentCard = CardScene.Instantiate<Card>();
 			// _currentCard.GlobalPosition = GlobalPosition;
 			_currentCard._placed = true;
 			AddChild(_currentCard);
-            
+            _currentCard.AddData(data);
             _currentCard.Position = (Size - _currentCard.Size) / 2.0f;
 			_currentCard.Scale = _currentCard.Scale / 2;
 			_occupied = true;

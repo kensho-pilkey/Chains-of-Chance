@@ -75,30 +75,7 @@ private Card CreateCardFromData(CardData cardData)
 
     public void _on_next_pressed()
     {
-        // Assuming you have a reference to the Global instance to check player cards
-        var playerCards = Global.Instance.PlayerCards; // Get player's cards
-        var opponentCards = GetOpponentCards(); // You'll need to implement this method to get opponent cards
-
-        if (playerCards.Count == 0 && opponentCards.Count == 0)
-        {
-            // Both players have no cards, it's a draw
-            GetTree().ChangeSceneToFile("res://Scenes/draw_scene.tscn");
-        }
-        else if (playerCards.Count == 0)
-        {
-            // Player has no cards left, player loses
-            GetTree().ChangeSceneToFile("res://Scenes/loser_scene.tscn");
-        }
-        else if (opponentCards.Count == 0)
-        {
-            // Opponent has no cards left, player wins
-            GetTree().ChangeSceneToFile("res://Scenes/winner_scene.tscn");
-        }
-        else
-        {
-            // Both players still have cards, return to the game scene
-            GetTree().ChangeSceneToFile("res://Scenes/game_scene.tscn");
-        }
+        Global.Instance.StartNextTurn();
     }
     private List<Card> GetOpponentCards()
     {

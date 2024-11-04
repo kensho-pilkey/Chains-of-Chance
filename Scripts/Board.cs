@@ -12,11 +12,13 @@ public partial class Board : Control
 	private int _currentAttackIndex = 0;
 	private Timer _attackTimer;
 	private Card _cardInstance;
+	public Boolean _playerTurn = true;
+	private bool _firstTurn = true;
 	public override void _Ready()
 	{
 		_opponentPlayArea = GetNode<HBoxContainer>("P2Slots");
 		_playerPlayArea = GetNode<HBoxContainer>("P1Slots");
-		generateCards(Global.Instance.LevelNum * 5);
+		//generateCards(Global.Instance.LevelNum * 5);
 		foreach (OpponentSlot slot in _opponentPlayArea.GetChildren())
         {
             _opponentSlots.Add(slot);
@@ -33,37 +35,57 @@ public partial class Board : Control
 
 	private void generateCards(int num) {
 		for (int i = 0; i <	num; i++) {
-			OpponentCards.Add(Global.Instance.createRandomCard());
+			OpponentCards.Add(Global.Instance.createOpponentCard());
 		}
 	}
-	public void PlayHand()
+	public async void PlayHand()
 {
-    while (OpponentCards.Count != 0 && hasSlotAvailable())
-	{
-		CardData selectedCard = OpponentCards[0];
+    _playerTurn = false;
 
-		// Get the next available slot
-		OpponentSlot availableSlot = getNextSlot();
-		
-		// Check if there is an available slot before placing the card
-		if (availableSlot != null)
-		{
-			_cardInstance = availableSlot.SpawnCard();
+    // Determine how many cards to play based on whether it's the first turn
+    int cardsToPlay = _firstTurn ? 5 : 3;
+    _firstTurn = false;  // Set to false after the first turn
 
-			GD.Print("Opponent played card: " + selectedCard.Name);
+    // Loop to play the designated number of cards with delays
+    for (int i = 0; i < cardsToPlay; i++)
+    {
+        // Ensure there are cards to draw and an available slot
+        if (!hasSlotAvailable())
+        {
+            GD.Print("No more cards to play or no open slots.");
+            break;
+        }
 
-			// Remove the played card from the opponent's deck
-			OpponentCards.RemoveAt(0);
-		}
-		else
-		{
-			GD.Print("No open slot available to place the card.");
-		} 
+		generateCards(1);
+        // Select the first card from the opponent's deck
+        CardData selectedCard = OpponentCards[0];
+
+        // Get the next available slot
+        OpponentSlot availableSlot = getNextSlot();
+
+        // Place the card if there's an available slot
+        if (availableSlot != null)
+        {
+            _cardInstance = availableSlot.SpawnCard(selectedCard);
+
+            GD.Print("Opponent played card: " + selectedCard.Name);
+
+            // Remove the played card from the opponent's deck
+            OpponentCards.RemoveAt(0);
+        }
+        else
+        {
+            GD.Print("No open slot available to place the card.");
+            break;
+        }
+
+        // Wait for 0.5 seconds before placing the next card
+        await ToSignal(GetTree().CreateTimer(0.5f), "timeout");
     }
-	GD.Print("Opponent has no more cards to play.");
-    return;
-    
 
+    // After placing cards, it's now the player's turn
+    GD.Print("Opponent has no more cards to play this turn.");
+    _playerTurn = true;
 }
 
 
@@ -89,27 +111,30 @@ public partial class Board : Control
 
 public void Attack()
 {
-    CalculateMultipliers();
+	if (_playerTurn) {
+		_playerTurn = false;
+		CalculateMultipliers();
 
-    // Setup or retrieve the Timer node
-    if (_attackTimer == null)
-    {
-        _attackTimer = new Timer();
-        _attackTimer.WaitTime = 1.0f; // 1 second delay
-        _attackTimer.OneShot = true;
-        _attackTimer.Timeout += OnAttackTimerTimeout;
-        AddChild(_attackTimer);
-    }
+		// Setup or retrieve the Timer node
+		if (_attackTimer == null)
+		{
+			_attackTimer = new Timer();
+			_attackTimer.WaitTime = 1.0f; // 1 second delay
+			_attackTimer.OneShot = true;
+			_attackTimer.Timeout += OnAttackTimerTimeout;
+			AddChild(_attackTimer);
+		}
 
-    // Reset the attack index
-    _currentAttackIndex = 0;
+		// Reset the attack index
+		_currentAttackIndex = 0;
 
-    // Start the first attack cycle
-    if (_playerSlots.Count > 0 && _opponentSlots.Count > 0)
-    {
-        ProcessAttack();
-        _attackTimer.Start();
-    }
+		// Start the first attack cycle
+		if (_playerSlots.Count > 0 && _opponentSlots.Count > 0)
+		{
+			ProcessAttack();
+			_attackTimer.Start();
+		}
+	}
 }
 
 private void CalculateMultipliers()
@@ -153,10 +178,10 @@ private void CalculateMultipliers()
         }
     }
 
-    if (maxMultiplier > 1 || maxCreatureStreak > 1)
-    {
-        GetParent<GameScene>().ScreenShake(50.0f, 0.5f, 0.03f);
-    }
+    // if (maxMultiplier > 1 || maxCreatureStreak > 1)
+    // {
+    //     GetParent<GameScene>().ScreenShake(50.0f, 0.5f, 0.03f);
+    // }
     Global.Instance.Multiplier = maxMultiplier + maxCreatureStreak;
 }
 
@@ -170,6 +195,11 @@ private void OnAttackTimerTimeout()
         ProcessAttack();
         _attackTimer.Start(); // Start the timer again for the next pair
     }
+	else {
+		_playerTurn = true;
+		PlayHand();
+    	GetParent().GetNode<CardDrawer>("CardDrawer").DrawCards(GetParent().GetNode<CardDrawer>("CardDrawer").GlobalPosition, 3);
+	}
 }
 
 private void ProcessAttack()
@@ -194,6 +224,7 @@ private void ProcessAttack()
                 playerSlot.TakeDamage();
 				if (opponentCard._Health > 0) {
 					opponentCard.PlayAttackAnimation();
+					GetParent<GameScene>().ScreenShake(5.0f, 0.5f, 0.03f);
 				}
             }
             if (opponentCard._Health <= 0)
@@ -203,6 +234,7 @@ private void ProcessAttack()
                 opponentSlot.TakeDamage();
 				if (playerCard._Health > 0) {
 					playerCard.PlayAttackAnimation();
+					GetParent<GameScene>().ScreenShake(5.0f, 0.5f, 0.03f);
 				}
             }
         }
@@ -211,16 +243,16 @@ private void ProcessAttack()
     {
         Global.Instance.OpponentHealth -= playerSlot.GetCard()._Damage * Global.Instance.Multiplier;
 		playerSlot.GetCard().PlayAttackAnimation();
+		GetParent<GameScene>().ScreenShake(30.0f, 0.5f, 0.03f);
     }
     else if (!playerSlot.IsOccupied() && opponentSlot.IsOccupied())
     {
         Global.Instance.PlayerHealth -= opponentSlot.GetCard()._Damage;
 		opponentSlot.GetCard().PlayAttackAnimation();
+		GetParent<GameScene>().ScreenShake(30.0f, 0.5f, 0.03f);
     }
 
     // Trigger the next set of cards if necessary
-    PlayHand();
-    GetParent().GetNode<CardDrawer>("CardDrawer").DrawCards(GetParent().GetNode<CardDrawer>("CardDrawer").GlobalPosition, 3);
 }
 
 }

@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://d4c2y3hpotigt"]
+
+[ext_resource type="Script" path="res://Scripts/RoundSummary.cs" id="1_ov3bs"]
+
+[node name="RoundSummary" type="Node2D"]
+script = ExtResource("1_ov3bs")
+
+[node name="PlayedCardsLabel" type="Label" parent="."]
+text = "Played Cards:
+"
+
+[node name="DefeatedCardsLabel" type="Label" parent="."]
+offset_top = 40.0
+offset_bottom = 40.0
+text = "Defeated Cards:
+"
+
+[node name="GoldLabel" type="Label" parent="."]
+offset_top = 80.0
+offset_bottom = 80.0
+text = "Gold Earned: 0"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Next" type="Button" parent="."]
+offset_left = 822.0
+offset_top = 462.0
+offset_right = 929.0
+offset_bottom = 523.0
+text = "Next"
+
+[connection signal="pressed" from="Next" to="." method="_on_next_pressed"]
