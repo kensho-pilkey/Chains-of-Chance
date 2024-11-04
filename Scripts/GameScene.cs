@@ -70,6 +70,7 @@ public partial class GameScene : Node2D
 		}
 		else {
 			GD.Print("You lose!");
+			GetTree().ChangeSceneToFile("res://Scenes/GameOver.tscn");
 		}
 		//TODO switch to end scene and implement end game logic
 	}
