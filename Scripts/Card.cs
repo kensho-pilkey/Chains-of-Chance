@@ -80,7 +80,6 @@ public partial class Card : Button
     {
         RotateVelocity((float)delta);
         FollowMouse((float)delta);
-        HandleShadow((float)delta);
     }
 
 	private void UpdateCardAppearance()
@@ -119,18 +118,6 @@ public partial class Card : Button
         _displacement += _oscillatorVelocity * delta;
 
         Rotation = _displacement;
-    }
-
-    private void HandleShadow(float delta)
-	//TODO make shadow actually follow card
-    {
-        var center = GetViewportRect().Size / 2.0f;
-        float distance = GlobalPosition.X - center.X;
-
-        _shadow.Position = new Vector2(
-            Mathf.Lerp(0.0f, -Mathf.Sign(distance) * MaxOffsetShadow, Mathf.Abs(distance / center.X)),
-            _shadow.Position.Y
-        );
     }
 
     private void FollowMouse(float delta)

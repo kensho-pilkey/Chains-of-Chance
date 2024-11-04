@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://beemq60umwn40"]
+[gd_scene load_steps=12 format=3 uid="uid://beemq60umwn40"]
 
 [ext_resource type="Script" path="res://Scripts/Ui.cs" id="1_0j38m"]
 [ext_resource type="Texture2D" uid="uid://bni3krme8x26k" path="res://Assets/card_sprite.png" id="2_n8bxm"]
@@ -6,6 +6,34 @@
 [ext_resource type="PackedScene" uid="uid://c4p858s3fsha1" path="res://Scenes/deck.tscn" id="3_htu72"]
 [ext_resource type="PackedScene" uid="uid://sodx12pxauxw" path="res://Scenes/sidebar.tscn" id="4_hw6e0"]
 [ext_resource type="PackedScene" uid="uid://bgw5mulqsvs4h" path="res://Scenes/shop.tscn" id="5_pi2ce"]
+[ext_resource type="FontFile" uid="uid://br3ifs24yc538" path="res://Assets/fonts/BADABB__.TTF" id="7_1s321"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dqaqs"]
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_waoq0"]
+bg_color = Color(0.953866, 0.379499, 0.448437, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x2q1d"]
+bg_color = Color(0.28, 0.28, 0.28, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8as6b"]
+bg_color = Color(0.401618, 0.669596, 0.501513, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -23,15 +51,6 @@ offset_top = 11.1999
 offset_right = 948.2
 offset_bottom = 132.2
 text = "Shop"
-
-[node name="Play" type="Button" parent="."]
-layout_mode = 0
-offset_left = 954.8
-offset_top = 10.4
-offset_right = 1183.8
-offset_bottom = 131.4
-text = "Play
-"
 
 [node name="Player1Health" type="TextureProgressBar" parent="."]
 layout_mode = 0
@@ -87,6 +106,34 @@ offset_bottom = -6.0
 visible = false
 layout_mode = 1
 
+[node name="Play" type="Button" parent="."]
+layout_mode = 0
+offset_left = 224.8
+offset_top = 806.4
+offset_right = 395.8
+offset_bottom = 1069.4
+focus_mode = 0
+theme_override_fonts/font = ExtResource("7_1s321")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/hover = SubResource("StyleBoxFlat_dqaqs")
+theme_override_styles/normal = SubResource("StyleBoxFlat_waoq0")
+text = "Play
+"
+
+[node name="Draw" type="Button" parent="."]
+layout_mode = 0
+offset_left = 21.2
+offset_top = 805.2
+offset_right = 192.2
+offset_bottom = 1068.2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("7_1s321")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/hover = SubResource("StyleBoxFlat_x2q1d")
+theme_override_styles/normal = SubResource("StyleBoxFlat_8as6b")
+text = "Draw"
+
 [connection signal="pressed" from="Shopbtn" to="." method="_on_shop_pressed"]
-[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="OpenDeck" to="." method="_on_deck_pressed"]
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Draw" to="." method="_on_draw_pressed"]

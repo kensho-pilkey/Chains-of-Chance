@@ -15,6 +15,7 @@ public partial class Global : Node
 	public int LevelNum { get; set; } = 1;
 	public int Money { get; set; } = 10;
 	public int Multiplier { get; set; } = 1;
+	public int Draws { get; set; } = 3;
 	private static readonly Dictionary<string, string> NameAssetPairs = new Dictionary<string, string>
     {
         { "Badger", "res://Assets/cardArt/badger.png" },
@@ -116,6 +117,7 @@ public partial class Global : Node
 		OpponentHealth = 100;
 		Multiplier = 1;
 		Money += 10;
+		Draws = 3;
 		
 	}
 

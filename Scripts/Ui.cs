@@ -12,4 +12,10 @@ public partial class Ui : Control
 		//initiate attack phase of round
 		GetParent().GetNode<Board>("board").Attack();
 	}
+	private void _on_draw_pressed() {
+		if(Global.Instance.Draws > 0) {
+			GetParent().GetNode<CardDrawer>("CardDrawer").DrawCards(GetParent().GetNode<CardDrawer>("CardDrawer").GlobalPosition, 1);
+			Global.Instance.Draws -= 1;
+		}
+	}
 }
