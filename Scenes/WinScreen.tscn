@@ -77,3 +77,6 @@ offset_left = -935.0
 offset_top = -552.0
 offset_right = -935.0
 offset_bottom = -552.0
+
+[connection signal="pressed" from="Quit" to="board" method="_on_quit_pressed"]
+[connection signal="pressed" from="Play Again" to="board" method="_on_play_again_pressed"]
