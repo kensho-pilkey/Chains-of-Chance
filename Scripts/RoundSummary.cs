@@ -13,6 +13,7 @@ public partial class RoundSummary : Node2D
     public List<Card> DefeatedCards { get; private set; }
     public int GoldEarned { get; private set; }
 
+
     public RoundSummary()
     {
         PlayedCards = new List<Card>();
@@ -30,6 +31,8 @@ public partial class RoundSummary : Node2D
 
             GetNode<HBoxContainer>("HBoxContainer").GetChild(i).GetNode<TextureRect>("glow").Visible = true;
         }
+        Sidebar sidebar = GetNode<Sidebar>("Sidebar");
+        sidebar.HideStuff();
     }
 
     public void AddPlayedCard(Card card)

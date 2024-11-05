@@ -171,6 +171,7 @@ theme_override_font_sizes/font_size = 80
 text = "+1"
 
 [node name="PlayerBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
 offset_left = 13.0
 offset_top = 247.0
 offset_right = 189.0
@@ -181,6 +182,7 @@ texture_under = ExtResource("5_6l7cp")
 texture_progress = ExtResource("6_wqpe6")
 
 [node name="OpponentBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
 offset_left = 15.0
 offset_top = 347.0
 offset_right = 191.0

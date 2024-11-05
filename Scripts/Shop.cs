@@ -86,7 +86,6 @@ public partial class Shop : Control
             GD.Print(Global.Instance.Money);
             if (Global.Instance.Money >= _selectedCard.cost) {
                 Global.Instance.Money -= _selectedCard.cost;
-                GD.Print("Bought Card: " + _selectedCard.Name);
                 Global.Instance.AddCard(_selectedCard._cardData);
                 _selectedCard.QueueFree(); // Remove the bought card from the shop
                 _selectedCard = null; // Reset selection after buying
@@ -96,16 +95,16 @@ public partial class Shop : Control
             }
         }
         else if (_selectedSpecial != null)
-        { // Implement buying logic for special cards
+        { 
              if (Global.Instance.Money >= _selectedSpecial.cost) {
-                GD.Print("Bought Special: " + _selectedSpecial.Name);
-                //Global.Instance.AddSpecial(_selectedSpecial._specialData);
+                Global.Instance.Money -= _selectedCard.cost;
                 _selectedSpecial.UseSpecial();
                 _selectedSpecial.QueueFree(); // Remove the bought card from the shop
                 _selectedSpecial = null; // Reset selection after buying
              }
              else {
                 GD.Print("Not enough money to buy card.");
+                _buyButton.Disabled = false;
             }
         }
         else {

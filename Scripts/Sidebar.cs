@@ -43,4 +43,12 @@ public partial class Sidebar : Control
 		_opponentBar.Value = Global.Instance.OpponentHealth;
 
 	}
+	public void HideStuff() {
+		GetNode<Label>("DrawCount").Visible = false;
+		GetNode<Label>("PlayerHealth").Visible = false;
+		GetNode<Label>("OpponentHealth").Visible = false;
+		GetNode<Label>("DrawSymbol").Visible = false;
+		GetNode<TextureProgressBar>("PlayerBar").Visible = false;
+		GetNode<TextureProgressBar>("OpponentBar").Visible = false;
+	}
 }
