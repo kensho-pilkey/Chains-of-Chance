@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://c4p858s3fsha1"]
+[gd_scene load_steps=4 format=3 uid="uid://c4p858s3fsha1"]
 
 [ext_resource type="Script" path="res://Scripts/Deck.cs" id="1_gmaqh"]
 [ext_resource type="PackedScene" uid="uid://dawpew6if4hk4" path="res://Scenes/card_still.tscn" id="2_364ld"]
+[ext_resource type="Texture2D" uid="uid://dqsaa44rxwc4j" path="res://Assets/card_back.png" id="3_wk2rn"]
 
 [node name="Deck" type="Control"]
 layout_mode = 3
@@ -27,14 +28,14 @@ theme_override_constants/h_separation = 45
 theme_override_constants/v_separation = 100
 columns = 10
 
-[node name="Button" type="Button" parent="."]
+[node name="Button" type="TextureButton" parent="."]
 z_index = 1
 layout_mode = 0
-offset_left = 1788.0
-offset_top = 964.0
-offset_right = 1887.0
-offset_bottom = 1024.0
-text = "Exit
-"
+offset_left = 1773.0
+offset_top = 844.0
+offset_right = 1919.0
+offset_bottom = 1079.0
+texture_normal = ExtResource("3_wk2rn")
+stretch_mode = 0
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

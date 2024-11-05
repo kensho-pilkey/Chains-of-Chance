@@ -8,20 +8,24 @@ public partial class CardStill : Button
 	private Label _label;
 	public CardData _cardData = null;
 	public int cost = 1;
+	private Label _dmghp;
 	public override void _Ready()
 	{
 		_cardTexture = GetNode<TextureRect>("CardTexture");
 		_cardImage = GetNode<TextureRect>("CardImage");
 		_label = GetNode<Label>("Label");
 		_cardData = Global.Instance.getRandomCard();
+		_dmghp = GetNode<Label>("dmgHp");
 		UpdateCardAppearance();
+		
 	}
 
 
 	private void UpdateCardAppearance()
 	{
+		_dmghp.Text = _cardData.Damage + "       " + _cardData.Health;
 		_cardImage.Texture = GD.Load<Texture2D>(_cardData.AssetPath);
-		_label.Text = _cardData.Name + "\n" + _cardData.Damage + "\n" + _cardData.Health;
+		_label.Text = _cardData.Name;
 		if(_cardData.ElementType == "Fire") {
 			_cardTexture.Texture = GD.Load<Texture2D>("res://Assets/fire_card_sprite.png");
 			cost = new RandomNumberGenerator().RandiRange(1, 4);

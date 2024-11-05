@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dawpew6if4hk4"]
+[gd_scene load_steps=14 format=3 uid="uid://dawpew6if4hk4"]
 
 [ext_resource type="Shader" path="res://shaders/dissolve.gdshader" id="1_cj6bi"]
 [ext_resource type="Script" path="res://Scripts/CardStill.cs" id="2_emvll"]
@@ -6,6 +6,7 @@
 [ext_resource type="Shader" path="res://shaders/fake_3D.gdshader" id="4_03fm2"]
 [ext_resource type="Texture2D" uid="uid://bni3krme8x26k" path="res://Assets/card_sprite.png" id="5_sl7fs"]
 [ext_resource type="Texture2D" uid="uid://vytnyxyfejp" path="res://Assets/cardArt/badger.png" id="6_fi217"]
+[ext_resource type="FontFile" uid="uid://u0upmi42jtpa" path="res://Assets/fonts/Carnevalee Freakshow.ttf" id="7_r03h5"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_kntej"]
 seed = -15
@@ -90,13 +91,16 @@ stretch_mode = 1
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 25.0
-offset_top = 27.0
-offset_right = 145.0
-offset_bottom = 102.0
+offset_left = 13.0
+offset_top = 14.0
+offset_right = 125.0
+offset_bottom = 89.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_r03h5")
+theme_override_font_sizes/font_size = 32
 text = "
 "
+horizontal_alignment = 1
 
 [node name="CardImage" type="TextureRect" parent="."]
 layout_mode = 0
@@ -105,5 +109,15 @@ offset_top = 44.0
 offset_right = 126.0
 offset_bottom = 131.0
 texture = ExtResource("6_fi217")
+
+[node name="dmgHp" type="Label" parent="."]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 160.0
+offset_right = 115.0
+offset_bottom = 199.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_r03h5")
+theme_override_font_sizes/font_size = 32
 
 [connection signal="pressed" from="." to="." method="_on_pressed"]
