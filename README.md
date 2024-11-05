@@ -1,6 +1,6 @@
 # Chains of Chance
 
-<img width="400" height="250" alt="Screenshot 2024-11-05 at 1 21 32 AM" src="https://github.com/user-attachments/assets/77ba80bf-a068-4335-9f98-da8977dd1049">
+<img width="410" height="250" alt="Screenshot 2024-11-05 at 1 21 32 AM" src="https://github.com/user-attachments/assets/77ba80bf-a068-4335-9f98-da8977dd1049">
 <img width="400" height="250" alt="Screenshot 2024-11-05 at 1 22 27 AM" src="https://github.com/user-attachments/assets/9bd6456d-a88c-416a-9041-853ffad657f2">
 
 ## About
