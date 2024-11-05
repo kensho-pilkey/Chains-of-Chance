@@ -116,9 +116,12 @@ public partial class Global : Node
 		// PlayerHealth = 100;
 		OpponentHealth = 100;
 		Multiplier = 1;
-		Money += 10;
 		Draws = 3;
 		
+	}
+	public void ResetCards() {
+		availableCardsForTurn = new List<CardData>(PlayerCards);
+		Money += 10;
 	}
 
 	public CardData DrawUniqueCard()

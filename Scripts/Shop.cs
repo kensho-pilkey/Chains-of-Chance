@@ -97,7 +97,7 @@ public partial class Shop : Control
         else if (_selectedSpecial != null)
         { 
              if (Global.Instance.Money >= _selectedSpecial.cost) {
-                Global.Instance.Money -= _selectedCard.cost;
+                Global.Instance.Money -= _selectedSpecial.cost;
                 _selectedSpecial.UseSpecial();
                 _selectedSpecial.QueueFree(); // Remove the bought card from the shop
                 _selectedSpecial = null; // Reset selection after buying

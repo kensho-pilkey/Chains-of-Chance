@@ -24,6 +24,7 @@ public partial class RoundSummary : Node2D
     public override void _Ready()
     {
         // Initialize labels
+        Global.Instance.ResetCards();
         playedCardsLabel = GetNode<Label>("PlayedCardsLabel");
         defeatedCardsLabel = GetNode<Label>("DefeatedCardsLabel");
         goldLabel = GetNode<Label>("GoldLabel");

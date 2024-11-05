@@ -246,7 +246,8 @@ private void OnAttackTimerTimeout()
 	else {
 		_playerTurn = true;
 		PlayHand();
-    	GetParent().GetNode<CardDrawer>("CardDrawer").DrawCards( 3);
+		Random RandomGenerator = new Random();
+    	GetParent().GetNode<CardDrawer>("CardDrawer").DrawCards(RandomGenerator.Next(1, 4));
 	}
 }
 
