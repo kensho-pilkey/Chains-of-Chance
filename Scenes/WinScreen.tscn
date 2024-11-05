@@ -8,11 +8,11 @@
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="Label" type="Label" parent="."]
-offset_left = -332.0
-offset_top = -332.0
-offset_right = 337.0
-offset_bottom = -113.0
+[node name="You Won" type="Label" parent="."]
+offset_left = -333.0
+offset_top = -538.0
+offset_right = 336.0
+offset_bottom = -319.0
 theme = SubResource("Theme_jlsxc")
 theme_override_font_sizes/font_size = 15
 text = "You Won!"
@@ -33,3 +33,38 @@ offset_top = 130.0
 offset_right = -190.0
 offset_bottom = 333.0
 text = "Play Again"
+
+[node name="PlayerHealth" type="Label" parent="."]
+offset_left = -128.0
+offset_top = -396.0
+offset_right = 131.0
+offset_bottom = -285.0
+text = "Player Health: "
+
+[node name="Money" type="Label" parent="."]
+offset_left = -127.0
+offset_top = -370.0
+offset_right = -3.0
+offset_bottom = -316.0
+text = "Money: "
+
+[node name="Card Count" type="Label" parent="."]
+offset_left = -126.0
+offset_top = -309.0
+offset_right = -30.0
+offset_bottom = -286.0
+text = "Card Count: "
+
+[node name="Draw count" type="Label" parent="."]
+offset_left = -126.0
+offset_top = -342.0
+offset_right = -27.0
+offset_bottom = -319.0
+text = "Draw count: "
+
+[node name="level" type="Label" parent="."]
+offset_left = -122.0
+offset_top = -268.0
+offset_right = -73.0
+offset_bottom = -245.0
+text = "Level: "
