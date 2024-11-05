@@ -1,26 +1,15 @@
 [gd_scene load_steps=3 format=3 uid="uid://6rn3p80lhoam"]
 
-[sub_resource type="Theme" id="Theme_jlsxc"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_yrtkb"]
+[ext_resource type="PackedScene" uid="uid://crk55yf4cd35p" path="res://Scenes/board.tscn" id="1_ofvky"]
+[ext_resource type="PackedScene" uid="uid://sodx12pxauxw" path="res://Scenes/sidebar.tscn" id="2_g1txo"]
 
 [node name="WinScreen" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="You Won" type="Label" parent="."]
-offset_left = -333.0
-offset_top = -538.0
-offset_right = 336.0
-offset_bottom = -319.0
-theme = SubResource("Theme_jlsxc")
-theme_override_font_sizes/font_size = 15
-text = "You Won!"
-label_settings = SubResource("LabelSettings_yrtkb")
-horizontal_alignment = 1
-vertical_alignment = 1
+z_index = 100
 
 [node name="Quit" type="Button" parent="."]
+z_index = 100
 offset_left = 175.0
 offset_top = 150.0
 offset_right = 562.0
@@ -28,43 +17,63 @@ offset_bottom = 322.0
 text = "Quit"
 
 [node name="Play Again" type="Button" parent="."]
-offset_left = -755.0
+z_index = 100
+offset_left = -459.0
 offset_top = 130.0
-offset_right = -190.0
+offset_right = -5.0
 offset_bottom = 333.0
 text = "Play Again"
 
 [node name="PlayerHealth" type="Label" parent="."]
+z_index = 100
 offset_left = -128.0
 offset_top = -396.0
 offset_right = 131.0
-offset_bottom = -285.0
-text = "Player Health: "
+offset_bottom = -372.0
 
 [node name="Money" type="Label" parent="."]
+z_index = 100
 offset_left = -127.0
 offset_top = -370.0
-offset_right = -3.0
-offset_bottom = -316.0
-text = "Money: "
+offset_right = 35.0
+offset_bottom = -341.0
 
 [node name="Card Count" type="Label" parent="."]
+z_index = 100
 offset_left = -126.0
 offset_top = -309.0
 offset_right = -30.0
 offset_bottom = -286.0
-text = "Card Count: "
 
 [node name="Draw count" type="Label" parent="."]
+z_index = 100
 offset_left = -126.0
 offset_top = -342.0
 offset_right = -27.0
 offset_bottom = -319.0
-text = "Draw count: "
 
 [node name="level" type="Label" parent="."]
-offset_left = -122.0
-offset_top = -268.0
-offset_right = -73.0
-offset_bottom = -245.0
-text = "Level: "
+z_index = 100
+offset_left = -124.0
+offset_top = -275.0
+offset_right = -75.0
+offset_bottom = -252.0
+
+[node name="board" parent="." instance=ExtResource("1_ofvky")]
+offset_left = 2423.0
+offset_top = 1089.0
+offset_right = 2463.0
+offset_bottom = 1129.0
+
+[node name="You Won!!!" type="Label" parent="."]
+offset_left = -60.0
+offset_top = -448.0
+offset_right = 153.0
+offset_bottom = -271.0
+text = "You Won!!!"
+
+[node name="Sidebar" parent="." instance=ExtResource("2_g1txo")]
+offset_left = -935.0
+offset_top = -552.0
+offset_right = -935.0
+offset_bottom = -552.0
