@@ -1,7 +1,7 @@
 # Chains of Chance
 
-<img width="500" height="250" alt="Screenshot 2024-11-05 at 1 21 32 AM" src="https://github.com/user-attachments/assets/77ba80bf-a068-4335-9f98-da8977dd1049">
-<img width="500" height="250" alt="Screenshot 2024-11-05 at 1 22 27 AM" src="https://github.com/user-attachments/assets/9bd6456d-a88c-416a-9041-853ffad657f2">
+<img width="300" height="250" alt="Screenshot 2024-11-05 at 1 21 32 AM" src="https://github.com/user-attachments/assets/77ba80bf-a068-4335-9f98-da8977dd1049">
+<img width="300" height="250" alt="Screenshot 2024-11-05 at 1 22 27 AM" src="https://github.com/user-attachments/assets/9bd6456d-a88c-416a-9041-853ffad657f2">
 
 ## About
 Chains of Chance is a thrilling strategic card game that pulls players into a web of deception, chance, and survival. You are a wanderer, lured by a cryptic job listing, only to find yourself imprisoned by a deranged mastermind who forces you to play a sinister game of cards. In this high-stakes battle of wit and strategy, you must win in order to survive and escape. Your captor holds an arsenal of enchanted cards, each containing the souls of creatures, and you must navigate his twisted rules to free these trapped spirits—and ultimately, yourself.
