@@ -32,13 +32,8 @@ public partial class Sidebar : Control
 	}
 	public override void _Process(double delta)
 	{
-<<<<<<< HEAD
-		_playerHealth.Text = "Player Health: " + Global.Instance.PlayerHealth.ToString();
-		_opponentHealth.Text = "Opponent Health: \n" + Global.Instance.OpponentHealth.ToString();
-=======
 		_playerHealth.Text = Global.Instance.PlayerHealth.ToString() + " / " + maxPlayerHP.ToString();
 		_opponentHealth.Text = Global.Instance.OpponentHealth.ToString() + " / " + maxOpponentHP.ToString();
->>>>>>> 626a887 (health bars and more special cards)
 		_level.Text = "Level: " + Global.Instance.LevelNum.ToString();
 		_money.Text = " x " + Global.Instance.Money.ToString();
 		_multiplier.Text = "X" + Global.Instance.Multiplier.ToString();
