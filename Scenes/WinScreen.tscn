@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://6rn3p80lhoam"]
+[gd_scene load_steps=4 format=3 uid="uid://6rn3p80lhoam"]
 
 [ext_resource type="PackedScene" uid="uid://crk55yf4cd35p" path="res://Scenes/board.tscn" id="1_ofvky"]
 [ext_resource type="PackedScene" uid="uid://sodx12pxauxw" path="res://Scenes/sidebar.tscn" id="2_g1txo"]
+[ext_resource type="FontFile" uid="uid://br3ifs24yc538" path="res://Assets/fonts/BADABB__.TTF" id="3_t4eqw"]
 
 [node name="WinScreen" type="Node2D"]
 
@@ -14,7 +15,6 @@ offset_left = 175.0
 offset_top = 150.0
 offset_right = 562.0
 offset_bottom = 322.0
-text = "Quit"
 
 [node name="Play Again" type="Button" parent="."]
 z_index = 100
@@ -22,7 +22,6 @@ offset_left = -459.0
 offset_top = 130.0
 offset_right = -5.0
 offset_bottom = 333.0
-text = "Play Again"
 
 [node name="PlayerHealth" type="Label" parent="."]
 z_index = 100
@@ -65,18 +64,38 @@ offset_top = 1089.0
 offset_right = 2463.0
 offset_bottom = 1129.0
 
-[node name="You Won!!!" type="Label" parent="."]
-offset_left = -60.0
-offset_top = -448.0
-offset_right = 153.0
-offset_bottom = -271.0
-text = "You Won!!!"
-
 [node name="Sidebar" parent="." instance=ExtResource("2_g1txo")]
 offset_left = -935.0
 offset_top = -552.0
 offset_right = -935.0
 offset_bottom = -552.0
+
+[node name="LevelInfo" type="Label" parent="."]
+offset_left = -247.0
+offset_top = -292.0
+offset_right = 218.0
+offset_bottom = -164.0
+theme_override_fonts/font = ExtResource("3_t4eqw")
+theme_override_font_sizes/font_size = 120
+text = "You Won!!!"
+
+[node name="LevelInfo2" type="Label" parent="."]
+offset_left = 231.0
+offset_top = 164.0
+offset_right = 506.0
+offset_bottom = 292.0
+theme_override_fonts/font = ExtResource("3_t4eqw")
+theme_override_font_sizes/font_size = 120
+text = "Quit"
+
+[node name="LevelInfo3" type="Label" parent="."]
+offset_left = -450.0
+offset_top = 160.0
+offset_right = -18.0
+offset_bottom = 288.0
+theme_override_fonts/font = ExtResource("3_t4eqw")
+theme_override_font_sizes/font_size = 120
+text = "Play Again"
 
 [connection signal="pressed" from="Quit" to="board" method="_on_quit_pressed"]
 [connection signal="pressed" from="Play Again" to="board" method="_on_play_again_pressed"]
