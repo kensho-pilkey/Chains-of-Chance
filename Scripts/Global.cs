@@ -10,6 +10,19 @@ public partial class Global : Node
 	public List<CardData> PlayerCards { get; private set; } = new List<CardData>();
 	public List<CardData> OpponentCards { get; private set; } = new List<CardData>();
 	public List<CardData> availableCardsForTurn = new List<CardData>();
+	public List<string> Phrases = new List<string>
+	{
+		"You've fallen for my trap!",
+		"There's no turning back now.",
+		"Caught in my web, just as I planned.",
+		"This is checkmate; there's nowhere left to run.",
+		"There's no way out!",
+		"My trap has sprung, and you’ve been caught!",
+		"You’re exactly where I want you.",
+		"All paths lead to your defeat!",
+		"Your every move was anticipated.",
+		"You'll never beat me!!!"
+	};
 	public static Global Instance { get; private set; }
 
 	public int LevelNum { get; set; } = 1;

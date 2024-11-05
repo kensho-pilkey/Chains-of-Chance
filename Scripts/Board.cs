@@ -16,13 +16,16 @@ public partial class Board : Control
 	private bool _firstTurn = true;
 	public override void _Ready()
 	{
-		_opponentPlayArea = GetNode<HBoxContainer>("P2Slots");
+		_opponentPlayArea = GetNode<P2Slots>("P2Slots");
 		_playerPlayArea = GetNode<HBoxContainer>("P1Slots");
 		//generateCards(Global.Instance.LevelNum * 5);
-		foreach (OpponentSlot slot in _opponentPlayArea.GetChildren())
-        {
-            _opponentSlots.Add(slot);
-        }
+		foreach (Node node in _opponentPlayArea.GetChildren())
+		{
+			if (node is OpponentSlot slot)
+			{
+				_opponentSlots.Add(slot);
+			}
+		}
 		foreach (CardSlot slot in _playerPlayArea.GetChildren())
 		{
 			_playerSlots.Add(slot);

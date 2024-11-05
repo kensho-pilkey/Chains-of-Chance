@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://crk55yf4cd35p"]
+[gd_scene load_steps=16 format=3 uid="uid://crk55yf4cd35p"]
 
 [ext_resource type="Script" path="res://Scripts/Board.cs" id="1_r58kg"]
 [ext_resource type="PackedScene" uid="uid://du3ohm1na5wf1" path="res://Scenes/card_slot.tscn" id="1_ybx71"]
 [ext_resource type="Texture2D" uid="uid://doxafoxse3dsd" path="res://Assets/Screenshot 2024-11-02 at 5.59.49 PM.png" id="2_48ybu"]
 [ext_resource type="Texture2D" uid="uid://dlep1v7hqrhvf" path="res://Assets/newbg.png" id="2_u63c0"]
 [ext_resource type="PackedScene" uid="uid://dwy8ckr8xnqlm" path="res://Scenes/opponent_slot.tscn" id="3_r0yvc"]
+[ext_resource type="Script" path="res://Scenes/P2Slots.cs" id="4_meo8v"]
 [ext_resource type="FontFile" uid="uid://br3ifs24yc538" path="res://Assets/fonts/BADABB__.TTF" id="6_jpyvx"]
 
 [sub_resource type="Animation" id="Animation_gdon3"]
@@ -502,6 +503,7 @@ layout_mode = 1
 offset_right = 1200.0
 scale = Vector2(2, 2)
 theme_override_constants/separation = 300
+script = ExtResource("4_meo8v")
 
 [node name="OpponentSlot" parent="P2Slots" instance=ExtResource("3_r0yvc")]
 layout_mode = 2

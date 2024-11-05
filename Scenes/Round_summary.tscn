@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://d4c2y3hpotigt"]
+[gd_scene load_steps=11 format=3 uid="uid://d4c2y3hpotigt"]
 
 [ext_resource type="Script" path="res://Scripts/RoundSummary.cs" id="1_ov3bs"]
 [ext_resource type="Texture2D" uid="uid://doxafoxse3dsd" path="res://Assets/Screenshot 2024-11-02 at 5.59.49 PM.png" id="2_afsqa"]
@@ -6,6 +6,19 @@
 [ext_resource type="PackedScene" uid="uid://sodx12pxauxw" path="res://Scenes/sidebar.tscn" id="4_al313"]
 [ext_resource type="Texture2D" uid="uid://bt3536o0xi6gm" path="res://Assets/squareGlow.jpg" id="5_52yuf"]
 [ext_resource type="FontFile" uid="uid://br3ifs24yc538" path="res://Assets/fonts/BADABB__.TTF" id="6_yixp2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ifthm"]
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fcy6i"]
+bg_color = Color(0.221859, 0.636775, 0.895358, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0h5y0"]
 bg_color = Color(0.75, 0.75, 0.75, 1)
@@ -59,7 +72,10 @@ offset_left = 694.0
 offset_top = 401.0
 offset_right = 911.0
 offset_bottom = 499.0
+focus_mode = 0
 theme_override_font_sizes/font_size = 40
+theme_override_styles/hover = SubResource("StyleBoxFlat_ifthm")
+theme_override_styles/normal = SubResource("StyleBoxFlat_fcy6i")
 text = "Next"
 
 [node name="Sidebar" parent="." instance=ExtResource("4_al313")]
