@@ -14,8 +14,10 @@ public partial class Board : Control
 	private Card _cardInstance;
 	public Boolean _playerTurn = true;
 	private bool _firstTurn = true;
+	private AudioStreamPlayer2D _soundEffectPlayer;
 	public override void _Ready()
 	{
+		_soundEffectPlayer = GetNode<AudioStreamPlayer2D>("SoundEffectPlayer");
 		_opponentPlayArea = GetNode<P2Slots>("P2Slots");
 		_playerPlayArea = GetNode<HBoxContainer>("P1Slots");
 		//generateCards(Global.Instance.LevelNum * 5);
@@ -31,10 +33,13 @@ public partial class Board : Control
 			_playerSlots.Add(slot);
 		}
 	}
-
-	public override void _Process(double delta)
-	{
-	}
+	public void PlaySound()
+    {
+        if (_soundEffectPlayer != null)
+        {
+            _soundEffectPlayer.Play();
+        }
+    }
 
 	private void generateCards(int num) {
 		for (int i = 0; i <	num; i++) {
@@ -217,19 +222,23 @@ private async void CalculateMultipliers()
     Global.Instance.Multiplier = maxElementStreak + maxCreatureStreak;
 
 	GetNode<AnimationPlayer>("AnimationPlayer").Play("firePopup");
+	PlaySound();
 	GetParent<GameScene>().ScreenShake(5.0f, 0.3f, 0.03f);
 	GetNode<Label>("Fire").Text = "X" + maxFireStreak;
 	await ToSignal(GetTree().CreateTimer(0.3f), "timeout");
 	GetNode<AnimationPlayer>("AnimationPlayer").Play("waterPopup");
 	GetNode<Label>("Water").Text = "X" + maxWaterStreak;
+	PlaySound();
 	GetParent<GameScene>().ScreenShake(5.0f, 0.3f, 0.03f);
 	await ToSignal(GetTree().CreateTimer(0.3f), "timeout");
 	GetNode<AnimationPlayer>("AnimationPlayer").Play("grassPopup");
 	GetNode<Label>("Grass").Text = "X" + maxGrassStreak;
+	PlaySound();
 	GetParent<GameScene>().ScreenShake(5.0f, 0.3f, 0.03f);
 	await ToSignal(GetTree().CreateTimer(0.3f), "timeout");
 	GetNode<AnimationPlayer>("AnimationPlayer").Play("matchPopup");
 	GetNode<Label>("Match").Text = "X" + maxCreatureStreak;
+	PlaySound();
 	GetParent<GameScene>().ScreenShake(5.0f, 0.3f, 0.03f);
 	await ToSignal(GetTree().CreateTimer(0.3f), "timeout");
 	GetNode<AnimationPlayer>("AnimationPlayer").Play("fade");
@@ -276,6 +285,8 @@ private void ProcessAttack()
                 playerSlot.TakeDamage();
 				if (opponentCard._Health > 0) {
 					opponentCard.PlayAttackAnimation();
+					PlaySound();
+
 					GetParent<GameScene>().ScreenShake(5.0f, 0.5f, 0.03f);
 				}
             }
@@ -286,6 +297,7 @@ private void ProcessAttack()
                 opponentSlot.TakeDamage();
 				if (playerCard._Health > 0) {
 					playerCard.PlayAttackAnimation();
+					PlaySound();
 					GetParent<GameScene>().ScreenShake(5.0f, 0.5f, 0.03f);
 				}
             }
@@ -295,12 +307,14 @@ private void ProcessAttack()
     {
         Global.Instance.OpponentHealth -= playerSlot.GetCard()._Damage * Global.Instance.Multiplier;
 		playerSlot.GetCard().PlayAttackAnimation();
+		PlaySound();
 		GetParent<GameScene>().ScreenShake(30.0f, 0.5f, 0.03f);
     }
     else if (!playerSlot.IsOccupied() && opponentSlot.IsOccupied())
     {
         Global.Instance.PlayerHealth -= opponentSlot.GetCard()._Damage;
 		opponentSlot.GetCard().PlayAttackAnimation();
+		PlaySound();
 		GetParent<GameScene>().ScreenShake(30.0f, 0.5f, 0.03f);
     }
 

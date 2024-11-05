@@ -43,11 +43,13 @@ public partial class Card : Button
 	public int _Health { get; set; }
 
 	public int _Damage;
+	private AudioStreamPlayer _soundEffectPlayer;
 
 
 
     public override void _Ready()
 {
+	_soundEffectPlayer = GetNode<AudioStreamPlayer>("SoundEffectPlayer2");
     AngleXMax = Mathf.DegToRad(AngleXMax);
     AngleYMax = Mathf.DegToRad(AngleYMax);
     _collisionShape = GetNode<CollisionShape2D>("DestroyArea/CollisionShape2D");
@@ -80,6 +82,13 @@ public partial class Card : Button
     {
         RotateVelocity((float)delta);
         FollowMouse((float)delta);
+    }
+	public void PlaySound()
+    {
+        if (_soundEffectPlayer != null)
+        {
+            _soundEffectPlayer.Play();
+        }
     }
 
 	private void UpdateCardAppearance()
@@ -127,6 +136,7 @@ public partial class Card : Button
         GlobalPosition = mousePos - (Size / 2.0f);
     }
     public void PlaceCardInSlot(CardSlot slot) {
+		PlaySound();
 		GlobalPosition = slot.GetCenterPosition() - (Size / 2.0f);
 		slot.PlaceCard(this);
 		_hoveredSlot = null;

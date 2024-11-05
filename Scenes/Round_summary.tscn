@@ -1,11 +1,13 @@
 [gd_scene load_steps=11 format=3 uid="uid://d4c2y3hpotigt"]
 
 [ext_resource type="Script" path="res://Scripts/RoundSummary.cs" id="1_ov3bs"]
-[ext_resource type="Texture2D" uid="uid://doxafoxse3dsd" path="res://Assets/Screenshot 2024-11-02 at 5.59.49 PM.png" id="2_afsqa"]
 [ext_resource type="PackedScene" uid="uid://bgw5mulqsvs4h" path="res://Scenes/shop.tscn" id="2_s8df4"]
 [ext_resource type="PackedScene" uid="uid://sodx12pxauxw" path="res://Scenes/sidebar.tscn" id="4_al313"]
 [ext_resource type="Texture2D" uid="uid://bt3536o0xi6gm" path="res://Assets/squareGlow.jpg" id="5_52yuf"]
 [ext_resource type="FontFile" uid="uid://br3ifs24yc538" path="res://Assets/fonts/BADABB__.TTF" id="6_yixp2"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wav2n"]
+load_path = "res://.godot/imported/Screenshot 2024-11-02 at 5.59.49 PM.png-b52299d843562e5c6f029a18d102e0a7.ctex"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ifthm"]
 corner_radius_top_left = 20
@@ -14,7 +16,7 @@ corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fcy6i"]
-bg_color = Color(0.221859, 0.636775, 0.895358, 1)
+bg_color = Color(0.952941, 0.380392, 0.447059, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -37,7 +39,7 @@ script = ExtResource("1_ov3bs")
 texture_repeat = 2
 position = Vector2(1191, 378)
 scale = Vector2(2.369, 1.576)
-texture = ExtResource("2_afsqa")
+texture = SubResource("CompressedTexture2D_wav2n")
 region_enabled = true
 region_rect = Rect2(0.48, 0.105, 2000, 2000)
 

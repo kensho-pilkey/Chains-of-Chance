@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://ccpeukrdsfbkm"]
+[gd_scene load_steps=22 format=3 uid="uid://ccpeukrdsfbkm"]
 
 [ext_resource type="Texture2D" uid="uid://cvq8v02n843lc" path="res://Assets/Tiles_A_white.png" id="1_3sp1f"]
 [ext_resource type="Shader" path="res://shaders/fake_3D.gdshader" id="1_7h7yf"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bni3krme8x26k" path="res://Assets/card_sprite.png" id="5_bt2h7"]
 [ext_resource type="FontFile" uid="uid://u0upmi42jtpa" path="res://Assets/fonts/Carnevalee Freakshow.ttf" id="6_521cu"]
 [ext_resource type="Texture2D" uid="uid://vytnyxyfejp" path="res://Assets/cardArt/badger.png" id="6_sksj7"]
+[ext_resource type="AudioStream" uid="uid://dw52ff01pel0u" path="res://Assets/sounds/cardSound.mp3" id="8_ofikl"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_kntej"]
 seed = -15
@@ -297,6 +298,10 @@ local_coords = true
 libraries = {
 "": SubResource("AnimationLibrary_ldpr3")
 }
+
+[node name="SoundEffectPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_ofikl")
+volume_db = -18.227
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

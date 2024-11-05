@@ -34,6 +34,10 @@ public partial class Global : Node
         { "Badger", "res://Assets/cardArt/badger.png" },
         { "Blue Dragon", "res://Assets/cardArt/blue_dragon.png" },
         { "Frill", "res://Assets/cardArt/frilled_lizard.png" },
+		{ "Koi Fish", "res://Assets/koi_fish.png" },
+		{ "Salamander", "res://Assets/salamander.png" },
+		{ "Swallow", "res://Assets/swallow.png" },
+
     };
 	private static readonly string[] Elements = { "Fire", "Water", "Grass" };
 	private static readonly Random RandomGenerator = new Random();
@@ -118,7 +122,14 @@ public partial class Global : Node
 		ShuffleCards();
 	}
 	public void EndRound() {
-		GetTree().ChangeSceneToFile("res://Scenes/Round_summary.tscn");
+		if (LevelNum >= 10) {
+			GD.Print("GameOver");
+			GetTree().ChangeSceneToFile("res://Scenes/WinScreen.tscn");
+		}
+		else {
+			GetTree().ChangeSceneToFile("res://Scenes/Round_summary.tscn");
+		}
+		
 	}
 	public void StartNextTurn() {
 		availableCardsForTurn = new List<CardData>(PlayerCards);
@@ -135,6 +146,31 @@ public partial class Global : Node
 	public void ResetCards() {
 		availableCardsForTurn = new List<CardData>(PlayerCards);
 		Money += 10;
+	}
+	public void ResetGame() {
+		LevelNum = 1;
+		Money = 10;
+		Multiplier = 1;
+		Draws = 3;
+		PlayerHealth = 100;
+		OpponentHealth = 100;
+		availableCardsForTurn = new List<CardData>(PlayerCards);
+		PlayerCards.Clear();
+		PlayerCards.Add(createRandomCard());
+		PlayerCards.Add(createRandomCard());
+		PlayerCards.Add(createRandomCard());
+		PlayerCards.Add(createRandomCard());
+		PlayerCards.Add(createRandomCard());
+		PlayerCards.Add(createRandomCard());
+		PlayerCards.Add(createRandomCard());
+		PlayerCards.Add(createRandomCard());
+		PlayerCards.Add(createRandomCard());
+		PlayerCards.Add(createRandomCard());
+		PlayerCards.Add(createRandomCard());
+		PlayerCards.Add(createRandomCard());
+		ShuffleCards();
+
+		GetTree().ChangeSceneToFile("res://Scenes/game_scene.tscn");
 	}
 
 	public CardData DrawUniqueCard()

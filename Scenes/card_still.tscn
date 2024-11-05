@@ -90,14 +90,13 @@ expand_mode = 3
 stretch_mode = 1
 
 [node name="Label" type="Label" parent="."]
-layout_mode = 0
-offset_left = 13.0
-offset_top = 14.0
-offset_right = 125.0
-offset_bottom = 89.0
+offset_left = 11.0
+offset_top = 16.0
+offset_right = 131.0
+offset_bottom = 51.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("7_r03h5")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 30
 text = "
 "
 horizontal_alignment = 1

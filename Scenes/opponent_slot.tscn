@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://b6xhonhc2jn1h" path="res://Assets/slot-Sheet.png" id="3_l7mgy"]
 [ext_resource type="Texture2D" uid="uid://brl7bkqjc1e8e" path="res://Assets/speechBubble.png" id="4_8dysy"]
 [ext_resource type="FontFile" uid="uid://u0upmi42jtpa" path="res://Assets/fonts/Carnevalee Freakshow.ttf" id="5_etgi6"]
-[ext_resource type="Script" path="res://Scenes/TypingLabel.cs" id="6_toyhp"]
+[ext_resource type="Script" path="res://Scripts/TypingLabel.cs" id="6_gj07j"]
 
 [node name="OpponentSlot" type="Control"]
 layout_mode = 3
@@ -40,6 +40,7 @@ region_rect = Rect2(0, 0, 42.7701, 71)
 
 [node name="SpeechBubble" type="TextureRect" parent="."]
 visible = false
+layout_mode = 0
 offset_left = -10.0
 offset_top = -412.0
 offset_right = 393.0
@@ -58,4 +59,4 @@ theme_override_font_sizes/font_size = 40
 text = "You're Cooked!"
 horizontal_alignment = 1
 autowrap_mode = 2
-script = ExtResource("6_toyhp")
+script = ExtResource("6_gj07j")

@@ -49,6 +49,7 @@ public partial class CardDrawer : Control
         if (CardScene != null && CardScene.Instantiate() is Card instance)
         {
             AddChild(instance);
+            instance.PlaySound();
 
             // Set the card's starting position to the deck button's position
             instance.GlobalPosition = _deckButton.GlobalPosition;

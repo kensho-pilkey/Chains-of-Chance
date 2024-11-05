@@ -1,12 +1,15 @@
-[gd_scene load_steps=16 format=3 uid="uid://crk55yf4cd35p"]
+[gd_scene load_steps=17 format=3 uid="uid://crk55yf4cd35p"]
 
 [ext_resource type="Script" path="res://Scripts/Board.cs" id="1_r58kg"]
 [ext_resource type="PackedScene" uid="uid://du3ohm1na5wf1" path="res://Scenes/card_slot.tscn" id="1_ybx71"]
-[ext_resource type="Texture2D" uid="uid://doxafoxse3dsd" path="res://Assets/Screenshot 2024-11-02 at 5.59.49 PM.png" id="2_48ybu"]
 [ext_resource type="Texture2D" uid="uid://dlep1v7hqrhvf" path="res://Assets/newbg.png" id="2_u63c0"]
 [ext_resource type="PackedScene" uid="uid://dwy8ckr8xnqlm" path="res://Scenes/opponent_slot.tscn" id="3_r0yvc"]
-[ext_resource type="Script" path="res://Scenes/P2Slots.cs" id="4_meo8v"]
+[ext_resource type="Script" path="res://Scripts/P2Slots.cs" id="4_meo8v"]
 [ext_resource type="FontFile" uid="uid://br3ifs24yc538" path="res://Assets/fonts/BADABB__.TTF" id="6_jpyvx"]
+[ext_resource type="AudioStream" uid="uid://xu07fmxtu8og" path="res://Assets/sounds/attackSound.mp3" id="7_ogswq"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wav2n"]
+load_path = "res://.godot/imported/Screenshot 2024-11-02 at 5.59.49 PM.png-b52299d843562e5c6f029a18d102e0a7.ctex"
 
 [sub_resource type="Animation" id="Animation_gdon3"]
 length = 0.001
@@ -484,7 +487,7 @@ script = ExtResource("1_r58kg")
 texture_repeat = 2
 position = Vector2(1191, 378)
 scale = Vector2(5.92152, 3.94019)
-texture = ExtResource("2_48ybu")
+texture = SubResource("CompressedTexture2D_wav2n")
 region_enabled = true
 region_rect = Rect2(0.48, 0.105, 2000, 2000)
 
@@ -595,3 +598,6 @@ theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
 theme_override_fonts/font = ExtResource("6_jpyvx")
 theme_override_font_sizes/font_size = 300
 text = "X1"
+
+[node name="SoundEffectPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_ogswq")

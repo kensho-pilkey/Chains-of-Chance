@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://djibtm4eotrey"
-path="res://.godot/imported/Screenshot 2024-11-02 at 5.59.49 PM.png-b52299d843562e5c6f029a18d102e0a7.ctex"
+uid="uid://cd01ei483x4al"
+path="res://.godot/imported/swallow.png-cd03fe71285978e90399ae3fda565ebf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Screenshot 2024-11-02 at 5.59.49 PM.png"
-dest_files=["res://.godot/imported/Screenshot 2024-11-02 at 5.59.49 PM.png-b52299d843562e5c6f029a18d102e0a7.ctex"]
+source_file="res://Assets/swallow.png"
+dest_files=["res://.godot/imported/swallow.png-cd03fe71285978e90399ae3fda565ebf.ctex"]
 
 [params]
 

@@ -108,5 +108,5 @@ offset_bottom = 624.0
 theme_override_constants/separation = 150
 alignment = 1
 
-[connection signal="pressed" from="Buy" to="." method="OnBuyButtonPressed"]
 [connection signal="pressed" from="Buy" to="." method="_on_buy_pressed"]
+[connection signal="pressed" from="Buy" to="." method="OnBuyButtonPressed"]
