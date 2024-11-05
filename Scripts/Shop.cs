@@ -52,6 +52,7 @@ public partial class Shop : Control
 		}
         _selectedCard = card;
 		_selectedCard.Select();
+        _buyButton.Disabled = false;
     }
     public void OnSpecialSelected(SpecialCard card)
     {
@@ -64,6 +65,7 @@ public partial class Shop : Control
 		}
         _selectedSpecial = card;
 		_selectedSpecial.Select();
+        _buyButton.Disabled = false;
     }
 	public void ResetShop() {
 		PopulateContainer(_hBoxContainer1, 3);
@@ -77,6 +79,7 @@ public partial class Shop : Control
 
     private void OnBuyButtonPressed()
     {
+        _buyButton.Disabled = true;
         if (_selectedCard != null)
         {
             // Implement buying logic here, e.g., adding to player inventory

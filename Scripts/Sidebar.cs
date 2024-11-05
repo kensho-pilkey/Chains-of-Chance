@@ -10,6 +10,10 @@ public partial class Sidebar : Control
 	private Label _multiplier;
 	private Label _cardCount;
 	private Label _drawCount;
+	private TextureProgressBar _playerBar;
+	private TextureProgressBar _opponentBar;
+	private int maxPlayerHP;
+	private int maxOpponentHP;
 	public override void _Ready()
 	{
 		_level = GetNode<Label>("LevelInfo");
@@ -19,15 +23,29 @@ public partial class Sidebar : Control
 		_multiplier = GetNode<Label>("CurrentMult");
 		_cardCount = GetNode<Label>("CardCount");
 		_drawCount = GetNode<Label>("DrawCount");
+		_playerBar = GetNode<TextureProgressBar>("PlayerBar");
+		_playerBar.MaxValue = Global.Instance.PlayerHealth;
+		_opponentBar = GetNode<TextureProgressBar>("OpponentBar");
+		_opponentBar.MaxValue = Global.Instance.OpponentHealth;
+		maxPlayerHP = Global.Instance.PlayerHealth;
+		maxOpponentHP = Global.Instance.OpponentHealth;
 	}
 	public override void _Process(double delta)
 	{
+<<<<<<< HEAD
 		_playerHealth.Text = "Player Health: " + Global.Instance.PlayerHealth.ToString();
 		_opponentHealth.Text = "Opponent Health: \n" + Global.Instance.OpponentHealth.ToString();
+=======
+		_playerHealth.Text = Global.Instance.PlayerHealth.ToString() + " / " + maxPlayerHP.ToString();
+		_opponentHealth.Text = Global.Instance.OpponentHealth.ToString() + " / " + maxOpponentHP.ToString();
+>>>>>>> 626a887 (health bars and more special cards)
 		_level.Text = "Level: " + Global.Instance.LevelNum.ToString();
-		_money.Text = Global.Instance.Money.ToString();
+		_money.Text = " x " + Global.Instance.Money.ToString();
 		_multiplier.Text = "X" + Global.Instance.Multiplier.ToString();
-		_cardCount.Text = Global.Instance.CardCount().ToString();
-		_drawCount.Text = Global.Instance.Draws.ToString();
+		_cardCount.Text = " x " + Global.Instance.CardCount().ToString();
+		_drawCount.Text = " x " + Global.Instance.Draws.ToString();
+		_playerBar.Value = Global.Instance.PlayerHealth;
+		_opponentBar.Value = Global.Instance.OpponentHealth;
+
 	}
 }

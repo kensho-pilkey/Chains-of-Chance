@@ -1,72 +1,91 @@
-using Godot;
 using System;
+using Godot;
+using System.Collections.Generic;
 
 public partial class SpecialCard : Button
 {
-    [Export] public string EffectType;  // Type of special effect (e.g., "DoubleHealth", "AddCards")
-    [Export] public int EffectValue;    // Value of the effect (e.g., 2 for "Add 2 Cards")
-	[Export] public string Description;
+    private RandomNumberGenerator rng = new RandomNumberGenerator();
+
+    private readonly Dictionary<string, int> effects = new Dictionary<string, int>
+    {
+        { "DoubleHealth", 0 },
+        { "AddCards", 2 },    // "AddCards" effect with a default value of 2 cards
+        { "PlusFour", 4 }      // "PlusFour" effect with a fixed value of 4 levels
+    };
+
+    public string EffectType;  // Type of special effect (e.g., "DoubleHealth", "AddCards")
+    public int EffectValue;    // Value of the effect (e.g., 2 for "Add 2 Cards")
+    public string Description;
     private RichTextLabel _label;
-    private TextureRect _cardTexture;
-	public int cost = 1;
+    private TextureRect _cardImage;
+    public int cost;
 
     public override void _Ready()
     {
-        // Set up nodes
-		cost = new RandomNumberGenerator().RandiRange(8, 12);
+        rng.Randomize();
+        cost = rng.RandiRange(8, 12);
+        SelectRandomEffect();  // Randomly choose an effect type and value
         _label = GetNode<RichTextLabel>("Label");
-        _cardTexture = GetNode<TextureRect>("CardTexture");
+        _cardImage = GetNode<TextureRect>("TextureRect");
 
         UpdateCardAppearance();
     }
 
+    private void SelectRandomEffect()
+    {
+        var effectList = new List<string>(effects.Keys);
+        EffectType = effectList[rng.RandiRange(0, effectList.Count - 1)];
+        EffectValue = effects[EffectType];
+    }
+
     private void UpdateCardAppearance()
     {
-        // Set card name and texture based on the effect
         _label.Text = EffectType;
         switch (EffectType)
-		{
-			case "DoubleHealth":
-				Description = "Doubles the player's health.";
-				_cardTexture.Texture = GD.Load<Texture2D>("res://Assets/card_sprite.png");
-				break;
-			case "AddCards":
-				Description = $"Adds {EffectValue} random card(s) to your deck.";
-				_cardTexture.Texture = GD.Load<Texture2D>("res://Assets/card_sprite.png");
-				break;
-			case "Shield":
-				Description = $"Grants a shield for {EffectValue} turn(s) to a card.";
-				_cardTexture.Texture = GD.Load<Texture2D>("res://Assets/card_sprite.png");
-				break;
-			default:
-				Description = "An unknown power.";
-				_cardTexture.Texture = GD.Load<Texture2D>("res://Assets/card_sprite.png");
-				break;
-		}
+        {
+            case "DoubleHealth":
+                Description = "Doubles the player's health.";
+                _cardImage.Texture = GD.Load<Texture2D>("res://Assets/health.png");
+                break;
+            case "AddCards":
+                Description = $"Adds {EffectValue} random card(s) to your deck.";
+                _cardImage.Texture = GD.Load<Texture2D>("res://Assets/health.png");
+                break;
+            case "PlusFour":
+                Description = $"Grants +4 levels to all cards' damage stat.";
+                _cardImage.Texture = GD.Load<Texture2D>("res://Assets/plusFour.png");
+                break;
+            default:
+                Description = "An unknown power.";
+                _cardImage.Texture = GD.Load<Texture2D>("res://Assets/health.png");
+                break;
+        }
 
-
-		_label.BbcodeEnabled = true;
-		_label.Text = $"[center]{EffectType}[/center]\n\n[center]{Description}[/center]";
-
-
-
+        _label.BbcodeEnabled = true;
+        _label.Text = Description;
     }
-	public void Select() {
-		GetNode<TextureRect>("glow").Visible = true;
-	}
-	public void UnSelect() {
-		GetNode<TextureRect>("glow").Visible = false;
-	}
-	private void _on_pressed() {
-		if (GetParent().GetParent() is Shop shop) {
-			shop.OnSpecialSelected(this);
-			GetParent().GetParent().GetNode<Button>("Buy").Text = "Buy $" + cost;
-		}
-	}
+
+    public void Select()
+    {
+        GetNode<TextureRect>("glow").Visible = true;
+    }
+
+    public void UnSelect()
+    {
+        GetNode<TextureRect>("glow").Visible = false;
+    }
+
+    private void _on_pressed()
+    {
+        if (GetParent().GetParent() is Shop shop)
+        {
+            shop.OnSpecialSelected(this);
+            GetParent().GetParent().GetNode<Button>("Buy").Text = "Buy $" + cost;
+        }
+    }
 
     public void UseSpecial()
     {
-        // Trigger the effect based on the EffectType
         switch (EffectType)
         {
             case "DoubleHealth":
@@ -75,37 +94,36 @@ public partial class SpecialCard : Button
             case "AddCards":
                 AddRandomCards(EffectValue);
                 break;
-            case "Shield":
-                ApplyShield();
+            case "PlusFour":
+                ApplyPlusFour();
                 break;
             // Add more cases for other special effects
         }
 
-        // Optionally, destroy or hide the card after use
-        QueueFree();
+        QueueFree(); // Destroy or hide the card after use
     }
 
     private void ApplyDoubleHealth()
     {
-        // Example of doubling player's health
         Global.Instance.PlayerHealth *= 2;
         GD.Print("Player health doubled!");
     }
 
     private void AddRandomCards(int numberOfCards)
     {
-        // Example of adding random cards to the player's deck
         for (int i = 0; i < numberOfCards; i++)
         {
-            Global.Instance.PlayerCards.Add(Global.Instance.getRandomCard());
+            Global.Instance.AddCard(Global.Instance.createRandomCard());
         }
         GD.Print($"{numberOfCards} random cards added to player's deck.");
     }
 
-    private void ApplyShield()
+    private void ApplyPlusFour()
     {
-        // Example of applying a shield to a card for two turns
-        //Global.Instance.ApplyShieldToCard(2); // Apply a shield effect that lasts for 2 turns
-        GD.Print("Shield applied to card for 2 turns.");
+        foreach (var card in Global.Instance.PlayerCards)
+        {
+            card.Damage += 4;
+        }
+        GD.Print("All cards' damage stats increased by +4 levels.");
     }
 }

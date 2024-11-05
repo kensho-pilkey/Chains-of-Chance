@@ -1,9 +1,29 @@
-[gd_scene load_steps=5 format=3 uid="uid://bgw5mulqsvs4h"]
+[gd_scene load_steps=8 format=3 uid="uid://bgw5mulqsvs4h"]
 
 [ext_resource type="Script" path="res://Scripts/Shop.cs" id="1_g7wyb"]
 [ext_resource type="PackedScene" uid="uid://dawpew6if4hk4" path="res://Scenes/card_still.tscn" id="2_a1n4s"]
 [ext_resource type="PackedScene" uid="uid://gl5r76u10amr" path="res://Scenes/special_card.tscn" id="3_i5bpm"]
 [ext_resource type="FontFile" uid="uid://u0upmi42jtpa" path="res://Assets/fonts/Carnevalee Freakshow.ttf" id="3_x0li6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_05lgr"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_88g8s"]
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_la7q0"]
+bg_color = Color(0.4, 0.670588, 0.501961, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
 [node name="Shop" type="Control"]
 z_index = 2
@@ -61,7 +81,12 @@ offset_left = 1390.0
 offset_top = 940.0
 offset_right = 1626.0
 offset_bottom = 1042.0
+focus_mode = 0
 theme_override_font_sizes/font_size = 40
+theme_override_styles/disabled = SubResource("StyleBoxFlat_05lgr")
+theme_override_styles/hover = SubResource("StyleBoxFlat_88g8s")
+theme_override_styles/normal = SubResource("StyleBoxFlat_la7q0")
+disabled = true
 text = "Buy"
 
 [node name="CreatureShop" type="HBoxContainer" parent="."]

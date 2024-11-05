@@ -1,9 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://sodx12pxauxw"]
+[gd_scene load_steps=9 format=3 uid="uid://sodx12pxauxw"]
 
 [ext_resource type="Script" path="res://Scripts/Sidebar.cs" id="1_5l8q0"]
 [ext_resource type="FontFile" uid="uid://br3ifs24yc538" path="res://Assets/fonts/BADABB__.TTF" id="2_b1boa"]
 [ext_resource type="FontFile" uid="uid://u0upmi42jtpa" path="res://Assets/fonts/Carnevalee Freakshow.ttf" id="2_ir2bv"]
 [ext_resource type="Texture2D" uid="uid://dqsaa44rxwc4j" path="res://Assets/card_back.png" id="4_0kmc8"]
+[ext_resource type="Texture2D" uid="uid://d0aqpg1at7wwj" path="res://Assets/blackBar.png" id="5_6l7cp"]
+[ext_resource type="Texture2D" uid="uid://b6an245wtyd75" path="res://Assets/blueBar.png" id="6_wqpe6"]
+[ext_resource type="Texture2D" uid="uid://cy4cyx53o3vff" path="res://Assets/redBar.png" id="7_j0syu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vyl0j"]
 bg_color = Color(0, 0, 0, 0.572549)
@@ -38,15 +41,16 @@ text = "Level 1"
 
 [node name="DrawCount" type="Label" parent="."]
 layout_mode = 0
-offset_left = 208.0
-offset_top = 445.0
-offset_right = 350.0
-offset_bottom = 535.0
-theme_override_fonts/font = ExtResource("2_ir2bv")
-theme_override_font_sizes/font_size = 80
-text = "3"
+offset_left = 174.0
+offset_top = 468.0
+offset_right = 316.0
+offset_bottom = 558.0
+theme_override_fonts/font = ExtResource("2_b1boa")
+theme_override_font_sizes/font_size = 60
+text = " x 3"
 
 [node name="RewardInfo" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 20.0
 offset_top = 152.0
@@ -58,23 +62,23 @@ text = "Payout: $10"
 
 [node name="PlayerHealth" type="Label" parent="."]
 layout_mode = 0
-offset_left = 17.0
-offset_top = 307.0
-offset_right = 186.0
-offset_bottom = 353.0
+offset_left = 57.0
+offset_top = 217.0
+offset_right = 226.0
+offset_bottom = 263.0
 theme_override_fonts/font = ExtResource("2_ir2bv")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 20
 text = "Player HP
 "
 
 [node name="OpponentHealth" type="Label" parent="."]
 layout_mode = 0
-offset_left = 17.0
-offset_top = 362.0
-offset_right = 186.0
-offset_bottom = 408.0
+offset_left = 59.0
+offset_top = 323.0
+offset_right = 228.0
+offset_bottom = 369.0
 theme_override_fonts/font = ExtResource("2_ir2bv")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 20
 text = "CPU HP"
 
 [node name="CurrentMult" type="Label" parent="."]
@@ -91,21 +95,21 @@ text = "x1"
 
 [node name="MoneyInfo" type="Label" parent="."]
 layout_mode = 0
-offset_left = 207.0
-offset_top = 557.0
-offset_right = 285.0
-offset_bottom = 647.0
+offset_left = 170.0
+offset_top = 576.0
+offset_right = 266.0
+offset_bottom = 666.0
 theme_override_colors/font_color = Color(0.682353, 0.537255, 0, 1)
-theme_override_fonts/font = ExtResource("2_ir2bv")
-theme_override_font_sizes/font_size = 80
-text = "10"
+theme_override_fonts/font = ExtResource("2_b1boa")
+theme_override_font_sizes/font_size = 60
+text = " x 10"
 
 [node name="MoneySymbol" type="Label" parent="."]
 layout_mode = 0
-offset_left = 116.0
-offset_top = 539.0
-offset_right = 163.0
-offset_bottom = 652.0
+offset_left = 112.0
+offset_top = 535.0
+offset_right = 159.0
+offset_bottom = 648.0
 theme_override_colors/font_color = Color(0.682353, 0.537255, 0, 1)
 theme_override_fonts/font = ExtResource("2_ir2bv")
 theme_override_font_sizes/font_size = 100
@@ -137,13 +141,13 @@ offset_bottom = 50.0
 
 [node name="CardCount" type="Label" parent="."]
 layout_mode = 0
-offset_left = 209.0
-offset_top = 665.0
-offset_right = 283.0
-offset_bottom = 775.0
-theme_override_fonts/font = ExtResource("2_ir2bv")
-theme_override_font_sizes/font_size = 80
-text = "1"
+offset_left = 177.0
+offset_top = 682.0
+offset_right = 251.0
+offset_bottom = 792.0
+theme_override_fonts/font = ExtResource("2_b1boa")
+theme_override_font_sizes/font_size = 60
+text = " x 1"
 
 [node name="Card" type="TextureRect" parent="."]
 layout_mode = 0
@@ -157,11 +161,31 @@ expand_mode = 1
 [node name="DrawSymbol" type="Label" parent="."]
 modulate = Color(0.04, 1, 0.12, 1)
 layout_mode = 0
-offset_left = 102.0
+offset_left = 89.0
 offset_top = 455.0
-offset_right = 178.0
+offset_right = 165.0
 offset_bottom = 541.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("2_b1boa")
 theme_override_font_sizes/font_size = 80
 text = "+1"
+
+[node name="PlayerBar" type="TextureProgressBar" parent="."]
+offset_left = 13.0
+offset_top = 247.0
+offset_right = 189.0
+offset_bottom = 279.0
+scale = Vector2(2, 1.5)
+value = 100.0
+texture_under = ExtResource("5_6l7cp")
+texture_progress = ExtResource("6_wqpe6")
+
+[node name="OpponentBar" type="TextureProgressBar" parent="."]
+offset_left = 15.0
+offset_top = 347.0
+offset_right = 191.0
+offset_bottom = 379.0
+scale = Vector2(2, 1.5)
+value = 100.0
+texture_under = ExtResource("5_6l7cp")
+texture_progress = ExtResource("7_j0syu")
