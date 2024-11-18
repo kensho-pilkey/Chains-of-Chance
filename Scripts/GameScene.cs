@@ -9,22 +9,19 @@ public partial class GameScene : Node2D
 	{
 		Global.Instance.StartTurn();
 		StartRound();
+		var audioPlayer2D = GetNode<AudioStreamPlayer2D>("SoundEffectPlayer2");
+		audioPlayer2D.Play();
 	}
+	private void _on_sound_effect_player_2_finished()
+{
+    var audioPlayer2D = GetNode<AudioStreamPlayer2D>("SoundEffectPlayer2");
+    audioPlayer2D.Play(); // Replay the sound to create a loop
+}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if(Global.Instance.PlayerHealth <= 0) {
-			GetTree().CreateTimer(1.0f).Timeout += () => {
-				//EndGame(false);
-				GetTree().ChangeSceneToFile("res://scenes/GameOver.tscn");
-			};
-		}
-		else if (Global.Instance.OpponentHealth <= 0) {
-				//EndGame(true);
-			Global.Instance.EndRound();
-				//Global.Instance.StartNextTurn();
-		}
+		
 	}
 	public async void ScreenShake(float intensity = 50.0f, float duration = 1.0f, float frequency = 0.05f)
 	{

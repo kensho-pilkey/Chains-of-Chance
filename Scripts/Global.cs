@@ -86,8 +86,8 @@ public partial class Global : Node
         string element = Elements[RandomGenerator.Next(Elements.Length)];
 
         // Randomly assign damage (1-8) and health (3-10)
-        int damage = RandomGenerator.Next(1, 4) * LevelNum;
-        int health = RandomGenerator.Next(1, 5) * LevelNum;
+        int damage = RandomGenerator.Next(1, 4) * LevelNum * LevelNum;
+        int health = RandomGenerator.Next(1, 5) * LevelNum * LevelNum;
 
         return new CardData(nameAsset.Key, nameAsset.Value, damage, health, element);
     }
@@ -120,6 +120,8 @@ public partial class Global : Node
 		// Reset available cards at the start of each turn
 		availableCardsForTurn = new List<CardData>(PlayerCards);
 		ShuffleCards();
+		PlayerHealth = 100 * LevelNum;
+		OpponentHealth = 100 * LevelNum;
 	}
 	public void EndRound() {
 		if (LevelNum >= 10) {

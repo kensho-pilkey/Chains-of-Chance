@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bgwmcug2b3m44"]
+[gd_scene load_steps=7 format=3 uid="uid://bgwmcug2b3m44"]
 
 [ext_resource type="Script" path="res://Scripts/GameScene.cs" id="1_uuudh"]
 [ext_resource type="PackedScene" uid="uid://ccpeukrdsfbkm" path="res://Scenes/card.tscn" id="2_yb5w7"]
 [ext_resource type="PackedScene" uid="uid://crk55yf4cd35p" path="res://Scenes/board.tscn" id="3_6l1e4"]
 [ext_resource type="Script" path="res://Scripts/CardDrawer.cs" id="5_2wmh7"]
 [ext_resource type="PackedScene" uid="uid://beemq60umwn40" path="res://Scenes/ui.tscn" id="6_eyrht"]
+[ext_resource type="AudioStream" uid="uid://coi8sv5v2dw5u" path="res://Assets/sounds/bgSound.wav" id="6_lmsjr"]
 
 [node name="gameScene" type="Node2D"]
 script = ExtResource("1_uuudh")
@@ -41,3 +42,10 @@ CardOffsetX = 200.0
 metadata/_edit_use_anchors_ = true
 
 [node name="PopupLayer" type="Node2D" parent="."]
+
+[node name="SoundEffectPlayer2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_lmsjr")
+volume_db = -11.108
+autoplay = true
+
+[connection signal="finished" from="SoundEffectPlayer2" to="." method="_on_sound_effect_player_2_finished"]

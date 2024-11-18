@@ -219,7 +219,7 @@ private async void CalculateMultipliers()
 
     // Set global or return values for multipliers (e.g., total maximum streaks)
     int maxElementStreak = Math.Max(Math.Max(maxFireStreak, maxWaterStreak), maxGrassStreak);
-    Global.Instance.Multiplier = maxElementStreak + maxCreatureStreak;
+    Global.Instance.Multiplier = maxFireStreak + maxCreatureStreak + maxWaterStreak + maxGrassStreak;
 
 	GetNode<AnimationPlayer>("AnimationPlayer").Play("firePopup");
 	PlaySound();
@@ -306,6 +306,12 @@ private void ProcessAttack()
     else if (playerSlot.IsOccupied() && !opponentSlot.IsOccupied())
     {
         Global.Instance.OpponentHealth -= playerSlot.GetCard()._Damage * Global.Instance.Multiplier;
+        if (Global.Instance.OpponentHealth <= 0) {
+            GetTree().CreateTimer(1.0f).Timeout += () => {
+				//EndGame(false);
+				Global.Instance.EndRound();
+			};
+		}
 		playerSlot.GetCard().PlayAttackAnimation();
 		PlaySound();
 		GetParent<GameScene>().ScreenShake(30.0f, 0.5f, 0.03f);
@@ -313,6 +319,10 @@ private void ProcessAttack()
     else if (!playerSlot.IsOccupied() && opponentSlot.IsOccupied())
     {
         Global.Instance.PlayerHealth -= opponentSlot.GetCard()._Damage;
+        if(Global.Instance.PlayerHealth <= 0) {
+				//EndGame(false);
+			GetTree().ChangeSceneToFile("res://scenes/GameOver.tscn");
+		}
 		opponentSlot.GetCard().PlayAttackAnimation();
 		PlaySound();
 		GetParent<GameScene>().ScreenShake(30.0f, 0.5f, 0.03f);

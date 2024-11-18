@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="CardGame"
-run/main_scene="res://Scenes/main.tscn"
+config/name="Chains of Chance"
+run/main_scene="res://Scenes/game_scene.tscn"
 config/features=PackedStringArray("4.3", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -28,3 +28,7 @@ window/stretch/mode="viewport"
 [dotnet]
 
 project/assembly_name="CardGame"
+
+[rendering]
+
+textures/vram_compression/import_etc2_astc=true

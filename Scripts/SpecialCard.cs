@@ -44,12 +44,14 @@ public partial class SpecialCard : Button
         switch (EffectType)
         {
             case "DoubleHealth":
-                Description = "Doubles the player's health.";
+                Description = "Doubles all cards' health.";
                 _cardImage.Texture = GD.Load<Texture2D>("res://Assets/health.png");
                 break;
             case "AddCards":
                 Description = $"Adds {EffectValue} random card(s) to your deck.";
-                _cardImage.Texture = GD.Load<Texture2D>("res://Assets/health.png");
+                _cardImage.Texture = GD.Load<Texture2D>("res://Assets/plusTwoCards.png");
+
+
                 break;
             case "PlusFour":
                 Description = $"Grants +4 levels to all cards' damage stat.";
@@ -105,8 +107,10 @@ public partial class SpecialCard : Button
 
     private void ApplyDoubleHealth()
     {
-        Global.Instance.PlayerHealth *= 2;
-        GD.Print("Player health doubled!");
+        foreach (var card in Global.Instance.PlayerCards)
+        {
+            card.Health *= 2;
+        }
     }
 
     private void AddRandomCards(int numberOfCards)
@@ -115,7 +119,6 @@ public partial class SpecialCard : Button
         {
             Global.Instance.AddCard(Global.Instance.createRandomCard());
         }
-        GD.Print($"{numberOfCards} random cards added to player's deck.");
     }
 
     private void ApplyPlusFour()
@@ -124,6 +127,5 @@ public partial class SpecialCard : Button
         {
             card.Damage += 4;
         }
-        GD.Print("All cards' damage stats increased by +4 levels.");
     }
 }

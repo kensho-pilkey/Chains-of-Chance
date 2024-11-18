@@ -27,18 +27,20 @@ public partial class Sidebar : Control
 		_playerBar.MaxValue = Global.Instance.PlayerHealth;
 		_opponentBar = GetNode<TextureProgressBar>("OpponentBar");
 		_opponentBar.MaxValue = Global.Instance.OpponentHealth;
-		maxPlayerHP = Global.Instance.PlayerHealth;
-		maxOpponentHP = Global.Instance.OpponentHealth;
+		maxPlayerHP = Global.Instance.PlayerHealth * Global.Instance.LevelNum;
+		maxOpponentHP = Global.Instance.OpponentHealth * Global.Instance.LevelNum;
 	}
 	public override void _Process(double delta)
 	{
-		_playerHealth.Text = Global.Instance.PlayerHealth.ToString() + " / " + maxPlayerHP.ToString();
-		_opponentHealth.Text = Global.Instance.OpponentHealth.ToString() + " / " + maxOpponentHP.ToString();
+		_playerHealth.Text = "Player HP " + Global.Instance.PlayerHealth.ToString();
+		_opponentHealth.Text = "Opponent HP " + Global.Instance.OpponentHealth.ToString();
 		_level.Text = "Level: " + Global.Instance.LevelNum.ToString();
 		_money.Text = " x " + Global.Instance.Money.ToString();
 		_multiplier.Text = "X" + Global.Instance.Multiplier.ToString();
 		_cardCount.Text = " x " + Global.Instance.CardCount().ToString();
 		_drawCount.Text = " x " + Global.Instance.Draws.ToString();
+		_playerBar.MaxValue = maxPlayerHP;
+		_opponentBar.MaxValue = maxOpponentHP;
 		_playerBar.Value = Global.Instance.PlayerHealth;
 		_opponentBar.Value = Global.Instance.OpponentHealth;
 

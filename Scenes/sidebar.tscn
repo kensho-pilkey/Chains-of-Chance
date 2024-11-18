@@ -62,23 +62,23 @@ text = "Payout: $10"
 
 [node name="PlayerHealth" type="Label" parent="."]
 layout_mode = 0
-offset_left = 57.0
-offset_top = 217.0
-offset_right = 226.0
-offset_bottom = 263.0
-theme_override_fonts/font = ExtResource("2_ir2bv")
-theme_override_font_sizes/font_size = 20
+offset_left = 53.0
+offset_top = 222.0
+offset_right = 222.0
+offset_bottom = 268.0
+theme_override_fonts/font = ExtResource("2_b1boa")
+theme_override_font_sizes/font_size = 25
 text = "Player HP
 "
 
 [node name="OpponentHealth" type="Label" parent="."]
 layout_mode = 0
-offset_left = 59.0
-offset_top = 323.0
-offset_right = 228.0
-offset_bottom = 369.0
-theme_override_fonts/font = ExtResource("2_ir2bv")
-theme_override_font_sizes/font_size = 20
+offset_left = 54.0
+offset_top = 322.0
+offset_right = 223.0
+offset_bottom = 368.0
+theme_override_fonts/font = ExtResource("2_b1boa")
+theme_override_font_sizes/font_size = 25
 text = "CPU HP"
 
 [node name="CurrentMult" type="Label" parent="."]
