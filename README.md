@@ -17,9 +17,9 @@ Chains of Chance is a thrilling strategic card game that pulls players into a we
 - Keep winning to gain freedom. 
 - Gain damage multiplier bonuses for every subsequence of matching card elements and creatures.
 ## Developers
-- Kensho Pilkey
-- Adriel Lanuza
-- Bryson Hogsed
+- Kensho Pilkey (Code + Art)
+- Adriel Lanuza (Main Artist)
+- Bryson Hogsed (Code)
 ## Technology Used
 - Godot Game Engine
 - C# Language
